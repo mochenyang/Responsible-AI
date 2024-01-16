@@ -1,0 +1,15 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: content/intro
+parts:
+- caption: Fairness and Ethics
+  chapters:
+  - file: content/notebooks
+- caption: Interpretability
+  chapters:
+  - file: content/Chapter2
+- caption: Reference
+  chapters:
+  - file: content/zbib
