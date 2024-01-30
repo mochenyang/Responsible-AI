@@ -10,6 +10,9 @@ parts:
 - caption: Interpretability
   chapters:
   - file: content/Chapter2
+- caption: Resources
+  chapters:
+  - file: content/resources
 - caption: Reference
   chapters:
   - file: content/zbib
