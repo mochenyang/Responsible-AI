@@ -2,14 +2,20 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: content/intro
+root: content/0-intro
 parts:
-- caption: Fairness and Ethics
+- caption: Fairness and Algorithmic Bias
   chapters:
-  - file: content/notebooks
+  - file: content/1-1-intro
+  - file: content/1-2-measure
 - caption: Interpretability
   chapters:
-  - file: content/Chapter2
+  - file: content/2-1-intro
+  - file: content/2-2-local
+- caption: Privacy
+  chapters:
+  - file: content/3-1-intro
+  - file: content/3-2-differential
 - caption: Resources
   chapters:
   - file: content/resources
