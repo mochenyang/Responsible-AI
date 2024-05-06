@@ -161,3 +161,4 @@ cython_debug/
 
 # Jupyter-book Build
 _build/
+internal_notes.txt
