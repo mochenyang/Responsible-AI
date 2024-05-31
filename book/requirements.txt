@@ -1,6 +1,5 @@
 jupyter-book
 matplotlib
-numpy
-pandas
 statsmodels
-scikit-learn
+fairlearn
+interpret
