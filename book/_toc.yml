@@ -12,7 +12,8 @@ parts:
 - caption: Interpretability
   chapters:
   - file: content/2-1-intro
-  - file: content/2-2-local
+  - file: content/2-2-global
+  - file: content/2-3-local
 - caption: Privacy
   chapters:
   - file: content/3-1-intro
