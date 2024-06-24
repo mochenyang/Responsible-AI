@@ -4,3 +4,5 @@ statsmodels
 fairlearn
 interpret
 alibi
+lime
+shap
