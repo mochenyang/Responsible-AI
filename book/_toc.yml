@@ -2,8 +2,11 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: content/0-intro
+root: content/0-1-intro
 parts:
+- caption: Overview
+  chapters:
+  - file: content/0-2-framework
 - caption: Fairness and Algorithmic Bias
   chapters:
   - file: content/1-1-intro
