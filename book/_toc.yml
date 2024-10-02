@@ -7,6 +7,7 @@ parts:
 - caption: Overview
   chapters:
   - file: content/0-2-framework
+  - file: content/0-3-philosophy
 - caption: Fairness and Algorithmic Bias
   chapters:
   - file: content/1-1-intro
