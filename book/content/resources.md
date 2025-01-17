@@ -13,3 +13,5 @@
 
 
 ## Privacy
+
+- [Programming Differential Privacy](https://programming-dp.com/cover.html)

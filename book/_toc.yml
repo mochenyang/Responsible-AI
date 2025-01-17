@@ -20,8 +20,11 @@ parts:
   - file: content/2-3-local
 - caption: Privacy
   chapters:
-  - file: content/3-1-intro
-  - file: content/3-2-differential
+  - file: content/3-1-framework
+  - file: content/3-2-mechanism
+- caption: Special Topics
+  chapters:
+  - file: content/4-1-GenAI
 - caption: Resources
   chapters:
   - file: content/resources
