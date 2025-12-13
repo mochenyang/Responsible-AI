@@ -37,3 +37,7 @@ It is worth noting that interpretable machine learning is a fast-evloving field,
 ## Why Is Interpretable ML Important?
 
 In decision-making systems where machine learning models play an important role, having interpretable models (vs. opaque, "black-box" models) is instrumental for achieving _accountability_ and enhance _trust_. 
+
+## Why is Interpretable ML Hard?
+
+There is a proliferation of interpretable ML techniques and tools, but data scientists may not always understand them or use them in the intended manner {cite:p}`kaur2020interpreting`. 
