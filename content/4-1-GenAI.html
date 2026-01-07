@@ -1,0 +1,629 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Responsible AI in the Age of Generative AI &#8212; Responsible AI for Data Scientists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/4-1-GenAI';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Resources" href="resources.html" />
+    <link rel="prev" title="Privacy Mechanisms" href="3-2-mechanism.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="0-1-intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.webp" class="logo__image only-light" alt="Responsible AI for Data Scientists - Home"/>
+    <script>document.write(`<img src="../_static/logo.webp" class="logo__image only-dark" alt="Responsible AI for Data Scientists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="0-1-intro.html">
+                    Responsible AI for Data Scientists
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="0-2-framework.html">A Human-Centric Framework of Responsible AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-3-philosophy.html">Philosophical Foundations for Ethical Decision-Making</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-4-prep.html">Fundementals of Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fairness and Algorithmic Bias</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1-1-intro.html">Introduction to Algorithmic Bias and Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-2-measure.html">Measuring Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-3-mitigation.html">Mitigating Algorithmic Bias</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interpretability</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2-1-intro.html">Introduction to Interpretable Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-2-global.html">Methods for Global Interpretations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-3-local.html">Methods for Local Interpretations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3-1-framework.html">Conceptual Framework of Privacy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3-2-mechanism.html">Privacy Mechanisms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Special Topics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Responsible AI in the Age of Generative AI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="zbib.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/mochenyang/Responsible-AI" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/4-1-GenAI.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Responsible AI in the Age of Generative AI</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#same-problems-new-challenges">Same Problems, New Challenges</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#genai-and-fairness">GenAI and Fairness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#genai-and-interpretability">GenAI and Interpretability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#genai-and-privacy">GenAI and Privacy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#genai-and-security">GenAI and Security</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-challenge-ai-alignment">New Challenge: AI Alignment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-very-brief-introduction-to-reinforcement-learning">A Very Brief Introduction to Reinforcement Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-alignment-hard">Why is Alignment Hard?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-challenge-robustness">New Challenge: Robustness</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="responsible-ai-in-the-age-of-generative-ai">
+<h1>Responsible AI in the Age of Generative AI<a class="headerlink" href="#responsible-ai-in-the-age-of-generative-ai" title="Link to this heading">#</a></h1>
+<p>Generative AI (GenAI) systems, such as large language models, represent arguably one of the most exciting recent advances in the field of AI. The same responsible AI issues, including fairness, interpretability, and privacy, remain highly relevant to GenAI, and they sometimes take on different forms. Meanwhile, GenAI also presents unique challenges, related to the broader alignment issue.</p>
+<p>This chapter provides a brief exposition of responsible AI in GenAI systems.</p>
+<section id="same-problems-new-challenges">
+<h2>Same Problems, New Challenges<a class="headerlink" href="#same-problems-new-challenges" title="Link to this heading">#</a></h2>
+<section id="genai-and-fairness">
+<h3>GenAI and Fairness<a class="headerlink" href="#genai-and-fairness" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>GenAI systems have been shown to exhibit biased generations, likely due to existing bias during pre-training;</p></li>
+<li><p>This bias is hard to remove / rectify after the fact.</p></li>
+</ul>
+</section>
+<section id="genai-and-interpretability">
+<h3>GenAI and Interpretability<a class="headerlink" href="#genai-and-interpretability" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p>People outside the field are often surprised and alarmed to learn that we do not understand how our own AI creations work. – Dario Amodei, <a class="reference external" href="https://www.darioamodei.com/post/the-urgency-of-interpretability">The Urgency of Interpretability</a></p>
+</div></blockquote>
+<p>GenAI systems are exceedingly hard to make sense of:</p>
+<ul class="simple">
+<li><p>Anthropic quote</p></li>
+<li><p>mechanistic interpretation</p></li>
+<li><p>illusion of interpretability as responses from GenAI systems themselves</p></li>
+</ul>
+<p>explaining language models <span id="id1">Enguehard [<a class="reference internal" href="zbib.html#id260" title="Joseph Enguehard. Sequential integrated gradients: a simple but effective method for explaining language models. arXiv preprint arXiv:2305.15853, 2023.">Eng23</a>]</span>.</p>
+<p>Mechanistic interpretation:</p>
+<ul class="simple">
+<li><p>software tool: <a class="reference external" href="https://github.com/TransformerLensOrg/TransformerLens">TransformerLens</a></p></li>
+<li><p>taxonomy library: <a class="reference external" href="https://dynalist.io/d/n2ZWtnoYHrU1s4vnFSAQ519J">A Comprehensive Mechanistic Interpretability Explainer &amp; Glossary</a></p></li>
+</ul>
+</section>
+<section id="genai-and-privacy">
+<h3>GenAI and Privacy<a class="headerlink" href="#genai-and-privacy" title="Link to this heading">#</a></h3>
+<p>GenAI brings new challenges to privacy protection:</p>
+<ul class="simple">
+<li><p>lack of transparency to data used during pre-training;</p></li>
+<li><p>prompt hacking / injection reveals personal information</p></li>
+<li><p>tradeoff between automation and privacy</p></li>
+</ul>
+<p>Jailbreaking represents a prominent threat for GenAI model. Jailbreaking can sometimes be achieved via surprising routes (e.g., “adversarial poetry”, <span id="id2">[<a class="reference internal" href="zbib.html#id271" title="Piercosma Bisconti, Matteo Prandi, Federico Pierucci, Francesco Giarrusso, Marcantonio Bracale, Marcello Galisai, Vincenzo Suriani, Olga Sorokoletova, Federico Sartore, and Daniele Nardi. Adversarial poetry as a universal single-turn jailbreak mechanism in large language models. arXiv preprint arXiv:2511.15304, 2025.">BPP+25</a>]</span>).</p>
+</section>
+<section id="genai-and-security">
+<h3>GenAI and Security<a class="headerlink" href="#genai-and-security" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>NIST <a class="reference external" href="https://www.nist.gov/news-events/news/2025/12/draft-nist-guidelines-rethink-cybersecurity-ai-era">new guideline</a> on rethinking cybersecurity for the AI era</p></li>
+<li><p>CISCO <a class="reference external" href="https://learn-cloudsecurity.cisco.com/ai-security-framework">new comprehensive framework</a> for AI security</p></li>
+</ul>
+</section>
+</section>
+<section id="new-challenge-ai-alignment">
+<h2>New Challenge: AI Alignment<a class="headerlink" href="#new-challenge-ai-alignment" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Yodovsky quote</p></li>
+<li><p>Definition of AI Aligment</p></li>
+</ul>
+<section id="a-very-brief-introduction-to-reinforcement-learning">
+<h3>A Very Brief Introduction to Reinforcement Learning<a class="headerlink" href="#a-very-brief-introduction-to-reinforcement-learning" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p>Reinforcement learning is learning what to do - how to map situations to actions - so as to maximize a numerical reward signal. – Sutton and Barto, Reinforcement Learning (Chapter 1.1)</p>
+</div></blockquote>
+<p><strong>Reinforcement learning</strong> is the paradigm of learning from interactions, about how to act under what situations. In a sense, RL is closer to how humans learn various skills: we learn by exploring and interacting with the world around us.</p>
+<p>Reinforcement learning has been successfully applied in game playing, robotics, and aligning large language models.</p>
+<p>A reinforcement learning system is often described by the following agent-environment framework.</p>
+<p><img alt="The Agent-Environment Framework" src="../_images/agent_environment.jpg" /></p>
+<p>Let’s look at each component:</p>
+<ul class="simple">
+<li><p><strong>Agent</strong> is the decision-maker who takes certain <strong>action</strong> in a given situation;</p></li>
+<li><p><strong>Environment</strong> contains everything outside the agent. It is what the agent interacts with.</p></li>
+<li><p>In response to the agent’s action, the environment produces a <strong>reward</strong>. The agent tries to learn from the reward feedback to figure out what’s the best action(s);</p></li>
+<li><p>The environment is characterized by its <strong>states</strong>, which, roughly speaking, are the “situations” that the agent is facing. The states may change as a result of the agent’s actions, and the states also affect the agent’s actions;</p></li>
+<li><p>Each action that the agent can take has certain <strong>value</strong>, which describes how good it is in achieving high reward;</p></li>
+<li><p>A mapping between the agent’s actions and the environment’s states is called the <strong>policy</strong>. RL algorithms are trying to learn <strong>optimal policy</strong> from interactions.</p></li>
+</ul>
+<p>A fundamental issue in reinforcement learning is the <em>tradeoff between exploration vs. exploitation</em>. Roughly speaking, <strong>Exploration</strong> means trying out different possible actions to see which one(s) work better; and <strong>Exploitation</strong> means keeping taking the action that appears to be the best based on currently available information.</p>
+<p>Balancing exploration and exploitation is the central consideration of most reinforcement learning algorithm design. Having too much exploration is wasteful and having too much exploitation can be myopic (maybe there is a much better option that you haven’t tried).</p>
+</section>
+<section id="why-is-alignment-hard">
+<h3>Why is Alignment Hard?<a class="headerlink" href="#why-is-alignment-hard" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>inherent tradeoff among different human preferences</p></li>
+<li><p>inevitable ambiguity in human preference and how to achieve it</p></li>
+<li><p>reward hacking</p></li>
+</ul>
+</section>
+</section>
+<section id="new-challenge-robustness">
+<h2>New Challenge: Robustness<a class="headerlink" href="#new-challenge-robustness" title="Link to this heading">#</a></h2>
+<p>Lack of robustness with respect to task-irrelevant variations:</p>
+<ul class="simple">
+<li><p>data fitting</p></li>
+<li><p>math</p></li>
+<li><p>level-k thinking</p></li>
+<li><p>semantic leakage <span id="id3">[<a class="reference internal" href="zbib.html#id272" title="Hila Gonen, Terra Blevins, Alisa Liu, Luke Zettlemoyer, and Noah A Smith. Does liking yellow imply driving a school bus? semantic leakage in language models. In Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers), 785–798. 2025.">GBL+25</a>]</span></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="3-2-mechanism.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Privacy Mechanisms</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="resources.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Resources</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#same-problems-new-challenges">Same Problems, New Challenges</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#genai-and-fairness">GenAI and Fairness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#genai-and-interpretability">GenAI and Interpretability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#genai-and-privacy">GenAI and Privacy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#genai-and-security">GenAI and Security</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-challenge-ai-alignment">New Challenge: AI Alignment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-very-brief-introduction-to-reinforcement-learning">A Very Brief Introduction to Reinforcement Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-alignment-hard">Why is Alignment Hard?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-challenge-robustness">New Challenge: Robustness</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Gediminas Adomavicius and Mochen Yang
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
