@@ -1,6 +1,13 @@
 # Introduction to Interpretable Machine Learning
 
-Many machine learning models are inherently very complex, and it is often unclear why a model makes certain predictions. The goal of Interpretable Machine Learning is to provide interpretations for a ML model's predictions. It is also referred to as Explainable Machine Learning or Explainable AI (XAI).
+This module deals with transparency as an important responsible AI consideration. Following the framework discussed in Chapter {doc}`0-2-framework`, transparency (or lack thereof) can also manifest in Problem, Data, Model, and Decision components. Specifically,
+
+- **Problem** transparency:
+- **Data** transparency: data provenance, data fact-sheet
+- **Model** transparency: this primarily deals with interpretable machine learning.
+- **Decision** transparency: interaction transparency (e.g., watermarking)
+
+From a technical point of view, the following two chapters focus on interpretable machine learning. Many machine learning models are inherently very complex, and it is often unclear why a model makes certain predictions. The goal of Interpretable Machine Learning is to provide interpretations for a ML model's predictions. It is also referred to as Explainable Machine Learning or Explainable AI (XAI).
 
 ## What Does "Interpretation" Mean?
 
