@@ -1,0 +1,634 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Conceptual Framework of Privacy &#8212; Responsible AI for Data Scientists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/3-1-framework';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Privacy Mechanisms" href="3-2-mechanism.html" />
+    <link rel="prev" title="Methods for Local Interpretations" href="2-3-local.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="0-1-intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.webp" class="logo__image only-light" alt="Responsible AI for Data Scientists - Home"/>
+    <script>document.write(`<img src="../_static/logo.webp" class="logo__image only-dark" alt="Responsible AI for Data Scientists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="0-1-intro.html">
+                    Responsible AI for Data Scientists
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="0-2-framework.html">A Human-Centric Framework of Responsible AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-3-philosophy.html">Philosophical Foundations for Ethical Decision-Making</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-4-prep.html">Fundementals of Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fairness and Algorithmic Bias</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1-1-intro.html">Introduction to Algorithmic Bias and Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-2-measure.html">Measuring Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-3-mitigation.html">Mitigating Algorithmic Bias</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Transparency and Interpretable Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2-1-intro.html">Introduction to Interpretable Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-2-global.html">Methods for Global Interpretations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-3-local.html">Methods for Local Interpretations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Conceptual Framework of Privacy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3-2-mechanism.html">Privacy Mechanisms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Special Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4-1-GenAI.html">Responsible AI in the Age of Generative AI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="zbib.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/mochenyang/Responsible-AI" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/3-1-framework.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Conceptual Framework of Privacy</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-privacy-and-why-it-is-important">What is Privacy and Why it is Important?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#philosophical-foundations-of-privacy">Philosophical Foundations of Privacy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#privacy-framework">Privacy Framework</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#privacy-in-the-age-of-big-data-and-ai">Privacy in the Age of Big Data and AI</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-double-edged-sword-of-big-data-applications">The Double-Edged Sword of Big Data Applications</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-of-anonymization-and-re-identification">Challenges of Anonymization and Re-Identification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#emerging-ethical-concerns">Emerging Ethical Concerns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-privacy-framework">Applying the Privacy Framework</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="conceptual-framework-of-privacy">
+<h1>Conceptual Framework of Privacy<a class="headerlink" href="#conceptual-framework-of-privacy" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p><strong>Acknowledgement</strong>: this chapter is adapted from Professor <a class="reference external" href="https://carlsonschool.umn.edu/faculty/russell-funk">Russell Funk</a>’s lectures in the MSBA 6141 “Ethics and Data Privacy”.</p>
+</div></blockquote>
+<section id="what-is-privacy-and-why-it-is-important">
+<h2>What is Privacy and Why it is Important?<a class="headerlink" href="#what-is-privacy-and-why-it-is-important" title="Link to this heading">#</a></h2>
+<p>Privacy is a multifaceted concept with profound implications for individuals, organizations, and society. At its core, it encompasses the right to control personal information and determine when, how, and to what extent such information is shared. This control is essential for safeguarding individual autonomy and fostering trust in personal and professional relationships. In an increasingly digital world, where data is collected and shared at unprecedented rates, privacy has become both a personal and collective concern. Beyond individual preferences, privacy establishes moral obligations for businesses to respect the rights of consumers, employees, and stakeholders, ensuring ethical data practices and fostering societal trust.</p>
+<section id="philosophical-foundations-of-privacy">
+<h3>Philosophical Foundations of Privacy<a class="headerlink" href="#philosophical-foundations-of-privacy" title="Link to this heading">#</a></h3>
+<p>The philosophical foundations of privacy are deeply rooted in the ethical frameworks that have been discussed in Chapter <a class="reference internal" href="0-3-philosophy.html"><span class="doc">Philosophical Foundations for Ethical Decision-Making</span></a>, particularly <em>utilitarianism</em> and the <em>rights-and-duties</em> approach. Utilitarianism emphasizes the role of privacy in enhancing individual well-being by reducing societal pressures, such as the <a class="reference external" href="https://en.wikipedia.org/wiki/Tyranny_of_the_majority">tyranny of the majority</a>—a concept articulated by <a class="reference external" href="https://en.wikipedia.org/wiki/John_Stuart_Mill">John Stuart Mill</a>. Mill argued that privacy creates a necessary separation between public and private spheres, enabling individuals to resist conformity and embrace diverse perspectives. This diversity, Mill believed, is essential for societal progress and the pursuit of truth.</p>
+<p>The rights-and-duties approach, on the other hand, frames privacy as an inherent right essential for autonomy and informed consent. This perspective highlights the ethical imperative of treating individuals as ends in themselves rather than means to an end (which is different from the utilitarianism perspective that treats privacy protection as a means to well-being). Modern privacy regulations, such as the General Data Protection Regulation (GDPR), draw heavily from this approach. GDPR mandates transparency and informed consent, ensuring individuals have control over how their data is collected and used, aligning with the broader principle of respecting human dignity and autonomy.</p>
+</section>
+<section id="privacy-framework">
+<h3>Privacy Framework<a class="headerlink" href="#privacy-framework" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://www.danielsolove.com/">Daniel Solove</a>, a prominent scholar in privacy law and ethics, developed a comprehensive framework to address and categorize privacy concerns. Solove’s framework identifies distinct stages of data interaction, including collection, processing, dissemination, and invasion. By categorizing these concerns, Solove provides a roadmap for analyzing how data practices impact privacy and ethical decision-making. The framework emphasizes the importance of understanding privacy not as a monolithic concept but as a dynamic interplay of various processes. Solove’s work highlights the need for adaptive privacy frameworks to keep pace with rapidly evolving technologies and their implications on data ethics. We replicate Solove’s privacy framework in the following figure, based on his article titled “A Taxonomy of Privacy” <span id="id1">[<a class="reference internal" href="zbib.html#id265" title="Daniel J Solove. A taxonomy of privacy. U. Pa. l. Rev., 154:477, 2005.">Sol05</a>]</span>.</p>
+<p><img alt="Solove's Privacy Framework" src="../_images/solove_privacy.png" /></p>
+<p>We further elaborate on the important elements in this framework, based on <span id="id2">Solove [<a class="reference internal" href="zbib.html#id265" title="Daniel J Solove. A taxonomy of privacy. U. Pa. l. Rev., 154:477, 2005.">Sol05</a>]</span>:</p>
+<ul class="simple">
+<li><p><strong>Information Collection</strong> refers to the gathering of data using various tools, sensors, and digital traces. It includes two primary subcategories:</p>
+<ul>
+<li><p><strong>Surveillance</strong>: This involves the close monitoring or observation of individuals, often passively. Surveillance becomes a privacy issue when it leads to behavioral changes, such as the <a class="reference external" href="https://en.wikipedia.org/wiki/Chilling_effect">chilling effect</a>, where individuals self-censor out of fear of being monitored.</p></li>
+<li><p><strong>Interrogation</strong>: This refers to pressuring individuals to divulge personal information. While less overt than traditional notions of interrogation, it includes practices like mandatory data input during online registration processes.</p></li>
+</ul>
+</li>
+<li><p><strong>Information Processing</strong> encompasses the handling, analysis, and utilization of collected data. Solove identifies several subcategories:</p>
+<ul>
+<li><p><strong>Aggregation</strong>: The combination of multiple data points to create a detailed profile.</p></li>
+<li><p><strong>Identification</strong>: Linking anonymized data to individuals, compromising anonymity.</p></li>
+<li><p><strong>Insecurity</strong>: The inadequate protection of personal data, leading to breaches.</p></li>
+<li><p><strong>Secondary Use</strong>: Using data for purposes beyond its original intent without consent.</p></li>
+<li><p><strong>Exclusion</strong>: Denying individuals access to or control over their data.</p></li>
+</ul>
+</li>
+<li><p><strong>Information dissemination</strong> involves the revelation of personal data or the threat of spreading information. This can include authorized sharing for legitimate purposes or unauthorized leaks that expose individuals to risks such as identity theft or reputational harm.</p>
+<ul>
+<li><p><strong>Breach of Confidentiality</strong>: The unauthorized revelation of confidential information, such as someone’s medical record.</p></li>
+<li><p><strong>Disclosure</strong>: “occurs when certain true information about a person is revealed to others. Disclosure differs from breach of confidentiality because the harm in disclosure involves the damage to reputation caused by the dissemination; the harm with breach of confidentiality is the violation of trust in the relationship” <span id="id3">[<a class="reference internal" href="zbib.html#id265" title="Daniel J Solove. A taxonomy of privacy. U. Pa. l. Rev., 154:477, 2005.">Sol05</a>]</span> (page 529).</p></li>
+<li><p><strong>Exposure</strong>: exposing certain physical or emotional characteristics of someone to others that may create embarrassment and humiliation.</p></li>
+<li><p><strong>Increased Accessibility</strong>: increasing the accessibility of already public information. Although increased accessibility does not cause disclosure per se (because the relevant information is already disclosed, e.g., in a physical location), it potentially elevates the risk of harm.</p></li>
+<li><p><strong>Blackmail</strong>: threaten to reveal someone’s personal information if they do not meet the demands of the blackmailer.</p></li>
+<li><p><strong>Appropriation</strong>: “use of one’s identity or personality for the purposes and goals of another” <span id="id4">[<a class="reference internal" href="zbib.html#id265" title="Daniel J Solove. A taxonomy of privacy. U. Pa. l. Rev., 154:477, 2005.">Sol05</a>]</span> (page 543).</p></li>
+<li><p><strong>Distortion</strong>: “manipulation of the way a person is perceived and judged by others, and involves the victim being inaccurately exposed to the public” <span id="id5">[<a class="reference internal" href="zbib.html#id265" title="Daniel J Solove. A taxonomy of privacy. U. Pa. l. Rev., 154:477, 2005.">Sol05</a>]</span> (page 547).</p></li>
+</ul>
+</li>
+<li><p><strong>Invasions</strong> refers to infringement of one’s right to privacy through intrusive actions. It differs from information collection / processing because it does not always involve information.</p>
+<ul>
+<li><p><strong>Intrusion</strong>: invasions into people’s lives that disturbs them. This includes not only physical intrusions but also digital disturbances like spam / junk mails.</p></li>
+<li><p><strong>Decision Interference</strong>: interference with people’s decisions regarding their lives.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="privacy-in-the-age-of-big-data-and-ai">
+<h2>Privacy in the Age of Big Data and AI<a class="headerlink" href="#privacy-in-the-age-of-big-data-and-ai" title="Link to this heading">#</a></h2>
+<p>The advent of the big data revolution has introduced unprecedented challenges and opportunities in the realm of privacy. The scale and scope of data generation have grown exponentially, with estimates indicating that 90% of all existing data was created in just the last few years.<a class="footnote-reference brackets" href="#footnote1" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> Technologies capable of processing and analyzing massive datasets have led to breakthroughs across various fields, but have also raised significant ethical concerns.</p>
+<section id="the-double-edged-sword-of-big-data-applications">
+<h3>The Double-Edged Sword of Big Data Applications<a class="headerlink" href="#the-double-edged-sword-of-big-data-applications" title="Link to this heading">#</a></h3>
+<p>Big data has enabled innovative solutions, such as identifying unknown drug interactions through analysis of search engine query logs<a class="footnote-reference brackets" href="#footnote2" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> or discovering new properties of chemical compounds using advanced machine learning techniques <span id="id8">[<a class="reference internal" href="zbib.html#id266" title="Vahe Tshitoyan, John Dagdelen, Leigh Weston, Alexander Dunn, Ziqin Rong, Olga Kononova, Kristin A Persson, Gerbrand Ceder, and Anubhav Jain. Unsupervised word embeddings capture latent knowledge from materials science literature. Nature, 571(7763):95–98, 2019.">TDW+19</a>]</span>. These developments illustrate the potential of data to benefit humanity in ways previously unimaginable. However, the same capabilities also pose risks when applied to commercial contexts. Recommendation engines, for instance, which suggest products or content based on user behavior, can feel invasive, as their accuracy often depends on aggregating and analyzing extensive personal data.</p>
+<p>A key ethical distinction lies in the context of data use. In the context of product recommendations, while a local shopkeeper’s personalized suggestions may be seen as benign, large-scale recommendation systems powered by big data often lack transparency and accountability, creating a sense of unease among users.</p>
+</section>
+<section id="challenges-of-anonymization-and-re-identification">
+<h3>Challenges of Anonymization and Re-Identification<a class="headerlink" href="#challenges-of-anonymization-and-re-identification" title="Link to this heading">#</a></h3>
+<p>The common practice of anonymizing data to protect individual privacy has proven to be fraught with challenges. High-profile cases, such as the <a class="reference external" href="https://en.wikipedia.org/wiki/AOL_search_log_release">release of search query data by AOL</a> and the Netflix Prize dataset, reveal the limitations of anonymization. Researchers have demonstrated that seemingly de-identified datasets can be re-identified by cross-referencing information with other publicly available data sources. This phenomenon underscores the difficulty of safeguarding privacy in the era of big data, where even fragmented information can be pieced together to reveal sensitive details about individuals.</p>
+</section>
+<section id="emerging-ethical-concerns">
+<h3>Emerging Ethical Concerns<a class="headerlink" href="#emerging-ethical-concerns" title="Link to this heading">#</a></h3>
+<p>Publicly available data further complicates the privacy landscape. While individuals may willingly share information on platforms like social media, the aggregation and analysis of this data can lead to intrusive profiling. Companies like Target have demonstrated the predictive power of data by identifying personal details, such as pregnancy, through shopping behavior—sometimes even before individuals disclose such information themselves.<a class="footnote-reference brackets" href="#footnote3" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> These cases highlight the ethical dilemmas surrounding the use of personal data for predictive analytics and targeted marketing.</p>
+<p>Data breaches have become increasingly common, eroding public trust in the ability of organizations to protect sensitive information. Even trusted companies face significant challenges in ensuring data security, raising questions about the ethical obligations of businesses in data collection and storage. Beyond the immediate risks of breaches, the mere existence of extensive data repositories creates vulnerabilities, emphasizing the need for organizations to adopt stringent data minimization practices.</p>
+</section>
+</section>
+<section id="applying-the-privacy-framework">
+<h2>Applying the Privacy Framework<a class="headerlink" href="#applying-the-privacy-framework" title="Link to this heading">#</a></h2>
+<p>Solove’s privacy framework can readily be applied to make sense of privacy risks in the age of big data. For instance:</p>
+<ul class="simple">
+<li><p>Surveillance examples include <a class="reference external" href="https://www.clearview.ai/">Clearview AI’s use of facial recognition</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Panopticon">panopticon</a>-like work environments that alter behavior.</p></li>
+<li><p>Interrogation practices are illustrated by Facebook’s mandatory collection of personal details during account creation, raising questions about the necessity and ethical implications of such data demands.</p></li>
+<li><p>Aggregation can be seen in Target’s predictive analytics and Clearview AI’s facial recognition database.</p></li>
+<li><p>Identification examples include the re-identification of Netflix Prize data and AOL search logs.</p></li>
+<li><p>Insecurity instances include Target’s data breaches, exposing sensitive customer information.</p></li>
+<li><p>Secondary use is involved in the sale of browsing histories by ISPs.</p></li>
+<li><p>Exclusion is exemplified by difficulties in correcting inaccuracies in credit reports, which can have severe consequences for affected individuals.</p></li>
+</ul>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="footnote1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">1</a><span class="fn-bracket">]</span></span>
+<p>https://www.forbes.com/sites/bernardmarr/2018/05/21/how-much-data-do-we-create-every-day-the-mind-blowing-stats-everyone-should-read/</p>
+</aside>
+<aside class="footnote brackets" id="footnote2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">2</a><span class="fn-bracket">]</span></span>
+<p>https://www.nytimes.com/2013/03/07/science/unreported-side-effects-of-drugs-found-using-internet-data-study-finds.html</p>
+</aside>
+<aside class="footnote brackets" id="footnote3" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">3</a><span class="fn-bracket">]</span></span>
+<p>https://www.forbes.com/sites/kashmirhill/2012/02/16/how-target-figured-out-a-teen-girl-was-pregnant-before-her-father-did/</p>
+</aside>
+</aside>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2-3-local.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Methods for Local Interpretations</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3-2-mechanism.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Privacy Mechanisms</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-privacy-and-why-it-is-important">What is Privacy and Why it is Important?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#philosophical-foundations-of-privacy">Philosophical Foundations of Privacy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#privacy-framework">Privacy Framework</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#privacy-in-the-age-of-big-data-and-ai">Privacy in the Age of Big Data and AI</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-double-edged-sword-of-big-data-applications">The Double-Edged Sword of Big Data Applications</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-of-anonymization-and-re-identification">Challenges of Anonymization and Re-Identification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#emerging-ethical-concerns">Emerging Ethical Concerns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-privacy-framework">Applying the Privacy Framework</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Gediminas Adomavicius and Mochen Yang
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

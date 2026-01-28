@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Philosophical Foundations for Ethical Decision-Making &#8212; Responsible AI for Data Scientists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/0-3-philosophy';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Fundementals of Machine Learning" href="0-4-prep.html" />
+    <link rel="prev" title="A Human-Centric Framework of Responsible AI" href="0-2-framework.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="0-1-intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.webp" class="logo__image only-light" alt="Responsible AI for Data Scientists - Home"/>
+    <script>document.write(`<img src="../_static/logo.webp" class="logo__image only-dark" alt="Responsible AI for Data Scientists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="0-1-intro.html">
+                    Responsible AI for Data Scientists
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="0-2-framework.html">A Human-Centric Framework of Responsible AI</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Philosophical Foundations for Ethical Decision-Making</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-4-prep.html">Fundementals of Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fairness and Algorithmic Bias</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1-1-intro.html">Introduction to Algorithmic Bias and Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-2-measure.html">Measuring Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-3-mitigation.html">Mitigating Algorithmic Bias</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Transparency and Interpretable Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2-1-intro.html">Introduction to Interpretable Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-2-global.html">Methods for Global Interpretations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-3-local.html">Methods for Local Interpretations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3-1-framework.html">Conceptual Framework of Privacy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3-2-mechanism.html">Privacy Mechanisms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Special Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4-1-GenAI.html">Responsible AI in the Age of Generative AI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="zbib.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/mochenyang/Responsible-AI" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/0-3-philosophy.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Philosophical Foundations for Ethical Decision-Making</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utilitarianism">Utilitarianism</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rights-and-duties">Rights and Duties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fairness-and-justice">Fairness and Justice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relativism">Relativism</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="philosophical-foundations-for-ethical-decision-making">
+<h1>Philosophical Foundations for Ethical Decision-Making<a class="headerlink" href="#philosophical-foundations-for-ethical-decision-making" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p><strong>Acknowledgement</strong>: this chapter is adapted from Professor <a class="reference external" href="https://carlsonschool.umn.edu/faculty/russell-funk">Russell Funk</a>’s lectures in the MSBA 6141 “Ethics and Data Privacy”.</p>
+</div></blockquote>
+<p>What is the right thing to do? Philosophers have debated the answers to this questions for thousands of years, creating various theories of ethical decision-making along the way. Understanding prevalent philosophical frameworks is important for thinking about Responsible AI. In this chapter, we briefly describe a few representative philosophical frameworks for ethical decision-making.</p>
+<section id="utilitarianism">
+<h2>Utilitarianism<a class="headerlink" href="#utilitarianism" title="Link to this heading">#</a></h2>
+<p>Utilitarianism is an important framework in ethical decision-making that emphasizes the <em>consequences</em> of actions as the primary criterion for moral evaluation. At its core, utilitarianism advocates for actions that produce the greatest good for the greatest number of people. This principle, often referred to as “the greatest happiness principle,” suggests that ethical actions are those that enhance overall happiness or reduce suffering. It is worth noting that utilitarianism is often misunderstood as simply being “selfish”. However, utilitarianism contrasts significantly with philosophy such as <em>egoism</em>, which centers only on the individual’s happiness.</p>
+<p>The origin of modern utilitarianism can be traced back to <a class="reference external" href="https://en.wikipedia.org/wiki/Jeremy_Bentham">Jeremy Bentham</a>, an influential British philosopher who aimed to replace tradition-based policy-making with a rational, consequence-oriented approach. Bentham’s utilitarianism is <em>quantitatively</em> driven, proposing that one could measure and compare pleasures and pains along various dimensions such as intensity, duration, and certainty. This methodical calculation would allow for a systematic analysis of the potential outcomes of different actions, similar to the cost-benefit analyses commonly used in policy-making areas like healthcare and business operations. Bentham’s approach, however, received significant criticism for its perceived reductionism and the challenges associated with quantifying qualitative human experiences. Understandably, critics of Bentham argued that complicated human experiences and preferences may not simply be reduced to fixed numbers (which are required for utilitarian cost-benefit analyses).</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/John_Stuart_Mill">John Stuart Mill</a>, a philosopher influenced by Bentham, sought to refine utilitarianism to address these criticisms. While retaining the core principle of maximizing happiness, Mill introduced <em>qualitative</em> distinctions among pleasures, asserting that some forms of happiness are inherently superior to others (for instance, intellectual/moral pleasures are regarded as being superior to physical pleasure by Mill). Furthermore, Mill emphasized the role of <em>general human experience</em> in ethical decision-making. This perspective laid the groundwork for <em>rule utilitarianism</em>, which proposes that actions are ethical if they conform to rules that generally maximize utility. This approach offers a more practical application of utilitarian principles by relying on established norms and heuristics derived from collective human experience, rather than requiring on-the-spot consequential calculations for every action.</p>
+<p>The practice of rule utilitarianism mitigates some criticisms of Bentham’s notion of <em>act utilitarianism</em>, notably the ethical dilemmas where act utilitarianism might justify clearly immoral actions, like murder, under specific circumstances. By adhering to general rules against such actions, rule utilitarianism maintains a more consistent ethical standard. However, utilitarianism still faces several criticisms, including the problem of incommensurability (comparing different kinds of pleasures and pains), calculation complexity, and an overemphasis on outcomes/consequences at the expense of <em>ethical processes</em>.</p>
+<p>In applying these utilitarian frameworks to practical scenarios, such as the ethical dilemma of whether an airline should differentially respond to customers based on their social media influence, both act and rule utilitarians might approach the decision differently. Act utilitarians would assess the immediate consequences of the policy on overall happiness, possibly justifying differential treatment if it optimally resolves customer issues and enhances overall satisfaction. Rule utilitarians, however, might consider broader implications and established principles, potentially arguing against the policy if it undermines fairness and equality, which are deemed essential for long-term societal well-being.</p>
+<p>Overall, utilitarianism underscores the importance of rational, consequence-based reasoning in ethical decision-making, offering a structured method to navigate complex moral landscapes. By examining these principles and their practical implications, individuals and organizations can sharpen their ethical rationale, making decisions that aim to enhance collective well-being.</p>
+</section>
+<section id="rights-and-duties">
+<h2>Rights and Duties<a class="headerlink" href="#rights-and-duties" title="Link to this heading">#</a></h2>
+<p>The Rights and Duties approach, as an ethical decision-making framework, offers a stark contrast to utilitarianism. Utilitarianism, often summarized as choosing the action that produces the greatest happiness for the greatest number, is an example of consequentialism (namely, it focuses heavily on the consequences of actions to determine their moral worth). On the other hand, the Rights and Duties approach centers on the <em>intentions</em> behind actions and the actions themselves. It holds that certain actions are morally right or wrong regardless of the consequences they produce. This approach is particularly useful for identifying actions that can be deemed categorically right or wrong, which is one aspect utilitarianism struggles with.</p>
+<p>Central to the Rights and Duties approach is the concept of “rights”. A right is a morally or legally justified claim or entitlement to something. Correspondingly, these rights imply duties on others to respect these rights. For example, a right to clean air implies a duty not to pollute. Rights can be categorized into different types, including negative rights and positive rights. Negative rights require others not to interfere, whereas positive rights necessitate others to provide assistance or benefits. Natural rights are universal and arise from our human nature, legal rights are granted by governments or legal systems, and human rights are universal rights recognized and supported by the international community.</p>
+<p>The renowned German philosopher <a class="reference external" href="https://en.wikipedia.org/wiki/Immanuel_Kant">Immanuel Kant</a> significantly influenced the Rights and Duties approach through his development of <a class="reference external" href="https://plato.stanford.edu/entries/ethics-deontological/">deontological ethics</a>, which emphasizes rule-based ethics driven by reason and logic rather than by personal experience or feelings. Kant proposed that moral principles should arise from goodwill, defined as acting out of a moral duty rather than personal gain. He argued that the morality of an action depends on the intention behind it, rather than its consequences. This leads to the notion that actions should be performed because they are inherently right, not because of the benefits they might offer.</p>
+<p>Kant introduced the <em>categorical imperative</em> as a key tool within this ethical framework. This imperative can be understood through three main formulations. The first formulation, universalizability, suggests that when deciding whether an action is morally right, you should ask yourself if the principle behind your action could be applied universally, meaning that everyone could follow that rule without contradiction. The second, respect for persons, dictates that humanity should always be treated as an end in itself and never merely as a means to an end, emphasizing the importance of respecting each individual’s autonomy. The third, the community formulation, advises individuals to consider if their actions could be endorsed by everyone in a community, essentially urging individuals to act as if they were part of an ideal democratic society where their actions could be universally supported.</p>
+<p>Despite its robust theoretical foundation, the Rights and Duties approach is not without criticisms. Some argue that it is overly demanding, as it calls for actions and motives to be morally pure, often an unrealistic expectation. Moreover, the framework can struggle to resolve conflicts among competing rights, such as those between privacy and property rights, as illustrated by the case of <a class="reference external" href="https://www.forbes.com/sites/johngoglia/2016/04/13/faa-confirms-shooting-drone-federal-crime-so-when-will-us-prosecute/#1563511c53ef">individuals shooting down drones over their property</a>. Lastly, critics point out that exclusively focusing on intentions can be impractical, as ignoring the consequences of actions may lead to ethically undesirable outcomes.</p>
+<p>In summary, the Rights and Duties approach to ethical decision-making, grounded in the philosophies of Immanuel Kant, prioritizes intentions and the intrinsic morality of actions over their consequences. It introduces key principles, such as the categorical imperative, to guide decision-making and emphasizes the inherent dignity and autonomy of individuals. While offering a valuable counterbalance to consequentialist theories like utilitarianism, it also faces challenges, particularly in handling complex real-world scenarios where conflicting rights and adverse consequences must be navigated.</p>
+</section>
+<section id="fairness-and-justice">
+<h2>Fairness and Justice<a class="headerlink" href="#fairness-and-justice" title="Link to this heading">#</a></h2>
+<p>The fairness and justice approach to ethical decision-making is intricately connected to the philosophy of <a class="reference external" href="https://en.wikipedia.org/wiki/John_Rawls">John Rawls</a>, one of the most influential moral and political philosophers of the 20th century. Rawls, who lived from 1921 to 2002, sought to establish principles of justice that would be universally accepted. Central to his theory is the idea that the most reasonable principles of justice are those everyone would agree to from an original position of equality. To explore this idea, Rawls introduces the thought experiment of the “<a class="reference external" href="https://en.wikipedia.org/wiki/Original_position">veil of ignorance</a>”, where individuals choose principles of justice without any knowledge of their own social standing, abilities, or personal circumstances. This theoretical approach ensures that decisions are made without bias and aim to benefit the community as a whole.</p>
+<p>In this thought experiment, Rawls rejects utilitarianism, which focuses on the greatest good for the greatest number, because it fails to protect against the risk of being part of an oppressed minority group. He argues that people would not endorse a system where they could potentially be adversely affected, even if it benefits the majority. Rawls also dismisses aristocracies and other systems that distribute wealth and opportunities based on arbitrary factors such as birth. While market systems offer formal equality of opportunity, they still allow for significant disparities because individuals start with different resources. Similarly, meritocracies improve upon fair opportunities but still fall short because inherent abilities vary among individuals.</p>
+<p>Instead, Rawls proposes two central principles of justice. The first is the <em>Liberty Principle</em>, which asserts that each person should have equal access to a comprehensive set of basic liberties. The second is the <em>Difference Principle</em>, consisting of two components: fair equality of opportunity and structuring social and economic inequalities to maximize the benefit for the least advantaged members of society. More specifically, fair equality of opportunity means that individuals should have a genuine and equal chance to attain positions of power, responsibility, or advantage, regardless of their social background or initial starting point in life. Rawls believes that social and economic inequalities, such as differences in wealth, social status, or education, are acceptable only if everyone has a fair opportunity to achieve success. Moreover, Rawls acknowledges that inequalities can exist, but only if they ultimately serve to improve the position of those worst off. For example, while some people may earn more or hold higher-status jobs, the structure of society should be such that these inequalities work to the advantage of those who are worst off.</p>
+<p>To put these concepts into practice, the veil of ignorance acts as a critical ethical tool, akin to calculating consequences in utilitarianism or adhering to the categorical imperative in deontological ethics. By applying the veil of ignorance, one can evaluate ethical dilemmas more objectively. For instance, consider the question of whether doctors and entry-level workers should receive the same pay. According to the Difference Principle, inequalities in pay are permissible if they result in benefits for society’s least advantaged members. Higher compensation for doctors can be justified because it incentivizes individuals to acquire the necessary skills and education to provide essential services, which ultimately benefits everyone, including the least advantaged who need access to healthcare.</p>
+<p>Overall, Rawls’ fairness and justice approach provides a nuanced framework for ethical decision-making, grounded in the elimination of biases and the promotion of justice for all societal members. By envisioning decisions made from an original position of equality, Rawls challenges us to create systems that are fair and benefit even the least advantaged, reinforcing the importance of justice as a fundamental ethical tenet.</p>
+</section>
+<section id="relativism">
+<h2>Relativism<a class="headerlink" href="#relativism" title="Link to this heading">#</a></h2>
+<p>As you may have already observed, different philosophical frameworks such as utilitarianism, the rights and duties approach, and the fairness and justice approach are not necessarily consistent with each other (in terms of what each framework deems ethical or unethical). This disparity raises a pivotal question: Are there objective or universal standards of right and wrong, or is morality inherently relative to specific cultural or temporal contexts? <em>Relativism</em> posits that ethical judgments can only be deemed correct or incorrect relative to certain cultures, periods, or frameworks, suggesting that without contextual understanding, we cannot definitively label actions as ethical or unethical.</p>
+<p>Most philosophers argue against relativism, advocating instead for the existence of universal moral principles that stand above cultural and temporal differences. This philosophical debate provokes further inquiry into why different ethical frameworks may provide divergent answers to moral questions. An illustrative analogy to scientific theories can offer some clarification here. In science, researchers build models to describe the natural world, constantly refining these models with new information. Past models may yield different, and often less accurate, predictions than contemporary ones. Similarly, ethical frameworks evolve over time as our understanding of morality deepens.</p>
+<p>Ethical theories, akin to scientific models, are dynamic and subject to refinement. Just as outdated scientific theories are replaced with superior ones, current ethical frameworks might eventually be supplanted by more advanced theories. Although our present frameworks may assist us in navigating ethical dilemmas, they might not always lead us to the absolute right answer. They offer pragmatic solutions based on our current understanding, but the pursuit of a more encompassing and precise ethical model remains open. Ultimately, the exploration of ethics is an ongoing process of learning and evolving our moral comprehension, much like the quest for scientific knowledge.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="0-2-framework.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">A Human-Centric Framework of Responsible AI</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="0-4-prep.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Fundementals of Machine Learning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utilitarianism">Utilitarianism</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rights-and-duties">Rights and Duties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fairness-and-justice">Fairness and Justice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relativism">Relativism</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Gediminas Adomavicius and Mochen Yang
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

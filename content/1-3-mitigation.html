@@ -1,0 +1,1039 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Mitigating Algorithmic Bias &#8212; Responsible AI for Data Scientists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/1-3-mitigation';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to Interpretable Machine Learning" href="2-1-intro.html" />
+    <link rel="prev" title="Measuring Fairness" href="1-2-measure.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="0-1-intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.webp" class="logo__image only-light" alt="Responsible AI for Data Scientists - Home"/>
+    <script>document.write(`<img src="../_static/logo.webp" class="logo__image only-dark" alt="Responsible AI for Data Scientists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="0-1-intro.html">
+                    Responsible AI for Data Scientists
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="0-2-framework.html">A Human-Centric Framework of Responsible AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-3-philosophy.html">Philosophical Foundations for Ethical Decision-Making</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-4-prep.html">Fundementals of Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fairness and Algorithmic Bias</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1-1-intro.html">Introduction to Algorithmic Bias and Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-2-measure.html">Measuring Fairness</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Mitigating Algorithmic Bias</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Transparency and Interpretable Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2-1-intro.html">Introduction to Interpretable Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-2-global.html">Methods for Global Interpretations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-3-local.html">Methods for Local Interpretations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3-1-framework.html">Conceptual Framework of Privacy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3-2-mechanism.html">Privacy Mechanisms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Special Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4-1-GenAI.html">Responsible AI in the Age of Generative AI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="zbib.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/mochenyang/Responsible-AI" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/1-3-mitigation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Mitigating Algorithmic Bias</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-processing-approaches">Pre-Processing Approaches</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-approach-remove-sensitive-feature">Naive Approach: Remove Sensitive Feature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-remover">Correlation Remover</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-processing-approaches">In-Processing Approaches</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processing-approaches">Post-Processing Approaches</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fairness-performance-tradeoff">Fairness-Performance Tradeoff</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="mitigating-algorithmic-bias">
+<h1>Mitigating Algorithmic Bias<a class="headerlink" href="#mitigating-algorithmic-bias" title="Link to this heading">#</a></h1>
+<p>This chapter demonstrates a few representative algorithms for mitigating algorithmic bias. As discussed in the Chapter <a class="reference internal" href="1-1-intro.html"><span class="doc">Introduction to Algorithmic Bias and Fairness</span></a>, algorithmic bias can arise from (i) pre-existing bias in data, (ii) bias introduced during model training, and (iii) bias introduced when making predictions / decisions. Accordingly, to mitigate these biases, there are at least three types of approaches:</p>
+<ul class="simple">
+<li><p><strong>Pre-processing Approaches</strong>: pre-process training data to remove existing bias, before training models;</p></li>
+<li><p><strong>In-processing Approaches</strong>: modify how models are trained to impose fairness as a learning objective or constraint;</p></li>
+<li><p><strong>Post-processing Approaches</strong>: post-process model outputs (e.g., predictions or predicted probabilities) to satisfy certain fairness objective.</p></li>
+</ul>
+<p>We will use the <a class="reference external" href="https://eric.ed.gov/?id=ED469370">LSAC Bar Passage Data</a> for illustration. This data, originally collected by <span id="id1">Wightman [<a class="reference internal" href="zbib.html#id255" title="Linda F Wightman. Lsac national longitudinal bar passage study. LSAC Research Report Series, 1998.">Wig98</a>]</span>, contains the bar passage outcomes and demographic information of over 20,000 individuals.</p>
+<div class="note admonition">
+<p class="admonition-title">Data: Compas Recidivism Dataset</p>
+<ul class="simple">
+<li><p>Location: “data/bar_pass_prediction.csv”</p></li>
+<li><p>Shape: (22407, 5)</p></li>
+<li><p>Note: original dataset has a few more columns. They have been removed for cleaner demonstration.</p></li>
+</ul>
+</div>
+<p>We will use <code class="docutils literal notranslate"><span class="pre">pass_bar</span></code> as the outcome variable of interest, and treat <code class="docutils literal notranslate"><span class="pre">race</span></code> as the sensitive feature. We will focus only on white and black races, and remove any rows with missing data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/bar_pass_prediction.csv&#39;</span><span class="p">)</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">bar</span><span class="p">[</span><span class="n">bar</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">])]</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>lsat</th>
+      <th>ugpa</th>
+      <th>gender</th>
+      <th>race</th>
+      <th>pass_bar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>44.0</td>
+      <td>3.5</td>
+      <td>female</td>
+      <td>white</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>29.0</td>
+      <td>3.5</td>
+      <td>female</td>
+      <td>white</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>36.0</td>
+      <td>3.5</td>
+      <td>male</td>
+      <td>white</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>39.0</td>
+      <td>3.5</td>
+      <td>male</td>
+      <td>white</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>48.0</td>
+      <td>3.5</td>
+      <td>male</td>
+      <td>white</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we will use lsat, upga, gender, and race as the features</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">bar</span><span class="p">[[</span><span class="s1">&#39;lsat&#39;</span><span class="p">,</span> <span class="s1">&#39;ugpa&#39;</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="s1">&#39;race&#39;</span><span class="p">]]</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">bar</span><span class="p">[</span><span class="s1">&#39;pass_bar&#39;</span><span class="p">]</span>
+<span class="c1"># Convert the categorical variables to numerical (needed for random forest training)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="s1">&#39;race&#39;</span><span class="p">],</span> <span class="n">drop_first</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;lsat&#39;, &#39;ugpa&#39;, &#39;gender_male&#39;, &#39;race_white&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s first build a baseline classifier for demonstration</span>
+<span class="c1"># using random forest here, please feel free to try other techniques</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="c1"># we will use 70% of the data for training and 30% for testing</span>
+<span class="c1"># setting random_state for reproducibility</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># train the random forest classifier</span>
+<span class="c1"># this dataset is quite imbalanced, so we will set class_weight to balanced</span>
+<span class="n">rf_clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="n">class_weight</span> <span class="o">=</span> <span class="s1">&#39;balanced&#39;</span><span class="p">)</span>
+<span class="n">rf_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># make predictions on the testing data</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">rf_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Throughout this chapter, we will evaluate multiple models in terms of both predictive performance and fairness</span>
+<span class="c1"># For predictive performance: we will report the accuracy, precision, recall, and F1 score</span>
+<span class="c1"># note that we set pos_label = 0 because class 0 (not passing the bar) is the minority class in this imbalanced dataset</span>
+<span class="c1"># For fairness: we will report demographic disparity and equalized odds disparity</span>
+<span class="c1"># let&#39;s create a function so that we don&#39;t need to repeat the same code multiple times</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_recall_fscore_support</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fairlearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">metrics</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_model</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="p">,</span> <span class="n">f1</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">precision_recall_fscore_support</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">pos_label</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">average</span> <span class="o">=</span> <span class="s1">&#39;binary&#39;</span><span class="p">)</span>
+    <span class="n">DD</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">demographic_parity_difference</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">sensitive_features</span> <span class="o">=</span> <span class="n">X_test</span><span class="p">[</span><span class="s1">&#39;race_white&#39;</span><span class="p">])</span>
+    <span class="n">EOD</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">equalized_odds_difference</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">sensitive_features</span> <span class="o">=</span> <span class="n">X_test</span><span class="p">[</span><span class="s1">&#39;race_white&#39;</span><span class="p">])</span>
+    <span class="c1"># print model accuracy metrics and fairness metrics</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-----------------------&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Model Accuracy Metrics: &#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy:&#39;</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Precision:&#39;</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recall:&#39;</span><span class="p">,</span> <span class="n">recall</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;F1 Score:&#39;</span><span class="p">,</span> <span class="n">f1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-----------------------&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Model Fairness Metrics: &#39;</span><span class="p">)</span>    
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Demographic Disparity:&#39;</span><span class="p">,</span> <span class="n">DD</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Equalized Odds Disparity:&#39;</span><span class="p">,</span> <span class="n">EOD</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># evaluate model</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------
+Model Accuracy Metrics: 
+Accuracy: 0.844939338540801
+Precision: 0.07529722589167767
+Recall: 0.19655172413793104
+F1 Score: 0.10888252148997135
+-----------------------
+Model Fairness Metrics: 
+Demographic Disparity: 0.16762272165217595
+Equalized Odds Disparity: 0.21173469387755106
+</pre></div>
+</div>
+</div>
+</div>
+<section id="pre-processing-approaches">
+<h2>Pre-Processing Approaches<a class="headerlink" href="#pre-processing-approaches" title="Link to this heading">#</a></h2>
+<section id="naive-approach-remove-sensitive-feature">
+<h3>Naive Approach: Remove Sensitive Feature<a class="headerlink" href="#naive-approach-remove-sensitive-feature" title="Link to this heading">#</a></h3>
+<p>The idea of pre-processing is to modify the data used for model training to remove the existing bias. Perhaps a seemingly obvious pre-processing approach is to simply drop the sensitive group attribute (<code class="docutils literal notranslate"><span class="pre">race</span></code> in this case). After all, if the model is “blind” to race, it cannot have racial bias, right? Well, let’s try it out.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># now build another classifier without the race column</span>
+<span class="n">X_norace_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;race_white&#39;</span><span class="p">])</span>
+<span class="n">X_norace_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;race_white&#39;</span><span class="p">])</span>
+<span class="c1"># train the random forest classifier</span>
+<span class="n">rf_clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="n">class_weight</span> <span class="o">=</span> <span class="s1">&#39;balanced&#39;</span><span class="p">)</span>
+<span class="n">rf_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_norace_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="c1"># make predictions on the testing data</span>
+<span class="n">y_pred_norace</span> <span class="o">=</span> <span class="n">rf_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_norace_test</span><span class="p">)</span>
+<span class="c1"># evaluate the model</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_norace</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------
+Model Accuracy Metrics: 
+Accuracy: 0.8311450889147416
+Precision: 0.07790697674418605
+Recall: 0.23103448275862068
+F1 Score: 0.11652173913043479
+-----------------------
+Model Fairness Metrics: 
+Demographic Disparity: 0.21030078689322695
+Equalized Odds Disparity: 0.21967584303597842
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see that, both demographic disparity and equalized odds disparity actually become greater. In general, removing sensitive feature from data has limited effectiveness. This is because other legitimate features in the data can be correlated with the sensitive feature. Indeed, as shown below, LSAT score and undergraduate GPA are both correlated with race to some degree.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="o">.</span><span class="n">corrwith</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="s1">&#39;race_white&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lsat           0.376971
+ugpa           0.222320
+gender_male    0.099201
+race_white     1.000000
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>One could argue that the correlations between LSAT score / undergraduate GPA with race are themselves manifestations of existing racial bias in the education system (e.g., perhaps black students systematically received less support in schools, leading to lower LSAT scores and undergraduate GPAs). In generally, what counts as “legitimate” or “non-sensitive” features can be a point of debate.</p>
+</div>
+</section>
+<section id="correlation-remover">
+<h3>Correlation Remover<a class="headerlink" href="#correlation-remover" title="Link to this heading">#</a></h3>
+<p>To deal with this issue, we need to systematically remove the correlations between each non-sensitive feature and the sensitive feature. This can be done via the <code class="docutils literal notranslate"><span class="pre">CorrelationRemover</span></code> function in the <code class="docutils literal notranslate"><span class="pre">fairlearn</span></code> package. Under the hood, it removes correlations by running linear regressions of non-sensitive features on the sensitive feature and obtaining the residuals.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">fairlearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">CorrelationRemover</span>
+<span class="n">cr</span> <span class="o">=</span> <span class="n">CorrelationRemover</span><span class="p">(</span><span class="n">sensitive_feature_ids</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;race_white&quot;</span><span class="p">])</span>
+<span class="n">X_cr_train</span> <span class="o">=</span> <span class="n">cr</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="c1"># transformation returns a numpy array, let&#39;s convert it back to a pandas dataframe</span>
+<span class="n">X_cr_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_cr_train</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lsat&#39;</span><span class="p">,</span> <span class="s1">&#39;ugpa&#39;</span><span class="p">,</span> <span class="s1">&#39;gender_male&#39;</span><span class="p">])</span>
+<span class="c1"># check correlations again - they are very close to 0 now</span>
+<span class="n">race_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;race_white&#39;</span><span class="p">]</span>
+<span class="n">race_train</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">X_cr_train</span><span class="o">.</span><span class="n">corrwith</span><span class="p">(</span><span class="n">race_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lsat           2.069709e-14
+ugpa           1.209489e-14
+gender_male    5.147216e-15
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># now build another classifier with the transformed data</span>
+<span class="n">rf_clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="n">class_weight</span> <span class="o">=</span> <span class="s1">&#39;balanced&#39;</span><span class="p">)</span>
+<span class="n">rf_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_cr_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="c1"># make predictions on the testing data</span>
+<span class="n">y_pred_cr</span> <span class="o">=</span> <span class="n">rf_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_norace_test</span><span class="p">)</span>
+<span class="c1"># evaluate the model</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_cr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------
+Model Accuracy Metrics: 
+Accuracy: 0.9017782948313113
+Precision: 0.09433962264150944
+Recall: 0.1206896551724138
+F1 Score: 0.1059001512859304
+-----------------------
+Model Fairness Metrics: 
+Demographic Disparity: 0.061266896331535925
+Equalized Odds Disparity: 0.07971938775510201
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see that both disparities are further reduced.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Why does a linear regression remove correlation? (optional, toggle to show)</p>
+<p>Given a sensitive attribute <span class="math notranslate nohighlight">\(V\)</span> and a non-sensitive attribute <span class="math notranslate nohighlight">\(X\)</span> that is correlated with <span class="math notranslate nohighlight">\(V\)</span>, the correlation remover runs a regression of <span class="math notranslate nohighlight">\(X\)</span> on <span class="math notranslate nohighlight">\(V\)</span> and collect the residual <span class="math notranslate nohighlight">\(X_r\)</span> as the transformed non-sensitive attribute that will be uncorrelated with <span class="math notranslate nohighlight">\(V\)</span>; that is <span class="math notranslate nohighlight">\(Cov(X_r, V) = 0\)</span>. This is a general procedure that is effective regardless of the distribution of <span class="math notranslate nohighlight">\(X\)</span> or <span class="math notranslate nohighlight">\(V\)</span>.</p>
+<p>Intuitively, it works because a linear regression of <span class="math notranslate nohighlight">\(X\)</span> on <span class="math notranslate nohighlight">\(V\)</span> is trying to use <span class="math notranslate nohighlight">\(V\)</span> to account for variations in <span class="math notranslate nohighlight">\(X\)</span>, and the residual is the variation in <span class="math notranslate nohighlight">\(X\)</span> that cannot be accounted for by <span class="math notranslate nohighlight">\(V\)</span> (hence independent from <span class="math notranslate nohighlight">\(V\)</span>).</p>
+<p>It can be proved more formally. See <a class="reference external" href="https://statproofbook.github.io/P/slr-rescorr.html">this article</a> for more details if you are interested.</p>
+</div>
+</section>
+</section>
+<section id="in-processing-approaches">
+<h2>In-Processing Approaches<a class="headerlink" href="#in-processing-approaches" title="Link to this heading">#</a></h2>
+<p>Compared to data pre-processing, in-processing approaches aim to mitigate bias by modifying how the model is trained. Many modern machine learning models are trained as an <em>optimization problem</em>, i.e., by minimizing a certain loss function (computed over training data). Therefore, some natural ways to mitigate bias include (1) modifying the objective function to have fairness as a part, such as fair regularization approaches (<span id="id2">Kamishima <em>et al.</em> [<a class="reference internal" href="zbib.html#id53" title="Toshihiro Kamishima, Shotaro Akaho, and Jun Sakuma. Fairness-aware learning through regularization approach. In 2011 IEEE 11th International Conference on Data Mining Workshops, 643–650. IEEE, 2011.">KAS11</a>]</span>); and (2) add fairness as constraints in the optimization problem (<span id="id3">Celis <em>et al.</em> [<a class="reference internal" href="zbib.html#id164" title="L Elisa Celis, Lingxiao Huang, Vijay Keswani, and Nisheeth K Vishnoi. Classification with fairness constraints: a meta-algorithm with provable guarantees. In Proceedings of the Conference on Fairness, Accountability, and Transparency, 319–328. 2019.">CHKV19</a>], Cotter <em>et al.</em> [<a class="reference internal" href="zbib.html#id55" title="Andrew Cotter, Maya Gupta, Heinrich Jiang, Nathan Srebro, Karthik Sridharan, Serena Wang, Blake Woodworth, and Seungil You. Training fairness-constrained classifiers to generalize. 2018.">CGJ+18</a>], Komiyama <em>et al.</em> [<a class="reference internal" href="zbib.html#id182" title="Junpei Komiyama, Akiko Takeda, Junya Honda, and Hajime Shimao. Nonconvex optimization for regression with fairness constraints. In International conference on machine learning, 2737–2746. 2018.">KTHS18</a>], Zafar <em>et al.</em> [<a class="reference internal" href="zbib.html#id188" title="Muhammad Bilal Zafar, Isabel Valera, Manuel Gomez Rogriguez, and Krishna P Gummadi. Fairness constraints: mechanisms for fair classification. In Artificial Intelligence and Statistics, 962–970. PMLR, 2017.">ZVRG17</a>]</span>).</p>
+<div class="tip admonition">
+<p class="admonition-title">Example: fairness regularization</p>
+<p>Consider a resume screening task where a classification model predicts whether candidate <span class="math notranslate nohighlight">\(i\)</span> is a good fit for a position or not. Let <span class="math notranslate nohighlight">\(Y_i\)</span> denote the ground truth, <span class="math notranslate nohighlight">\(\widehat{Y}_i\)</span> denote the classifier’s prediction. Let sets <span class="math notranslate nohighlight">\(N_F\)</span> and <span class="math notranslate nohighlight">\(N_M\)</span> respectively contain the indices of female and male candidates.</p>
+<p>The regular classification task typically uses a cross-entropy loss <span class="math notranslate nohighlight">\(\sum_{i=1}^N L(Y_i, \widehat{Y}_i)\)</span>. With the additional consideration of demographic parity, we want the following difference to be small</p>
+<div class="math notranslate nohighlight">
+\[
+\left | \frac{1}{|N_F|}\sum_{i \in N_F} \widehat{Y}_i - \frac{1}{|N_M|}\sum_{i \in N_M} \widehat{Y}_i\right |
+\]</div>
+<p>The new fairness-aware learning task can be formulated as minimizing the following fairness regularized loss function:</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^N L(Y_i, \widehat{Y}_i) + \lambda \left | \frac{1}{|N_F|}\sum_{i \in N_F} \widehat{Y}_i - \frac{1}{|N_M|}\sum_{i \in N_M} \widehat{Y}_i\right |
+\]</div>
+<p>where parameter <span class="math notranslate nohighlight">\(\lambda\)</span> controls the relative importance of achiving demographic parity as compared to achieving greater predictive accuracy.</p>
+</div>
+<p>For demonstration, we will use the <code class="docutils literal notranslate"><span class="pre">ExponentiatedGradient</span></code> method, proposed by <span id="id4">Agarwal <em>et al.</em> [<a class="reference internal" href="zbib.html#id256" title="Alekh Agarwal, Alina Beygelzimer, Miroslav Dudík, John Langford, and Hanna Wallach. A reductions approach to fair classification. In International conference on machine learning, 60–69. PMLR, 2018.">ABDudik+18</a>]</span> and available within the <code class="docutils literal notranslate"><span class="pre">fairlearn</span></code> package. This method reframes a binary classification problem as a constrained optimization problem, with fairness objective(s) set as constraints.</p>
+<div class="cell tag_remove-stderr docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">fairlearn.reductions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExponentiatedGradient</span><span class="p">,</span> <span class="n">DemographicParity</span><span class="p">,</span> <span class="n">EqualizedOdds</span>
+<span class="n">rf_clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="n">class_weight</span> <span class="o">=</span> <span class="s1">&#39;balanced&#39;</span><span class="p">)</span>
+<span class="n">fair_obj</span> <span class="o">=</span> <span class="n">DemographicParity</span><span class="p">()</span>
+<span class="n">EG_Demo</span> <span class="o">=</span> <span class="n">ExponentiatedGradient</span><span class="p">(</span><span class="n">rf_clf</span><span class="p">,</span> <span class="n">constraints</span> <span class="o">=</span> <span class="n">fair_obj</span><span class="p">)</span>
+<span class="n">EG_Demo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">sensitive_features</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;race_white&#39;</span><span class="p">])</span>
+<span class="n">y_pred_eg</span> <span class="o">=</span> <span class="n">EG_Demo</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_eg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------
+Model Accuracy Metrics: 
+Accuracy: 0.815855077281037
+Precision: 0.05735930735930736
+Recall: 0.18275862068965518
+F1 Score: 0.08731466227347612
+-----------------------
+Model Fairness Metrics: 
+Demographic Disparity: 0.026640772040859906
+Equalized Odds Disparity: 0.0398360044995677
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-stderr docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rf_clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="n">class_weight</span> <span class="o">=</span> <span class="s1">&#39;balanced&#39;</span><span class="p">)</span>
+<span class="n">fair_obj</span> <span class="o">=</span> <span class="n">EqualizedOdds</span><span class="p">()</span>
+<span class="n">EG_EqualOdds</span> <span class="o">=</span> <span class="n">ExponentiatedGradient</span><span class="p">(</span><span class="n">rf_clf</span><span class="p">,</span> <span class="n">constraints</span> <span class="o">=</span> <span class="n">fair_obj</span><span class="p">)</span>
+<span class="n">EG_EqualOdds</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">sensitive_features</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;race_white&#39;</span><span class="p">])</span>
+<span class="n">y_pred_eg</span> <span class="o">=</span> <span class="n">EG_EqualOdds</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_eg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------
+Model Accuracy Metrics: 
+Accuracy: 0.7857736413495098
+Precision: 0.05757307351638618
+Recall: 0.22413793103448276
+F1 Score: 0.0916138125440451
+-----------------------
+Model Fairness Metrics: 
+Demographic Disparity: 0.05358670554388412
+Equalized Odds Disparity: 0.09300595238095233
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="post-processing-approaches">
+<h2>Post-Processing Approaches<a class="headerlink" href="#post-processing-approaches" title="Link to this heading">#</a></h2>
+<p>Finally, post-processing approaches mitigate bias by changing how a model’s predictions are used. For binary classification, one of the most common approaches here is to adjust the prediction threshold. For example, a threshold optimizing approach ({e.g., cite:t}<code class="docutils literal notranslate"><span class="pre">hardt2016equality</span></code>) searches for group-specific thresholds that achieves certain fairness goals.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">fairlearn.postprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThresholdOptimizer</span>
+<span class="c1"># initialize the threshold optimizer</span>
+<span class="c1"># &quot;constraint&quot; specifies what kind of fairness goal you want to achieve</span>
+<span class="c1"># &quot;objective&quot; specifies the learning objective</span>
+<span class="n">rf_clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="n">class_weight</span> <span class="o">=</span> <span class="s1">&#39;balanced&#39;</span><span class="p">)</span>
+<span class="n">TO_Demo</span> <span class="o">=</span> <span class="n">ThresholdOptimizer</span><span class="p">(</span><span class="n">estimator</span> <span class="o">=</span> <span class="n">rf_clf</span><span class="p">,</span> <span class="n">constraints</span> <span class="o">=</span> <span class="s1">&#39;demographic_parity&#39;</span><span class="p">,</span> <span class="n">objective</span> <span class="o">=</span> <span class="s2">&quot;accuracy_score&quot;</span><span class="p">,</span> <span class="n">predict_method</span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<span class="n">TO_Demo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">sensitive_features</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;race_white&#39;</span><span class="p">])</span>
+<span class="n">y_pred_to</span> <span class="o">=</span> <span class="n">TO_Demo</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">sensitive_features</span> <span class="o">=</span> <span class="n">X_test</span><span class="p">[</span><span class="s1">&#39;race_white&#39;</span><span class="p">],</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_to</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------
+Model Accuracy Metrics: 
+Accuracy: 0.9511384410835965
+Precision: 0.16666666666666666
+Recall: 0.0034482758620689655
+F1 Score: 0.006756756756756757
+-----------------------
+Model Fairness Metrics: 
+Demographic Disparity: 0.001068947087119243
+Equalized Odds Disparity: 0.00520833333333337
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rf_clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="n">class_weight</span> <span class="o">=</span> <span class="s1">&#39;balanced&#39;</span><span class="p">)</span>
+<span class="n">TO_EqualOdds</span> <span class="o">=</span> <span class="n">ThresholdOptimizer</span><span class="p">(</span><span class="n">estimator</span> <span class="o">=</span> <span class="n">rf_clf</span><span class="p">,</span> <span class="n">constraints</span> <span class="o">=</span> <span class="s1">&#39;equalized_odds&#39;</span><span class="p">,</span> <span class="n">objective</span> <span class="o">=</span> <span class="s2">&quot;accuracy_score&quot;</span><span class="p">,</span> <span class="n">predict_method</span> <span class="o">=</span> <span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<span class="n">TO_EqualOdds</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">sensitive_features</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;race_white&#39;</span><span class="p">])</span>
+<span class="n">y_pred_to</span> <span class="o">=</span> <span class="n">TO_EqualOdds</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">sensitive_features</span> <span class="o">=</span> <span class="n">X_test</span><span class="p">[</span><span class="s1">&#39;race_white&#39;</span><span class="p">],</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+<span class="n">evaluate_model</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_to</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------
+Model Accuracy Metrics: 
+Accuracy: 0.9511384410835965
+Precision: 0.16666666666666666
+Recall: 0.0034482758620689655
+F1 Score: 0.006756756756756757
+-----------------------
+Model Fairness Metrics: 
+Demographic Disparity: 0.001068947087119243
+Equalized Odds Disparity: 0.00520833333333337
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that in this case, the threshold optimizer clearly reduces demographic disparity and disparity in equalized odds. Coincidentally, the results are identical under two constraints. However, this is not always the case (e.g., try replacing the random forest classifier with a gradient boosting classifier).</p>
+</section>
+<section id="fairness-performance-tradeoff">
+<h2>Fairness-Performance Tradeoff<a class="headerlink" href="#fairness-performance-tradeoff" title="Link to this heading">#</a></h2>
+<p>Let’s start by tabulating the performance, both predictive and fairness-related, of all the above mitigation approaches. The following table summarizes the (1) accuracy score (as an overall predictive performance measure), (2) F-1 of minority class (as a class-specific performance measure), and (3) demographic disparity and equalized odds disparity (as fairness measures). “Baseline” refers to classifier’s performance without considering fairness at all; “DD” denotes demographic disparity, and “EOD” denotes equalized odds disparity.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Accuracy</p></th>
+<th class="head"><p>F-1</p></th>
+<th class="head"><p>DD</p></th>
+<th class="head"><p>EOD</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Baseline</p></td>
+<td><p>0.845</p></td>
+<td><p>0.109</p></td>
+<td><p>0.168</p></td>
+<td><p>0.212</p></td>
+</tr>
+<tr class="row-odd"><td><p>Drop Race</p></td>
+<td><p>0.831</p></td>
+<td><p>0.117</p></td>
+<td><p>0.210</p></td>
+<td><p>0.220</p></td>
+</tr>
+<tr class="row-even"><td><p>Correlation Remover</p></td>
+<td><p>0.902</p></td>
+<td><p>0.121</p></td>
+<td><p>0.061</p></td>
+<td><p>0.080</p></td>
+</tr>
+<tr class="row-odd"><td><p>Exponentiated Gradient (DD)</p></td>
+<td><p>0.816</p></td>
+<td><p>0.087</p></td>
+<td><p>0.027</p></td>
+<td><p>0.040</p></td>
+</tr>
+<tr class="row-even"><td><p>Exponentiated Gradient (EOD)</p></td>
+<td><p>0.792</p></td>
+<td><p>0.094</p></td>
+<td><p>0.044</p></td>
+<td><p>0.062</p></td>
+</tr>
+<tr class="row-odd"><td><p>Threshold Optimizer (DD)</p></td>
+<td><p>0.951</p></td>
+<td><p>0.007</p></td>
+<td><p>0.001</p></td>
+<td><p>0.005</p></td>
+</tr>
+<tr class="row-even"><td><p>Threshold Optimizer (EOD)</p></td>
+<td><p>0.951</p></td>
+<td><p>0.007</p></td>
+<td><p>0.001</p></td>
+<td><p>0.005</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Several observations are worth noting:</p>
+<ul class="simple">
+<li><p>There is a tradeoff between predictive performance and fairness performance. In-processing approaches produce more fair predictions than pre-processing approach (correlation remover to be specific) at the cost of having lower accuracy and F-1 scores.</p></li>
+<li><p>Post-processing approach (i.e., threshold optimizer) results in extremely small fairness disparities, but the F-1 scores are also very low and the accuracy is very high. Considering the imbalanced nature of the dataset, this is not good news. It indicates that the post-processed predictions are almost always class 1 (e.g., if you predict everyone passes the bar, of course there is not demographic disparity). Therefore, just because disparity metrics have lower values do not automatically mean the classifier is more “useful”.</p></li>
+<li><p>So which model is the best? Well, this depends on user’s tolerance for predictive performance and fairness. If predictive performance takes priority, then correlation remover model may be the best because it produces highest F-1 score while also clearly reduces disparities compared to the baseline. However, if fairness takes priority, then exponentiated gradient models may be prefered.</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Is the fairness-performance tradeoff always a problematic phenomenon? If achiving certain notion of fairness necessarily sacrifices predictive accuracy, is that always a bad thing? The answer to this question can be quite nuanced and depends on the context.</p>
+<p>For sake of illustration, imagine an “extreme case” of direct discrimination, where an employer only hires male candidates and rejects all female candidates. Any fairness-aware classification model that predicts a positive hiring decision for a female candidate would have made a “mistake” from the accuracy perspective. However, these “mistakes” often represent a corrective force against historical bias and injustice (direct discrimination in this example). This is a type of <strong>corrective justice</strong>.</p>
+<p>When thinking about the potential tradeoff between fairness and predictive performance, it is important to reflect on how predictive performance is being measured. If predictive performance is measured based on (biased) historical labels, then high performance can be a signal of perpetuating existing biases.</p>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1-2-measure.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Measuring Fairness</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="2-1-intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Interpretable Machine Learning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-processing-approaches">Pre-Processing Approaches</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-approach-remove-sensitive-feature">Naive Approach: Remove Sensitive Feature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-remover">Correlation Remover</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-processing-approaches">In-Processing Approaches</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processing-approaches">Post-Processing Approaches</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fairness-performance-tradeoff">Fairness-Performance Tradeoff</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Gediminas Adomavicius and Mochen Yang
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

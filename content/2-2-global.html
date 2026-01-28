@@ -1,0 +1,866 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Methods for Global Interpretations &#8212; Responsible AI for Data Scientists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/2-2-global';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Methods for Local Interpretations" href="2-3-local.html" />
+    <link rel="prev" title="Introduction to Interpretable Machine Learning" href="2-1-intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="0-1-intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.webp" class="logo__image only-light" alt="Responsible AI for Data Scientists - Home"/>
+    <script>document.write(`<img src="../_static/logo.webp" class="logo__image only-dark" alt="Responsible AI for Data Scientists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="0-1-intro.html">
+                    Responsible AI for Data Scientists
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="0-2-framework.html">A Human-Centric Framework of Responsible AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-3-philosophy.html">Philosophical Foundations for Ethical Decision-Making</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-4-prep.html">Fundementals of Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fairness and Algorithmic Bias</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1-1-intro.html">Introduction to Algorithmic Bias and Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-2-measure.html">Measuring Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-3-mitigation.html">Mitigating Algorithmic Bias</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Transparency and Interpretable Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2-1-intro.html">Introduction to Interpretable Machine Learning</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Methods for Global Interpretations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-3-local.html">Methods for Local Interpretations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3-1-framework.html">Conceptual Framework of Privacy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3-2-mechanism.html">Privacy Mechanisms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Special Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4-1-GenAI.html">Responsible AI in the Age of Generative AI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="zbib.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/mochenyang/Responsible-AI" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/2-2-global.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Methods for Global Interpretations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-specific-method-feature-importance">Model-Specific Method: Feature Importance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-agnostic-methods">Model-Agnostic Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-dependency-plot-pdp">Partial Dependency Plot (PDP)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accumulated-local-effects-ale-plot">Accumulated Local Effects (ALE) Plot</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="methods-for-global-interpretations">
+<h1>Methods for Global Interpretations<a class="headerlink" href="#methods-for-global-interpretations" title="Link to this heading">#</a></h1>
+<p>Global interpretations of a machine learning aims to provide an overall assessment of the relative importance of different features in predicting the outcome / target. In this chapter, we will look at several common global interpretation methods, including both model-specific methods (e.g., feature importance for ensemble techniques) and model-agnostic methods (such as PDP and ALE plots).</p>
+<section id="model-specific-method-feature-importance">
+<h2>Model-Specific Method: Feature Importance<a class="headerlink" href="#model-specific-method-feature-importance" title="Link to this heading">#</a></h2>
+<p>Many tree-based ensemble learning techniques, such as random forest and gradient boosting (XGBoost and LightGBM) naturally offer a global interpretation mechanism, via <strong>feature importance</strong>. Using the <a class="reference external" href="https://archive.ics.uci.edu/dataset/222/bank+marketing">Bank Marketing dataset</a>, we will demonstrate how to obtain and visualize feature importance, and more crucially, try to understand what it actually means.</p>
+<div class="note admonition">
+<p class="admonition-title">Data: Bank Marketing</p>
+<ul class="simple">
+<li><p>Location: “data/bank-full.csv”</p></li>
+<li><p>Shape: (45211, 17)</p></li>
+<li><p>Note: this is a commonly used dataset for benchmarking ML algorithms. The goal is typically to predict <code class="docutils literal notranslate"><span class="pre">y</span></code> (whether a customer subscribed to a term deposit) based on other features.</p></li>
+</ul>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import data</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">bank</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/bank-full.csv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+<span class="n">bank</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>job</th>
+      <th>marital</th>
+      <th>education</th>
+      <th>default</th>
+      <th>balance</th>
+      <th>housing</th>
+      <th>loan</th>
+      <th>contact</th>
+      <th>day</th>
+      <th>month</th>
+      <th>duration</th>
+      <th>campaign</th>
+      <th>pdays</th>
+      <th>previous</th>
+      <th>poutcome</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>58</td>
+      <td>management</td>
+      <td>married</td>
+      <td>tertiary</td>
+      <td>no</td>
+      <td>2143</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>261</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>44</td>
+      <td>technician</td>
+      <td>single</td>
+      <td>secondary</td>
+      <td>no</td>
+      <td>29</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>151</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>33</td>
+      <td>entrepreneur</td>
+      <td>married</td>
+      <td>secondary</td>
+      <td>no</td>
+      <td>2</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>76</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>47</td>
+      <td>blue-collar</td>
+      <td>married</td>
+      <td>unknown</td>
+      <td>no</td>
+      <td>1506</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>92</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>33</td>
+      <td>unknown</td>
+      <td>single</td>
+      <td>unknown</td>
+      <td>no</td>
+      <td>1</td>
+      <td>no</td>
+      <td>no</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>198</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>no</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">bank</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">bank</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+<span class="c1"># converting categorical variables to dummies</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;job&#39;</span><span class="p">,</span> <span class="s1">&#39;marital&#39;</span><span class="p">,</span> <span class="s1">&#39;education&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;housing&#39;</span><span class="p">,</span> <span class="s1">&#39;loan&#39;</span><span class="p">,</span> <span class="s1">&#39;contact&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;poutcome&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="c1"># converting yes / no in outcome variable to 1 / 0</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">Y</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">yes</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">no</span> <span class="o">=</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># for illustration, let&#39;s build a random forest model</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="c1"># we will use 70% of the data for training and 30% for testing</span>
+<span class="c1"># setting random_state for reproducibility</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># train the random forest classifier</span>
+<span class="c1"># this dataset is quite imbalanced, so we will set class_weight to balanced</span>
+<span class="n">rf_clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="n">class_weight</span> <span class="o">=</span> <span class="s1">&#39;balanced&#39;</span><span class="p">)</span>
+<span class="n">rf_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># to get feature importances</span>
+<span class="n">importances</span> <span class="o">=</span> <span class="n">rf_clf</span><span class="o">.</span><span class="n">feature_importances_</span>
+<span class="c1"># put importance scores in a DataFrame for easy inspection</span>
+<span class="n">importances_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">importances</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># visually, we can try to plot a bar chart of top-15 most important features, in descending order</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">importances_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">importances_df</span> <span class="o">=</span> <span class="n">importances_df</span><span class="p">[:</span><span class="mi">15</span><span class="p">]</span>
+<span class="n">importances_df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Feature importances&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0ef27c7fa2495d1f413bad7df838ca447512ca24a180d5954d74dae23b9d26ac.png" src="../_images/0ef27c7fa2495d1f413bad7df838ca447512ca24a180d5954d74dae23b9d26ac.png" />
+</div>
+</div>
+<p>From the plot, it seems that <code class="docutils literal notranslate"><span class="pre">duration</span></code> (duration since last telemarketing contact) is the most predictive feature, and <code class="docutils literal notranslate"><span class="pre">balance</span></code> (yearly account balance), <code class="docutils literal notranslate"><span class="pre">age</span></code> (age of client), <code class="docutils literal notranslate"><span class="pre">day</span></code> (day of the month of last contact) are all somewhat important. While this plot is very often presented as a form of “interpretation” of ensemble models, what exactly does each feature importance value mean? Take <code class="docutils literal notranslate"><span class="pre">duration</span></code> as an example, its importance is 0.340, what does this number mean?</p>
+<p>In fact, the feature importance value measures the <strong>reduction of impurity brought by a given feature</strong>, averaged overall all trees in the ensemble. In a decision tree, each split is determined by identifying a feature (and an associated value of that feature) that produces largest impurity reduction (where impurity may be measured by entropy or Gini). Impurity reduction of a given feature therefore reflects its “usefulness” in the decisiont tree. Averaging impurity reduction over all trees, we get an overall, ensemble-level feature importance measure.</p>
+<p>Because the feature importance values are averaged over all trees, we can also quantify their variances, as a signal of the variability of feature importance among constituent models within the ensemble. The following code visualizes that.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">([</span><span class="n">tree</span><span class="o">.</span><span class="n">feature_importances_</span> <span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">rf_clf</span><span class="o">.</span><span class="n">estimators_</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">importances_df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;score&#39;</span><span class="p">:</span> <span class="n">importances</span><span class="p">,</span> <span class="s1">&#39;score_std&#39;</span><span class="p">:</span> <span class="n">std</span><span class="p">},</span> <span class="n">index</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">importances_df2</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">],</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">importances_df2</span> <span class="o">=</span> <span class="n">importances_df2</span><span class="p">[:</span><span class="mi">15</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">importances_df2</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">importances_df2</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">],</span> <span class="n">xerr</span> <span class="o">=</span> <span class="n">importances_df2</span><span class="p">[</span><span class="s1">&#39;score_std&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Feature importances&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/66e120053fec910693018440aacb68aa6a2fd8ff7e241b156e06724975b9a623.png" src="../_images/66e120053fec910693018440aacb68aa6a2fd8ff7e241b156e06724975b9a623.png" />
+</div>
+</div>
+</section>
+<section id="model-agnostic-methods">
+<h2>Model-Agnostic Methods<a class="headerlink" href="#model-agnostic-methods" title="Link to this heading">#</a></h2>
+<p>While the above feature importance plot is a useful interpretation method for tree-based ensemble techniques, it is not easily generalizable to other ML techniques. Now, we turn our attention to a few global interpretation methods that are model-agnostic, i.e., they can be used as a “wrapper” on top of arbitrary models.</p>
+<section id="partial-dependency-plot-pdp">
+<h3>Partial Dependency Plot (PDP)<a class="headerlink" href="#partial-dependency-plot-pdp" title="Link to this heading">#</a></h3>
+<p>PDP <span id="id1">[<a class="reference internal" href="zbib.html#id257" title="Trevor Hastie, Robert Tibshirani, Jerome H Friedman, and Jerome H Friedman. The elements of statistical learning: data mining, inference, and prediction. Volume 2. Springer, 2009.">HTFF09</a>]</span> is a straightforward (yet somewhat naïve) approach to quantify the effect of a feature on ML predictions. Specifically, for a given “focal” feature, it simply computes the average prediction when the focal feature takes a particular value, averaging over all possible values of other features in order to “marginalize” their effects on the predictions. What you get is an “isolated” measure of the effect of the focal feature on predictions. Then, plotting that effect measure across different values the focal feature can take, you get a plot illustrating the dependency of predictions on the focal feature.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Maths behind PDP (optional, toggle to show)</p>
+<p>For simplicity, suppose two features, <span class="math notranslate nohighlight">\(X_1\)</span> and <span class="math notranslate nohighlight">\(X_2\)</span>, are used to build a ML model. Given a specific pair of feature values <span class="math notranslate nohighlight">\((x_1, x_2)\)</span>, denote the prediction generated by the ML model as <span class="math notranslate nohighlight">\(f(x_1,x_2)\)</span>. Further denote <span class="math notranslate nohighlight">\(p_1(.)\)</span> and <span class="math notranslate nohighlight">\(p_2()\)</span> as the probability density function of feature <span class="math notranslate nohighlight">\(X_1\)</span> and <span class="math notranslate nohighlight">\(X_2\)</span>, and <span class="math notranslate nohighlight">\(p_{2\|1}(.)\)</span> as the conditional density of feature <span class="math notranslate nohighlight">\(X_2\)</span> on feature <span class="math notranslate nohighlight">\(X_1\)</span>.</p>
+<p>Under PDP, for a given feature value <span class="math notranslate nohighlight">\(x_1\)</span>, it simply computes the <em>average prediction</em> when <span class="math notranslate nohighlight">\(X_1 = x_1\)</span>, and the “average” is taken over all possible values of <span class="math notranslate nohighlight">\(X_2\)</span>, in order to “marginalize” the effect of the second feature on predictions. More precisely, PDP computes:</p>
+<div class="math notranslate nohighlight">
+\[
+f_{1,PDP}(x_1) = \mathbb{E}(f(x_1, X_2)) = \int p_2(x_2) f(x_1, x_2) dx_2
+\]</div>
+<p>then plots <span class="math notranslate nohighlight">\(f_{1,PDP}(x_1)\)</span> against <span class="math notranslate nohighlight">\(x_1\)</span> for different values of <span class="math notranslate nohighlight">\(x_1\)</span>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.inspection</span><span class="w"> </span><span class="kn">import</span> <span class="n">PartialDependenceDisplay</span>
+<span class="c1"># let&#39;s get PDP of the above random forest classifier for feature &quot;duration&quot;, &quot;balance&quot;, and &quot;age&quot;</span>
+<span class="c1"># &quot;estimator&quot; takes the random forest classifier</span>
+<span class="c1"># &quot;X&quot; takes a set of data (with all features) over which to compute the partial dependency values</span>
+<span class="c1"># &quot;features&quot; takes the indices of the features for which we want to compute the partial dependency values</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Partial Dependency Plots&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">PartialDependenceDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span><span class="n">estimator</span> <span class="o">=</span> <span class="n">rf_clf</span><span class="p">,</span> 
+                                        <span class="n">X</span> <span class="o">=</span> <span class="n">X_test</span><span class="p">,</span> 
+                                        <span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;duration&quot;</span><span class="p">,</span> <span class="s2">&quot;balance&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">],</span>
+                                        <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/83e6c932cca4507401111dc7db1a28f64481a9b570a6d594cea9a1903200f6ff.png" src="../_images/83e6c932cca4507401111dc7db1a28f64481a9b570a6d594cea9a1903200f6ff.png" />
+</div>
+</div>
+<p>We can see that the effect of <code class="docutils literal notranslate"><span class="pre">duration</span></code> on probability of subscribing to the term deposit is largely linear - higher the duration, greater the probability of subscription. As for <code class="docutils literal notranslate"><span class="pre">balance</span></code>, we see a positive effect for lower balance, but after certain point, it does not seem to matter. Finally, we see a non-linear relationship between <code class="docutils literal notranslate"><span class="pre">age</span></code> and probability of subscription. As the client’s age increases, there is an initial decrease in subscription probability to a steady level, followed by a sharp increase in subscription probability beyond 60 years old or so.</p>
+<p>Despite its intuitive nature, PDP makes an important, and often unrealistic assumption that features are independent of each other (this allows straightforward marginalization of other features for a given focal feature). When this assumption fails, which it usually does, PDP can be somewhat misleading.</p>
+<p>One straightforward attempt to overcome PDP’s naive assumption of feature independence is to take into account the distributions of other features <em>conditional</em> on the focal feature. Instead of averaging over the predictions associated with all possible values of other features (as is done in PDP), we average over the values that other features actually take given a particular value of the focal features. This strategy produces the so-called <strong>M-Plot</strong>. Toggle the following block to see a more precise description.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Maths behind M-Plot (optional, toggle to show)</p>
+<p>Under the same setting as PDP, M-Plot computes:</p>
+<div class="math notranslate nohighlight">
+\[
+f_{1,MPlot}(x_1) = \mathbb{E}(f(x_1, X_2) | X_1 = x_1) = \int p_{2|1}(x_2 | x_1) f(x_1, x_2) dx_2
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(p_{2|1}(x_2 | x_1)\)</span> is the conditional density of feature <span class="math notranslate nohighlight">\(X_2\)</span> w.r.t. the first feature taking value <span class="math notranslate nohighlight">\(x_1\)</span>. Then, <span class="math notranslate nohighlight">\(f_{1,MPlot}(x_1)\)</span> is plotted against <span class="math notranslate nohighlight">\(x_1\)</span> for different values of <span class="math notranslate nohighlight">\(x_1\)</span> to get the M-plot.</p>
+</div>
+<p>While this sounds appealing on the outset, it turns out that M-plot actually does not fully address the feature dependency issue. The approach is still visualizing a “combined” effect of both focal feature and other features on predictions. This is not intuitively obvious from the math. For a deeper illustration, please see <a class="reference external" href="https://mochenyang.github.io/mochenyangblog/posts/2022-03-23-PDP-M-ALE/2022-03-23-PDP-M-ALE.html#understanding-ale">this blog post</a>.</p>
+</section>
+<section id="accumulated-local-effects-ale-plot">
+<h3>Accumulated Local Effects (ALE) Plot<a class="headerlink" href="#accumulated-local-effects-ale-plot" title="Link to this heading">#</a></h3>
+<p>Accumulated local effects (ALE) is another method to quantify the effect of a focal feature while not having to assume its independence from other features. It computes the “marginal effect” of the focal feature on predictions, then accumulates such marginal effects (over a range of values that the focal feature can take) in order to obtain an overall effect measure <span id="id2">[<a class="reference internal" href="zbib.html#id258" title="Daniel W Apley and Jingyu Zhu. Visualizing the effects of predictor variables in black box supervised learning models. Journal of the Royal Statistical Society Series B: Statistical Methodology, 82(4):1059–1086, 2020.">AZ20</a>]</span>. The math behind ALE is somewhat complicated - feel free to toggle the following block for more details, but it’s also ok to skip.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Maths behind ALE (optional, toggle to show)</p>
+<p>Under the same setting as PDP, ALE computes:</p>
+<div class="math notranslate nohighlight">
+\[
+f_{1,ALE}(x_1) = \int_{\min(X1)}^{x_1} \mathbb{E}(f^1 (X_1, X_2)|X_1 = z_1) dz_1 = \int_{\min(X1)}^{x_1} \int p_{2|1}(x_2|z_1) f^1(z_1, x_2) dx_2 dz_1
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(f^1(z_1, x_2)\)</span> is the partial derivative of prediction w.r.t. the first feature, i.e., <span class="math notranslate nohighlight">\(f^1(z_1, x_2)=\frac{\partial f(z_1,x_2)}{\partial z_1}\)</span>, which measures the “marginal effect” of <span class="math notranslate nohighlight">\(X_1\)</span> on the predictions in the neighborhood of <span class="math notranslate nohighlight">\(X_1 = z_1\)</span>. Then, such marginal effects are accumulated from the minimum value that <span class="math notranslate nohighlight">\(X_1\)</span> takes, up to the focal value <span class="math notranslate nohighlight">\(x_1\)</span>. Finally, <span class="math notranslate nohighlight">\(f_{1,ALE}(x_1)\)</span> is plotted against <span class="math notranslate nohighlight">\(x_1\)</span> for different values of <span class="math notranslate nohighlight">\(x_1\)</span> to get the ALE plot.</p>
+<p>The partial derivative, <span class="math notranslate nohighlight">\(f^1(z_1, x_2)\)</span>, is the key of ALE. For a clearer illustration, imagine a simplified case where <span class="math notranslate nohighlight">\(f(x_1,x_2) := \beta_1 x_1 + \beta_2 x_2\)</span>, then we have <span class="math notranslate nohighlight">\(f^1 (z_1, x_2) = \beta_1\)</span>, and consequently,</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+f_{1,ALE}(x_1) &amp; = \int_{\min(X1)}^{x_1} \int p_{2|1}(x_2|z_1) \beta_1 dx_2 dz_1 \\
+&amp; = \int_{\min(X1)}^{x_1} \beta_1 \int p_{2|1}(x_2|z_1) dx_2 dz_1 \\ 
+&amp; = \int_{\min(X1)}^{x_1} \beta_1 dz_1 \\
+&amp; = \beta_1 x_1 - \beta_1 \min(X_1) = \beta_1 x_1 - constant
+\end{align*}\]</div>
+<p>This explains why <span class="math notranslate nohighlight">\(f_{1,ALE}(x_1)\)</span> correctly recovers the pure effect of <span class="math notranslate nohighlight">\(X_1\)</span>, without being confounded by <span class="math notranslate nohighlight">\(X_2\)</span>.</p>
+</div>
+<p>Next, let’s try to make an ALE plot using the <code class="docutils literal notranslate"><span class="pre">alibi</span></code> package.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">alibi.explainers</span><span class="w"> </span><span class="kn">import</span> <span class="n">ALE</span><span class="p">,</span> <span class="n">plot_ale</span>
+<span class="c1"># this implementation requires numpy arrays rather than pandas DataFrame as inputs</span>
+<span class="c1"># re-training the same random forest model with numpy arrays</span>
+<span class="n">x_train_np</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">y_train_np</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">X_test_np</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">rf_clf_np</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="n">class_weight</span> <span class="o">=</span> <span class="s1">&#39;balanced&#39;</span><span class="p">)</span>
+<span class="n">rf_clf_np</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train_np</span><span class="p">,</span> <span class="n">y_train_np</span><span class="p">)</span>
+
+<span class="c1"># inputs to ALE include the predict function of the model as well as feature / target names (for plotting)</span>
+<span class="c1"># since we care about how probability of class 1 changes with feature values, we will use predict_proba</span>
+<span class="n">ale_explainer</span> <span class="o">=</span> <span class="n">ALE</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">rf_clf_np</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">x</span><span class="p">)[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">feature_names</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">target_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+<span class="c1"># also, features to explain need to be specified by indices</span>
+<span class="n">ale_exp</span> <span class="o">=</span> <span class="n">ale_explainer</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="n">X_test_np</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plot_ale</span><span class="p">(</span><span class="n">ale_exp</span><span class="p">,</span> <span class="n">n_cols</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">fig_kw</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;figwidth&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="s1">&#39;figheight&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\yang3653\AppData\Local\anaconda3\envs\responsibleai\Lib\site-packages\tqdm\auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+</pre></div>
+</div>
+<img alt="../_images/a58a026148fac4f4e450d00214a7ca27f6cf0bb32961e9a9524a9a4e76fc8abb.png" src="../_images/a58a026148fac4f4e450d00214a7ca27f6cf0bb32961e9a9524a9a4e76fc8abb.png" />
+</div>
+</div>
+<p>We get fairly consistent explanations as under PDP in this case. One interesting difference is for <code class="docutils literal notranslate"><span class="pre">balance</span></code>, the ALE plot shows a slight non-linearity – beyond a certain point (around 5000 or so), greater balance actually decreases the subscription probability. This does not show up in PDP plots.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2-1-intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Interpretable Machine Learning</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="2-3-local.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Methods for Local Interpretations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-specific-method-feature-importance">Model-Specific Method: Feature Importance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-agnostic-methods">Model-Agnostic Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-dependency-plot-pdp">Partial Dependency Plot (PDP)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accumulated-local-effects-ale-plot">Accumulated Local Effects (ALE) Plot</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Gediminas Adomavicius and Mochen Yang
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

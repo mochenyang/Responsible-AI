@@ -1,0 +1,1381 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Privacy Mechanisms &#8212; Responsible AI for Data Scientists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/3-2-mechanism';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Responsible AI in the Age of Generative AI" href="4-1-GenAI.html" />
+    <link rel="prev" title="Conceptual Framework of Privacy" href="3-1-framework.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="0-1-intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.webp" class="logo__image only-light" alt="Responsible AI for Data Scientists - Home"/>
+    <script>document.write(`<img src="../_static/logo.webp" class="logo__image only-dark" alt="Responsible AI for Data Scientists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="0-1-intro.html">
+                    Responsible AI for Data Scientists
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="0-2-framework.html">A Human-Centric Framework of Responsible AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-3-philosophy.html">Philosophical Foundations for Ethical Decision-Making</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-4-prep.html">Fundementals of Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fairness and Algorithmic Bias</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1-1-intro.html">Introduction to Algorithmic Bias and Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-2-measure.html">Measuring Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-3-mitigation.html">Mitigating Algorithmic Bias</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Transparency and Interpretable Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2-1-intro.html">Introduction to Interpretable Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-2-global.html">Methods for Global Interpretations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-3-local.html">Methods for Local Interpretations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3-1-framework.html">Conceptual Framework of Privacy</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Privacy Mechanisms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Special Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4-1-GenAI.html">Responsible AI in the Age of Generative AI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="zbib.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/mochenyang/Responsible-AI" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/3-2-mechanism.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Privacy Mechanisms</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#de-identification">De-Identification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#de-identification-via-feature-removal">De-Identification via Feature Removal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#de-identification-via-feature-value-coarsening-k-anonymity">De-Identification via Feature Value Coarsening (<span class="math notranslate nohighlight">\(k\)</span>-Anonymity)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#differential-privacy">Differential Privacy</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="privacy-mechanisms">
+<h1>Privacy Mechanisms<a class="headerlink" href="#privacy-mechanisms" title="Link to this heading">#</a></h1>
+<p>Privacy preservation is not merely about the suppression of sensitive, personal identifiable information (PII); it is about how to release information in a way that is resistent to adversarial attacks / probes. Therefore, privacy perserving techniques need to make the fundamental tradeoff between data privacy and data utility – that is, how to release data that is safe (to some degree) while also being useful for some forms of analyses.</p>
+<p>In this part, we discuss two common mechanisms to achieve privacy protection, including de-identification and differential privacy. Roughly speaking, de-identification seeks to protect privacy by <strong>modifying the data</strong>, whereas differential privacy seeks to protect privacy by <strong>modifying the algorithms allowed to query the data</strong>.</p>
+<section id="de-identification">
+<h2>De-Identification<a class="headerlink" href="#de-identification" title="Link to this heading">#</a></h2>
+<p>The high-level idea of de-identification is to process the raw / sensitive data so that it is harder to identify an individual. There are multiple ways to achieve this, and we discuss both a somewhat “naive” approach (i.e., feature removal) and a more sophisticated approach (i.e., feature value coarsening or <span class="math notranslate nohighlight">\(k\)</span>-anonymity).</p>
+<p>For discussions in this chapter, we will use the <a class="reference external" href="https://archive.ics.uci.edu/dataset/20/census+income">Adult dataset</a> with personal identifiable information (PII).</p>
+<div class="note admonition">
+<p class="admonition-title">Data: Adult Dataset with Personal Identifiable Information</p>
+<ul class="simple">
+<li><p>Location: “data/adult_with_pii.csv”</p></li>
+<li><p>Shape: (32563, 18)</p></li>
+<li><p>Note: this dataset contains additional PII beyond the original census data on UCI.</p></li>
+</ul>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/adult_with_pii.csv&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>DOB</th>
+      <th>SSN</th>
+      <th>Zip</th>
+      <th>Workclass</th>
+      <th>Education</th>
+      <th>Education-Num</th>
+      <th>Marital Status</th>
+      <th>Occupation</th>
+      <th>Relationship</th>
+      <th>Race</th>
+      <th>Sex</th>
+      <th>Hours per week</th>
+      <th>Country</th>
+      <th>Target</th>
+      <th>Age</th>
+      <th>Capital Gain</th>
+      <th>Capital Loss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Karrie Trusslove</td>
+      <td>9/7/1967</td>
+      <td>732-14-6110</td>
+      <td>64152</td>
+      <td>State-gov</td>
+      <td>Bachelors</td>
+      <td>13</td>
+      <td>Never-married</td>
+      <td>Adm-clerical</td>
+      <td>Not-in-family</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+      <td>56</td>
+      <td>2174</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Brandise Tripony</td>
+      <td>6/7/1988</td>
+      <td>150-19-2766</td>
+      <td>61523</td>
+      <td>Self-emp-not-inc</td>
+      <td>Bachelors</td>
+      <td>13</td>
+      <td>Married-civ-spouse</td>
+      <td>Exec-managerial</td>
+      <td>Husband</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>13</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+      <td>35</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Brenn McNeely</td>
+      <td>8/6/1991</td>
+      <td>725-59-9860</td>
+      <td>95668</td>
+      <td>Private</td>
+      <td>HS-grad</td>
+      <td>9</td>
+      <td>Divorced</td>
+      <td>Handlers-cleaners</td>
+      <td>Not-in-family</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+      <td>32</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Dorry Poter</td>
+      <td>4/6/2009</td>
+      <td>659-57-4974</td>
+      <td>25503</td>
+      <td>Private</td>
+      <td>11th</td>
+      <td>7</td>
+      <td>Married-civ-spouse</td>
+      <td>Handlers-cleaners</td>
+      <td>Husband</td>
+      <td>Black</td>
+      <td>Male</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+      <td>14</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Dick Honnan</td>
+      <td>9/16/1951</td>
+      <td>220-93-3811</td>
+      <td>75387</td>
+      <td>Private</td>
+      <td>Bachelors</td>
+      <td>13</td>
+      <td>Married-civ-spouse</td>
+      <td>Prof-specialty</td>
+      <td>Wife</td>
+      <td>Black</td>
+      <td>Female</td>
+      <td>40</td>
+      <td>Cuba</td>
+      <td>&lt;=50K</td>
+      <td>72</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="de-identification-via-feature-removal">
+<h3>De-Identification via Feature Removal<a class="headerlink" href="#de-identification-via-feature-removal" title="Link to this heading">#</a></h3>
+<p>As a first (and intuitive) step of privacy protection, it makes sense to remove some personal information that can be used to easily identify individuals. Here, <code class="docutils literal notranslate"><span class="pre">SSN</span></code> is a unique identifier of individuals and releasing it is a clear violation of individual privacy. Let’s also remove <code class="docutils literal notranslate"><span class="pre">Name</span></code> and <code class="docutils literal notranslate"><span class="pre">DOB</span></code> in this process – even though they are not unique identifiers of individuals, they are still quite specific and intuitively feel “personal”. Removing these sensitive columns is a straightforward form of de-identification.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_anonymized</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;DOB&#39;</span><span class="p">,</span> <span class="s1">&#39;SSN&#39;</span><span class="p">])</span>
+<span class="n">data_anonymized</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Zip</th>
+      <th>Workclass</th>
+      <th>Education</th>
+      <th>Education-Num</th>
+      <th>Marital Status</th>
+      <th>Occupation</th>
+      <th>Relationship</th>
+      <th>Race</th>
+      <th>Sex</th>
+      <th>Hours per week</th>
+      <th>Country</th>
+      <th>Target</th>
+      <th>Age</th>
+      <th>Capital Gain</th>
+      <th>Capital Loss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>64152</td>
+      <td>State-gov</td>
+      <td>Bachelors</td>
+      <td>13</td>
+      <td>Never-married</td>
+      <td>Adm-clerical</td>
+      <td>Not-in-family</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+      <td>56</td>
+      <td>2174</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>61523</td>
+      <td>Self-emp-not-inc</td>
+      <td>Bachelors</td>
+      <td>13</td>
+      <td>Married-civ-spouse</td>
+      <td>Exec-managerial</td>
+      <td>Husband</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>13</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+      <td>35</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>95668</td>
+      <td>Private</td>
+      <td>HS-grad</td>
+      <td>9</td>
+      <td>Divorced</td>
+      <td>Handlers-cleaners</td>
+      <td>Not-in-family</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+      <td>32</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>25503</td>
+      <td>Private</td>
+      <td>11th</td>
+      <td>7</td>
+      <td>Married-civ-spouse</td>
+      <td>Handlers-cleaners</td>
+      <td>Husband</td>
+      <td>Black</td>
+      <td>Male</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+      <td>14</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>75387</td>
+      <td>Private</td>
+      <td>Bachelors</td>
+      <td>13</td>
+      <td>Married-civ-spouse</td>
+      <td>Prof-specialty</td>
+      <td>Wife</td>
+      <td>Black</td>
+      <td>Female</td>
+      <td>40</td>
+      <td>Cuba</td>
+      <td>&lt;=50K</td>
+      <td>72</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>However, when thinking about privacy, it is important to realize that just personal identifiable information is typically not sufficient to protect individuals from being re-identified. <strong>Re-identifiation</strong> attack using a combination of features that are not immediately sensitive poses a significant threat in practice.</p>
+<p>For instance, with a combination of <code class="docutils literal notranslate"><span class="pre">Zip</span></code> and <code class="docutils literal notranslate"><span class="pre">Age</span></code>, you can typically uniquely identify an individual in this dataset. As a less obvious example, imagine you know someone with age 35 who lives in the United States, works in the government, and recently made some money from investment. Using just this information, you can narrow down to 19 individuals, among which <em>only one</em> person had a positive capital gain. In other words, in this case, you have discovered <em>exactly</em> how much money the person made from capital gain (2977) simply based on a combination of age, country of residence, broad professional category, and vague information on capital gain!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_anonymized_attack</span> <span class="o">=</span> <span class="n">data_anonymized</span><span class="p">[</span>
+    <span class="p">(</span><span class="n">data_anonymized</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">35</span><span class="p">)</span> <span class="o">&amp;</span> 
+    <span class="p">(</span><span class="n">data_anonymized</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;United-States&#39;</span><span class="p">)</span> <span class="o">&amp;</span>
+    <span class="p">(</span><span class="n">data_anonymized</span><span class="p">[</span><span class="s1">&#39;Workclass&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;State-gov&#39;</span><span class="p">)</span> <span class="o">&amp;</span>
+    <span class="p">(</span><span class="n">data_anonymized</span><span class="p">[</span><span class="s1">&#39;Capital Gain&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">data_anonymized_attack</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Zip</th>
+      <th>Workclass</th>
+      <th>Education</th>
+      <th>Education-Num</th>
+      <th>Marital Status</th>
+      <th>Occupation</th>
+      <th>Relationship</th>
+      <th>Race</th>
+      <th>Sex</th>
+      <th>Hours per week</th>
+      <th>Country</th>
+      <th>Target</th>
+      <th>Age</th>
+      <th>Capital Gain</th>
+      <th>Capital Loss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>8390</th>
+      <td>18107</td>
+      <td>State-gov</td>
+      <td>Bachelors</td>
+      <td>13</td>
+      <td>Never-married</td>
+      <td>Exec-managerial</td>
+      <td>Not-in-family</td>
+      <td>Asian-Pac-Islander</td>
+      <td>Female</td>
+      <td>45</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+      <td>35</td>
+      <td>2977</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="de-identification-via-feature-value-coarsening-k-anonymity">
+<h3>De-Identification via Feature Value Coarsening (<span class="math notranslate nohighlight">\(k\)</span>-Anonymity)<a class="headerlink" href="#de-identification-via-feature-value-coarsening-k-anonymity" title="Link to this heading">#</a></h3>
+<p>In light of the above example, it is clear that (1) simply removing personal identifiable information may not be enough for privacy protection, and (2) we need to manage re-identification risk. One mechanism to do so is by <strong>manipulating the data such that each individual “blends into” a group of non-distinguishable other individuals</strong>. This is the key idea behind <span class="math notranslate nohighlight">\(k\)</span>-Anonymity <span id="id1">[<a class="reference internal" href="zbib.html#id262" title="Latanya Sweeney. K-anonymity: a model for protecting privacy. International journal of uncertainty, fuzziness and knowledge-based systems, 10(05):557–570, 2002.">Swe02</a>]</span>, defined as follows.</p>
+<div class="tip admonition">
+<p class="admonition-title">Definition: <span class="math notranslate nohighlight">\(k\)</span>-Anonymity</p>
+<p>Let <span class="math notranslate nohighlight">\(D\)</span> denote a dataset and <span class="math notranslate nohighlight">\(r \in D\)</span> denote a particular row in the dataset. Given a value <span class="math notranslate nohighlight">\(k\)</span> and a set of quasi-identifiers <span class="math notranslate nohighlight">\(QI\)</span> (i.e., specific columns in the dataset that can be used to identify individuals), the dataset <span class="math notranslate nohighlight">\(D\)</span> satisfies <span class="math notranslate nohighlight">\(k\)</span>-Anonymity if <span class="math notranslate nohighlight">\(\forall r \in D\)</span>, there are at least <span class="math notranslate nohighlight">\(k-1\)</span> other rows in <span class="math notranslate nohighlight">\(D\)</span> that share the same values with <span class="math notranslate nohighlight">\(r\)</span> on quasi-identifiers <span class="math notranslate nohighlight">\(QI\)</span>.</p>
+</div>
+<p>Put differently, <span class="math notranslate nohighlight">\(k\)</span>-anonymity typically requires “obfuscating” the dataset such that when an attacker makes a query using some specific values of quasi-identifiers, the attacker will get back at least <span class="math notranslate nohighlight">\(k\)</span> rows that are essentially indistinguishable from one another on those quasi-identifiers (so that any one of them cannot be uniquely identified).</p>
+<p>It’s easy to imagine that if we want to be “extremely conservative” and treat all columns of a dataset as quasi-identifiers, then enforcing <span class="math notranslate nohighlight">\(k\)</span>-anonymity may amount to manipulating data to such an extend that individuals become identical. This of course makes the data pretty much useless. In practice, therefore, implementing <span class="math notranslate nohighlight">\(k\)</span>-anonymity requires careful choices of (1) a reasonable value of <span class="math notranslate nohighlight">\(k\)</span>, (2) a reasonable set of quasi-identifiers, and (3) a reasonable approach of data manipulation.</p>
+<p>How to achieve <span class="math notranslate nohighlight">\(k\)</span>-anonymity? One approach is <strong>data generalization and suppression</strong>, which is to modifying the values of quasi-identifiers to be <em>less specific</em> (i.e., more “coarse”). For instance, modifying values of the <code class="docutils literal notranslate"><span class="pre">Age</span></code> variable from integers to ranges (e.g., changing 25 to “20-30”) makes it much harder to uniquely identifying someone by age. However, algorithmically implementing <span class="math notranslate nohighlight">\(k\)</span>-anonymity is actually a very hard task – in fact, it is NP-hard in general <span id="id2">[<a class="reference internal" href="zbib.html#id263" title="Adam Meyerson and Ryan Williams. On the complexity of optimal k-anonymity. In Proceedings of the twenty-third ACM SIGMOD-SIGACT-SIGART symposium on Principles of database systems, 223–228. 2004.">MW04</a>]</span> and people often resort to <em>approximating</em> <span class="math notranslate nohighlight">\(k\)</span>-anonymity. We omit the algorithmic details here, as they are beyond the scope of this book.</p>
+<p>As a simple demonstration, we can apply this idea to coarsen the <code class="docutils literal notranslate"><span class="pre">Age</span></code> variable in the Adult dataset, and evaluate the same re-identification attack again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># convert age to categorical with bucket size of 10</span>
+<span class="n">data_anonymized</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">data_anonymized</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">data_anonymized</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Zip</th>
+      <th>Workclass</th>
+      <th>Education</th>
+      <th>Education-Num</th>
+      <th>Marital Status</th>
+      <th>Occupation</th>
+      <th>Relationship</th>
+      <th>Race</th>
+      <th>Sex</th>
+      <th>Hours per week</th>
+      <th>Country</th>
+      <th>Target</th>
+      <th>Age</th>
+      <th>Capital Gain</th>
+      <th>Capital Loss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>64152</td>
+      <td>State-gov</td>
+      <td>Bachelors</td>
+      <td>13</td>
+      <td>Never-married</td>
+      <td>Adm-clerical</td>
+      <td>Not-in-family</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+      <td>(50, 60]</td>
+      <td>2174</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>61523</td>
+      <td>Self-emp-not-inc</td>
+      <td>Bachelors</td>
+      <td>13</td>
+      <td>Married-civ-spouse</td>
+      <td>Exec-managerial</td>
+      <td>Husband</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>13</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+      <td>(30, 40]</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>95668</td>
+      <td>Private</td>
+      <td>HS-grad</td>
+      <td>9</td>
+      <td>Divorced</td>
+      <td>Handlers-cleaners</td>
+      <td>Not-in-family</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+      <td>(30, 40]</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>25503</td>
+      <td>Private</td>
+      <td>11th</td>
+      <td>7</td>
+      <td>Married-civ-spouse</td>
+      <td>Handlers-cleaners</td>
+      <td>Husband</td>
+      <td>Black</td>
+      <td>Male</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+      <td>(10, 20]</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>75387</td>
+      <td>Private</td>
+      <td>Bachelors</td>
+      <td>13</td>
+      <td>Married-civ-spouse</td>
+      <td>Prof-specialty</td>
+      <td>Wife</td>
+      <td>Black</td>
+      <td>Female</td>
+      <td>40</td>
+      <td>Cuba</td>
+      <td>&lt;=50K</td>
+      <td>(70, 80]</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_anonymized_attack</span> <span class="o">=</span> <span class="n">data_anonymized</span><span class="p">[</span>
+    <span class="p">(</span><span class="n">data_anonymized</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">pd</span><span class="o">.</span><span class="n">Interval</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">))</span> <span class="o">&amp;</span> 
+    <span class="p">(</span><span class="n">data_anonymized</span><span class="p">[</span><span class="s1">&#39;Country&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;United-States&#39;</span><span class="p">)</span> <span class="o">&amp;</span>
+    <span class="p">(</span><span class="n">data_anonymized</span><span class="p">[</span><span class="s1">&#39;Workclass&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;State-gov&#39;</span><span class="p">)</span> <span class="o">&amp;</span>
+    <span class="p">(</span><span class="n">data_anonymized</span><span class="p">[</span><span class="s1">&#39;Capital Gain&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="c1"># after coarsening, there are a number of individuals that match the criteria -- the attacker can no longer uniquely identify anyone</span>
+<span class="n">data_anonymized_attack</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Zip</th>
+      <th>Workclass</th>
+      <th>Education</th>
+      <th>Education-Num</th>
+      <th>Marital Status</th>
+      <th>Occupation</th>
+      <th>Relationship</th>
+      <th>Race</th>
+      <th>Sex</th>
+      <th>Hours per week</th>
+      <th>Country</th>
+      <th>Target</th>
+      <th>Age</th>
+      <th>Capital Gain</th>
+      <th>Capital Loss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4153</th>
+      <td>99817</td>
+      <td>State-gov</td>
+      <td>Some-college</td>
+      <td>10</td>
+      <td>Divorced</td>
+      <td>Prof-specialty</td>
+      <td>Unmarried</td>
+      <td>White</td>
+      <td>Female</td>
+      <td>50</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+      <td>(30, 40]</td>
+      <td>1506</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7023</th>
+      <td>25621</td>
+      <td>State-gov</td>
+      <td>Masters</td>
+      <td>14</td>
+      <td>Married-civ-spouse</td>
+      <td>Prof-specialty</td>
+      <td>Husband</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>50</td>
+      <td>United-States</td>
+      <td>&gt;50K</td>
+      <td>(30, 40]</td>
+      <td>7688</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8253</th>
+      <td>58074</td>
+      <td>State-gov</td>
+      <td>Masters</td>
+      <td>14</td>
+      <td>Divorced</td>
+      <td>Prof-specialty</td>
+      <td>Unmarried</td>
+      <td>Black</td>
+      <td>Female</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&gt;50K</td>
+      <td>(30, 40]</td>
+      <td>7430</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8390</th>
+      <td>18107</td>
+      <td>State-gov</td>
+      <td>Bachelors</td>
+      <td>13</td>
+      <td>Never-married</td>
+      <td>Exec-managerial</td>
+      <td>Not-in-family</td>
+      <td>Asian-Pac-Islander</td>
+      <td>Female</td>
+      <td>45</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+      <td>(30, 40]</td>
+      <td>2977</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>11820</th>
+      <td>82990</td>
+      <td>State-gov</td>
+      <td>Masters</td>
+      <td>14</td>
+      <td>Divorced</td>
+      <td>Prof-specialty</td>
+      <td>Unmarried</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>30</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+      <td>(30, 40]</td>
+      <td>5455</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>12622</th>
+      <td>40322</td>
+      <td>State-gov</td>
+      <td>Bachelors</td>
+      <td>13</td>
+      <td>Married-civ-spouse</td>
+      <td>Exec-managerial</td>
+      <td>Husband</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&gt;50K</td>
+      <td>(30, 40]</td>
+      <td>15024</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>15317</th>
+      <td>45807</td>
+      <td>State-gov</td>
+      <td>Doctorate</td>
+      <td>16</td>
+      <td>Married-civ-spouse</td>
+      <td>Prof-specialty</td>
+      <td>Husband</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>60</td>
+      <td>United-States</td>
+      <td>&gt;50K</td>
+      <td>(30, 40]</td>
+      <td>7688</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>18217</th>
+      <td>64300</td>
+      <td>State-gov</td>
+      <td>Assoc-voc</td>
+      <td>11</td>
+      <td>Married-civ-spouse</td>
+      <td>Prof-specialty</td>
+      <td>Husband</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&gt;50K</td>
+      <td>(30, 40]</td>
+      <td>4386</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>20285</th>
+      <td>37455</td>
+      <td>State-gov</td>
+      <td>Masters</td>
+      <td>14</td>
+      <td>Married-civ-spouse</td>
+      <td>Sales</td>
+      <td>Husband</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>80</td>
+      <td>United-States</td>
+      <td>&gt;50K</td>
+      <td>(30, 40]</td>
+      <td>99999</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>24319</th>
+      <td>21323</td>
+      <td>State-gov</td>
+      <td>Doctorate</td>
+      <td>16</td>
+      <td>Married-civ-spouse</td>
+      <td>Exec-managerial</td>
+      <td>Husband</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>55</td>
+      <td>United-States</td>
+      <td>&gt;50K</td>
+      <td>(30, 40]</td>
+      <td>7688</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>31516</th>
+      <td>34207</td>
+      <td>State-gov</td>
+      <td>Assoc-voc</td>
+      <td>11</td>
+      <td>Divorced</td>
+      <td>Tech-support</td>
+      <td>Not-in-family</td>
+      <td>White</td>
+      <td>Female</td>
+      <td>42</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+      <td>(30, 40]</td>
+      <td>3325</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="differential-privacy">
+<h2>Differential Privacy<a class="headerlink" href="#differential-privacy" title="Link to this heading">#</a></h2>
+<p>The de-identification strategy seeks to achieve privacy protection by <em>modifying the data</em>. In contrast, <strong>differential privacy</strong> represents a privacy mechanism of <em>algorithms</em> acting on data. Roughly speaking, an algorithm satisfies differential privacy if it cannot be used to differentiate two datasets that differ by one data record (e.g., it cannot be used to identify whether one particular individual is present or not in a dataset). An important strength of differential privacy is its mathematical rigor. The above rough definition can be made very precise, which offers a clear approach to decide whether, and how much, an algorithm satisfies differential privacy. We will discuss the precise definition of differential privacy below.</p>
+<p>To illustrate the key idea first, let’s think about a very simple “algorithm”, the averaging function <span class="math notranslate nohighlight">\(f(X) = \frac{1}{N} \sum_{x \in X} x\)</span> that simply returns the average value of a particular variable <span class="math notranslate nohighlight">\(X\)</span>. For concreteness, we can think about each <span class="math notranslate nohighlight">\(x \in X\)</span> being an indicator of whether an individual has cancer (which is highly sensitive information). In this case, <span class="math notranslate nohighlight">\(f(X)\)</span> computes the proportion of cancer patients in a sample of <span class="math notranslate nohighlight">\(N\)</span> individuals. Now, consider a particular individual with cancer indicator <span class="math notranslate nohighlight">\(x^*\)</span> and two different datasets <span class="math notranslate nohighlight">\(D\)</span> and <span class="math notranslate nohighlight">\(D'\)</span> where <span class="math notranslate nohighlight">\(x^* \in D\)</span> and <span class="math notranslate nohighlight">\(D' = D \setminus x^*\)</span>. In other words, the two datasets differ only by a single record <span class="math notranslate nohighlight">\(x^*\)</span>. By applying the averaging function on <span class="math notranslate nohighlight">\(D\)</span> and <span class="math notranslate nohighlight">\(D'\)</span>, it is trivial to precisely recover the true value of <span class="math notranslate nohighlight">\(x^*\)</span>.<a class="footnote-reference brackets" href="#footnote1" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> As a result, an attacker with the ability to query a dataset for average values with and without a particular row can precisely deduce the value of a sensitive feature.</p>
+<div class="note admonition">
+<p class="admonition-title">Note about this example</p>
+<p>In discussions of differential privacy, it is common to assume that the attacker possesses basic / descriptive information of the dataset, such as its size, variable names / types, or even the values of certain variables. This is intentional because it corresponds to an “adversarial” context. The goal is to protect privacy even under such challenging contexts.</p>
+</div>
+<p>How do we protect privacy in the above example with an averaging function? Instead of modifying the original patient dataset, the proposal of differential privacy is to <strong>add noise to the output of the algorithm</strong>. Specifically, consider a “noisy” version of the averaging function, <span class="math notranslate nohighlight">\(F(X)\)</span> (called a “mechanism”), defined simply as <span class="math notranslate nohighlight">\(F(X) = f(X) + \eta\)</span>. Note that <span class="math notranslate nohighlight">\(\eta\)</span> here is not a fixed value but a random variable. Now the attacker querying the dataset with <span class="math notranslate nohighlight">\(F(X)\)</span> will have much less ability to deduce the sensitive information of any individual, because the results from applying <span class="math notranslate nohighlight">\(F(X)\)</span> are randomized each time, thereby effectively masking the true value of any specific <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>More precisely, differential privacy is often defined as the following property of a randomized function <span class="math notranslate nohighlight">\(F(.)\)</span></p>
+<div class="tip admonition">
+<p class="admonition-title">Definition: Differential Privacy</p>
+<p>A randomized function <span class="math notranslate nohighlight">\(F(.)\)</span> satisfies <span class="math notranslate nohighlight">\(\varepsilon\)</span>-differential privacy if for all pairs of adjacent datasets <span class="math notranslate nohighlight">\(D\)</span> and <span class="math notranslate nohighlight">\(D'\)</span> and <span class="math notranslate nohighlight">\(S \subseteq Range(K)\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\Pr(F(D) \in S)}{\Pr(F(D') \in S)} \leq e^{\varepsilon}
+\]</div>
+</div>
+<p>Here, “adjacent datasets” means two datasets that differ only by one record (like in the example above), <span class="math notranslate nohighlight">\(Range(K)\)</span> denote the range / possible values that <span class="math notranslate nohighlight">\(F(.)\)</span> can return, and <span class="math notranslate nohighlight">\(\varepsilon \geq 0\)</span> is a non-negative constant that controls “how much” privacy protection is guaranteed – higher <span class="math notranslate nohighlight">\(\varepsilon\)</span> indicates weaker privacy guarantee (e.g., imagine taking <span class="math notranslate nohighlight">\(\varepsilon\)</span> to infinity, it implies that the two probabilities on the left-hand-side can be arbitrarily different).<a class="footnote-reference brackets" href="#footnote2" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
+<p>Achieving the abovementioned <span class="math notranslate nohighlight">\(\varepsilon\)</span>-differential diversity hinges on picking the right distribution from which the noise <span class="math notranslate nohighlight">\(\eta\)</span> is drawn. A commonly used distribution is the <a class="reference external" href="https://en.wikipedia.org/wiki/Laplace_distribution"><strong>Laplace distribution</strong></a>, and the resulting differential privacy mechanism is known as the <strong>Laplace mechanism</strong>. In general, designing the proper mechanism to achieve differential privacy is a topic of ongoing research interest.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Maths behind the Laplace Mechanism (optional, toggle to show)</p>
+<p>Why does the Laplace mechanism implements <span class="math notranslate nohighlight">\(\varepsilon\)</span>-differential privacy? Let <span class="math notranslate nohighlight">\(F(D)\)</span> denote the randomized function querying dataset <span class="math notranslate nohighlight">\(D\)</span>. The Laplace mechanism computes it as <span class="math notranslate nohighlight">\(F(D) = f(D) + \eta\)</span> where <span class="math notranslate nohighlight">\(\eta\)</span> is drawn from a Laplace distribution with mean 0 and scale <span class="math notranslate nohighlight">\(\frac{s}{\varepsilon}\)</span>, that is, <span class="math notranslate nohighlight">\(\eta \sim Laplace \left(\frac{s}{\varepsilon} \right)\)</span>. Here, <span class="math notranslate nohighlight">\(\varepsilon\)</span> represents the degree-of-privacy control (discussed above) and <span class="math notranslate nohighlight">\(s\)</span> denotes the “sensitivity” of the actual query function <span class="math notranslate nohighlight">\(f(D)\)</span>, defined as <span class="math notranslate nohighlight">\(s := \max_{D,D'} \vert \vert f(D) - f(D') \vert \vert\)</span>.</p>
+<p>For conciseness, let <span class="math notranslate nohighlight">\(b = \frac{s}{\varepsilon}\)</span>, then the density function of Laplace distribution can be written as <span class="math notranslate nohighlight">\(Laplace(x) = \frac{1}{2b} \exp \left( - \frac{|x|}{b} \right)\)</span>. For an arbitrary possible output value of the <span class="math notranslate nohighlight">\(F(.)\)</span> that we denote as <span class="math notranslate nohighlight">\(y\)</span>, we will next show that <span class="math notranslate nohighlight">\(\frac{\Pr(F(D) = y)}{\Pr(F(D') = y)} \leq e^{\varepsilon}\)</span>.</p>
+<p>Notice that<a class="footnote-reference brackets" href="#footnote3" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Pr(F(D) = y) &amp;=  \frac{1}{2b} \exp \left( - \frac{|y - f(D)|}{b} \right)\\
+\Pr(F(D') = y) &amp;=  \frac{1}{2b} \exp \left( - \frac{|y - f(D')|}{b} \right)
+\end{align*}\]</div>
+<p>Therefore,</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\Pr(F(D) = y)}{\Pr(F(D') = y)} = \exp \left(\frac{|y-f(D')| - |y-f(D)|}{b} \right)
+\]</div>
+<p>By the <a class="reference external" href="https://en.wikipedia.org/wiki/Triangle_inequality">triangle inequality</a>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+|y-f(D')| - |y-f(D)| \leq |(y-f(D')) - (y-f(D))| = |f(D) - f(D')|
+\]</div>
+<p>Subsequently, we have</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\Pr(F(D) = y)}{\Pr(F(D') = y)} \leq \exp \left(\frac{|f(D) - f(D')|}{b} \right) \leq \exp \left(\frac{s}{b} \right) = e^{\varepsilon}
+\]</div>
+<p>which completes the proof.</p>
+</div>
+<p>In practice, how much privacy is enough (that is, how low should we set <span class="math notranslate nohighlight">\(\varepsilon\)</span>)? This is a non-trivial question. While it might appear at first that more privacy protection is always better (suggesting setting <span class="math notranslate nohighlight">\(\varepsilon\)</span> as low as possible), it is important to realize that doing so necessarily introduces greater noise into <span class="math notranslate nohighlight">\(F(.)\)</span>, making its returned values less useful / informative. In the extreme, we can achieve (almost) perfect privacy by completely overwhelming the true values of a query by noise. Here, we are directly faced with a first-order tradeoff between <em>privacy protection</em> and <em>data utility</em>.</p>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="footnote1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">1</a><span class="fn-bracket">]</span></span>
+<p>Let <span class="math notranslate nohighlight">\(f(X;D)\)</span> and <span class="math notranslate nohighlight">\(f(X;D')\)</span> be the average values of the two datasets, then <span class="math notranslate nohighlight">\(x^* = |D|f(X;D) - |D'|f(X;D')\)</span>.</p>
+</aside>
+<aside class="footnote brackets" id="footnote2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">2</a><span class="fn-bracket">]</span></span>
+<p>A more general definition of differential privacy involves another parameter <span class="math notranslate nohighlight">\(\delta\)</span>. It states that a randomized function <span class="math notranslate nohighlight">\(F(.)\)</span> satisfies <span class="math notranslate nohighlight">\((\varepsilon, \delta)\)</span>-differential privacy if for all pairs of adjacent datasets <span class="math notranslate nohighlight">\(D\)</span> and <span class="math notranslate nohighlight">\(D'\)</span> and <span class="math notranslate nohighlight">\(S \subseteq Range(K)\)</span> we have <span class="math notranslate nohighlight">\(\Pr(F(D) \in S) \leq e^{\varepsilon} \Pr(F(D') \in S) + \delta\)</span>. We discuss the simplified version with <span class="math notranslate nohighlight">\(\delta = 0\)</span> here.</p>
+</aside>
+<aside class="footnote brackets" id="footnote3" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">3</a><span class="fn-bracket">]</span></span>
+<p>Technically the pdf function does not produce probability (but density / likelihood). A more rigorous proof would involve looking at an infinitesimal interval around <span class="math notranslate nohighlight">\(y\)</span>.</p>
+</aside>
+</aside>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="3-1-framework.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Conceptual Framework of Privacy</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="4-1-GenAI.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Responsible AI in the Age of Generative AI</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#de-identification">De-Identification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#de-identification-via-feature-removal">De-Identification via Feature Removal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#de-identification-via-feature-value-coarsening-k-anonymity">De-Identification via Feature Value Coarsening (<span class="math notranslate nohighlight">\(k\)</span>-Anonymity)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#differential-privacy">Differential Privacy</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Gediminas Adomavicius and Mochen Yang
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

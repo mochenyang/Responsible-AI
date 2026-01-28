@@ -1,0 +1,839 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Bibliography &#8212; Responsible AI for Data Scientists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/zbib';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Resources" href="resources.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="0-1-intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.webp" class="logo__image only-light" alt="Responsible AI for Data Scientists - Home"/>
+    <script>document.write(`<img src="../_static/logo.webp" class="logo__image only-dark" alt="Responsible AI for Data Scientists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="0-1-intro.html">
+                    Responsible AI for Data Scientists
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="0-2-framework.html">A Human-Centric Framework of Responsible AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-3-philosophy.html">Philosophical Foundations for Ethical Decision-Making</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-4-prep.html">Fundementals of Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fairness and Algorithmic Bias</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1-1-intro.html">Introduction to Algorithmic Bias and Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-2-measure.html">Measuring Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-3-mitigation.html">Mitigating Algorithmic Bias</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Transparency and Interpretable Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2-1-intro.html">Introduction to Interpretable Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-2-global.html">Methods for Global Interpretations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-3-local.html">Methods for Local Interpretations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3-1-framework.html">Conceptual Framework of Privacy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3-2-mechanism.html">Privacy Mechanisms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Special Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4-1-GenAI.html">Responsible AI in the Age of Generative AI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/mochenyang/Responsible-AI" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/zbib.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bibliography</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="bibliography">
+<h1>Bibliography<a class="headerlink" href="#bibliography" title="Link to this heading">#</a></h1>
+<div class="docutils container" id="id1">
+<div role="list" class="citation-list">
+<div class="citation" id="id119" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ALCT18<span class="fn-bracket">]</span></span>
+<p>Ahmed Abbasi, Jingjing Li, Gari Clifford, and Herman Taylor. Make “fairness by design&quot; part of machine learning. <em>Harvard Business Review</em>, 2018.</p>
+</div>
+<div class="citation" id="id89" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ABCZ13<span class="fn-bracket">]</span></span>
+<p>Gediminas Adomavicius, Jesse C Bockstedt, Shawn P Curley, and Jingjing Zhang. Do recommender systems manipulate consumer preferences? a study of anchoring effects. <em>Information Systems Research</em>, 24(4):956–975, 2013.</p>
+</div>
+<div class="citation" id="id149" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ABCZ18<span class="fn-bracket">]</span></span>
+<p>Gediminas Adomavicius, Jesse C Bockstedt, Shawn P Curley, and Jingjing Zhang. Effects of online recommendations on consumers’ willingness to pay. <em>Information Systems Research</em>, 29(1):84–102, 2018.</p>
+</div>
+<div class="citation" id="id267" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>AY22<span class="fn-bracket">]</span></span>
+<p>Gediminas Adomavicius and Mochen Yang. Integrating behavioral, economic, and technical insights to understand and address algorithmic bias: a human-centric perspective. <em>ACM Transactions on Management Information Systems (TMIS)</em>, 13(3):1–27, 2022.</p>
+</div>
+<div class="citation" id="id256" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ABDudik+18<span class="fn-bracket">]</span></span>
+<p>Alekh Agarwal, Alina Beygelzimer, Miroslav Dudík, John Langford, and Hanna Wallach. A reductions approach to fair classification. In <em>International conference on machine learning</em>, 60–69. PMLR, 2018.</p>
+</div>
+<div class="citation" id="id120" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>AAR19<span class="fn-bracket">]</span></span>
+<p>Mehmet Eren Ahsen, Mehmet Ulvi Saygi Ayvaci, and Srinivasan Raghunathan. When algorithmic predictions use human-generated data: a bias-aware classification algorithm for breast cancer diagnosis. <em>Information Systems Research</em>, 30(1):97–116, 2019.</p>
+</div>
+<div class="citation" id="id295" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>AOS+16<span class="fn-bracket">]</span></span>
+<p>Dario Amodei, Chris Olah, Jacob Steinhardt, Paul Christiano, John Schulman, and Dan Mané. Concrete problems in ai safety. <em>arXiv preprint arXiv:1606.06565</em>, 2016.</p>
+</div>
+<div class="citation" id="id117" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ALMK16<span class="fn-bracket">]</span></span>
+<p>Julia Angwin, Jeff Larson, Surya Mattu, and Lauren Kirchner. Machine bias. <em>ProPublica, May</em>, 23:2016, 2016.</p>
+</div>
+<div class="citation" id="id258" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>AZ20<span class="fn-bracket">]</span></span>
+<p>Daniel W Apley and Jingyu Zhu. Visualizing the effects of predictor variables in black box supervised learning models. <em>Journal of the Royal Statistical Society Series B: Statistical Methodology</em>, 82(4):1059–1086, 2020.</p>
+</div>
+<div class="citation" id="id128" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BS16<span class="fn-bracket">]</span></span>
+<p>Solon Barocas and Andrew D Selbst. Big data's disparate impact. <em>Calif. L. Rev.</em>, 104:671, 2016.</p>
+</div>
+<div class="citation" id="id129" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Bec10<span class="fn-bracket">]</span></span>
+<p>Gary S Becker. <em>The economics of discrimination</em>. University of Chicago press, 2010.</p>
+</div>
+<div class="citation" id="id291" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Bel22<span class="fn-bracket">]</span></span>
+<p>Yonatan Belinkov. Probing classifiers: promises, shortcomings, and advances. <em>Computational Linguistics</em>, 48(1):207–219, 2022.</p>
+</div>
+<div class="citation" id="id92" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BP17<span class="fn-bracket">]</span></span>
+<p>Bettina Berendt and Sören Preibusch. Toward accountable discrimination-aware data mining: the importance of keeping the human in the loop—and under the looking glass. <em>Big data</em>, 5(2):135–152, 2017.</p>
+</div>
+<div class="citation" id="id296" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BTW+25<span class="fn-bracket">]</span></span>
+<p>Jan Betley, Daniel Tan, Niels Warncke, Anna Sztyber-Betley, Xuchan Bao, Martín Soto, Nathan Labenz, and Owain Evans. Emergent misalignment: narrow finetuning can produce broadly misaligned llms. <em>arXiv preprint arXiv:2502.17424</em>, 2025.</p>
+</div>
+<div class="citation" id="id271" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BPP+25<span class="fn-bracket">]</span></span>
+<p>Piercosma Bisconti, Matteo Prandi, Federico Pierucci, Francesco Giarrusso, Marcantonio Bracale, Marcello Galisai, Vincenzo Suriani, Olga Sorokoletova, Federico Sartore, and Daniele Nardi. Adversarial poetry as a universal single-turn jailbreak mechanism in large language models. <em>arXiv preprint arXiv:2511.15304</em>, 2025.</p>
+</div>
+<div class="citation" id="id294" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Bos14<span class="fn-bracket">]</span></span>
+<p>Nick Bostrom. <em>Superintelligence: Paths, Dangers, Strategies</em>. Oxford University Press, 2014.</p>
+</div>
+<div class="citation" id="id285" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BMR+20<span class="fn-bracket">]</span></span>
+<p>Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, and others. Language models are few-shot learners. <em>Advances in neural information processing systems</em>, 33:1877–1901, 2020.</p>
+</div>
+<div class="citation" id="id279" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BKWC01<span class="fn-bracket">]</span></span>
+<p>Peter Buneman, Sanjeev Khanna, and Tan Wang-Chiew. Why and where: a characterization of data provenance. In <em>International conference on database theory</em>, 316–330. Springer, 2001.</p>
+</div>
+<div class="citation" id="id19" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CKP09<span class="fn-bracket">]</span></span>
+<p>Toon Calders, Faisal Kamiran, and Mykola Pechenizkiy. Building classifiers with independency constraints. In <em>2009 IEEE International Conference on Data Mining Workshops</em>, 13–18. IEEE, 2009.</p>
+</div>
+<div class="citation" id="id23" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CV10<span class="fn-bracket">]</span></span>
+<p>Toon Calders and Sicco Verwer. Three naive bayes approaches for discrimination-free classification. <em>Data Mining and Knowledge Discovery</em>, 21(2):277–292, 2010.</p>
+</div>
+<div class="citation" id="id82" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CBN17<span class="fn-bracket">]</span></span>
+<p>Aylin Caliskan, Joanna J Bryson, and Arvind Narayanan. Semantics derived automatically from language corpora contain human-like biases. <em>Science</em>, 356(6334):183–186, 2017.</p>
+</div>
+<div class="citation" id="id164" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CHKV19<span class="fn-bracket">]</span></span>
+<p>L Elisa Celis, Lingxiao Huang, Vijay Keswani, and Nisheeth K Vishnoi. Classification with fairness constraints: a meta-algorithm with provable guarantees. In <em>Proceedings of the Conference on Fairness, Accountability, and Transparency</em>, 319–328. 2019.</p>
+</div>
+<div class="citation" id="id282" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CAF+24<span class="fn-bracket">]</span></span>
+<p>Marc Cheong, Ehsan Abedin, Marinus Ferreira, Ritsaart Reimann, Shalom Chalson, Pamela Robinson, Joanne Byrne, Leah Ruppanner, Mark Alfano, and Colin Klein. Investigating gender and racial biases in dall-e mini images. <em>ACM Journal on Responsible Computing</em>, 1(2):1–20, 2024.</p>
+</div>
+<div class="citation" id="id75" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Cho17<span class="fn-bracket">]</span></span>
+<p>Alexandra Chouldechova. Fair prediction with disparate impact: a study of bias in recidivism prediction instruments. <em>Big data</em>, 5(2):153–163, 2017.</p>
+</div>
+<div class="citation" id="id238" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CLV09<span class="fn-bracket">]</span></span>
+<p>Charles T Clotfelter, Helen F Ladd, and Jacob L Vigdor. The academic achievement gap in grades 3 to 8. <em>The Review of Economics and Statistics</em>, 91(2):398–419, 2009.</p>
+</div>
+<div class="citation" id="id20" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CDPF+17<span class="fn-bracket">]</span></span>
+<p>Sam Corbett-Davies, Emma Pierson, Avi Feller, Sharad Goel, and Aziz Huq. Algorithmic decision making and the cost of fairness. In <em>Proceedings of the 23rd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, 797–806. 2017.</p>
+</div>
+<div class="citation" id="id55" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CGJ+18<span class="fn-bracket">]</span></span>
+<p>Andrew Cotter, Maya Gupta, Heinrich Jiang, Nathan Srebro, Karthik Sridharan, Serena Wang, Blake Woodworth, and Seungil You. Training fairness-constrained classifiers to generalize. 2018.</p>
+</div>
+<div class="citation" id="id280" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>DXX+24<span class="fn-bracket">]</span></span>
+<p>Sunhao Dai, Chen Xu, Shicheng Xu, Liang Pang, Zhenhua Dong, and Jun Xu. Bias and unfairness in information retrieval systems: new challenges in the llm era. In <em>Proceedings of the 30th ACM SIGKDD Conference on Knowledge Discovery and Data Mining</em>, 6437–6447. 2024.</p>
+</div>
+<div class="citation" id="id118" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Das18<span class="fn-bracket">]</span></span>
+<p>Jeffrey Dastin. Amazon scraps secret ai recruiting tool that showed bias against women. <em>San Fransico, CA: Reuters. Retrieved on October</em>, 9:2018, 2018.</p>
+</div>
+<div class="citation" id="id253" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>DMB16<span class="fn-bracket">]</span></span>
+<p>William Dieterich, Christina Mendoza, and Tim Brennan. Compas risk scales: demonstrating accuracy equity and predictive parity. <em>Northpointe Inc</em>, 7(4):1–36, 2016.</p>
+</div>
+<div class="citation" id="id13" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>DB19<span class="fn-bracket">]</span></span>
+<p>Berkeley Dietvorst and Soaham Bharti. People reject even the best possible algorithm in uncertain decision domains. <em>Available at SSRN 3424158</em>, 2019.</p>
+</div>
+<div class="citation" id="id94" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>DSM15<span class="fn-bracket">]</span></span>
+<p>Berkeley J Dietvorst, Joseph P Simmons, and Cade Massey. Algorithm aversion: people erroneously avoid algorithms after seeing them err. <em>Journal of Experimental Psychology: General</em>, 144(1):114, 2015.</p>
+</div>
+<div class="citation" id="id232" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Eli19<span class="fn-bracket">]</span></span>
+<p>Madeleine Clare Elish. Moral crumple zones: cautionary tales in human-robot interaction (pre-print). <em>Engaging Science, Technology, and Society (pre-print)</em>, 2019.</p>
+</div>
+<div class="citation" id="id261" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>EMMR24<span class="fn-bracket">]</span></span>
+<p>Tyna Eloundou, Sam Manning, Pamela Mishkin, and Daniel Rock. Gpts are gpts: labor market impact potential of llms. <em>Science</em>, 384(6702):1306–1308, 2024.</p>
+</div>
+<div class="citation" id="id260" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Eng23<span class="fn-bracket">]</span></span>
+<p>Joseph Enguehard. Sequential integrated gradients: a simple but effective method for explaining language models. <em>arXiv preprint arXiv:2305.15853</em>, 2023.</p>
+</div>
+<div class="citation" id="id273" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>FL20<span class="fn-bracket">]</span></span>
+<p>Sina Fazelpour and Zachary C Lipton. Algorithmic fairness from a non-ideal perspective. In <em>Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society</em>, 57–63. 2020.</p>
+</div>
+<div class="citation" id="id297" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>GLBF25<span class="fn-bracket">]</span></span>
+<p>Yuan Gao, Dokyun Lee, Gordon Burtch, and Sina Fazelpour. Take caution in using llms as human surrogates. <em>Proceedings of the National Academy of Sciences</em>, 122(24):e2501660122, 2025.</p>
+</div>
+<div class="citation" id="id230" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>GSR+21<span class="fn-bracket">]</span></span>
+<p>Susanne Gaube, Harini Suresh, Martina Raue, Alexander Merritt, Seth J Berkowitz, Eva Lermer, Joseph F Coughlin, John V Guttag, Errol Colak, and Marzyeh Ghassemi. Do as ai say: susceptibility in deployment of clinical decision-aids. <em>NPJ digital medicine</em>, 4(1):1–8, 2021.</p>
+</div>
+<div class="citation" id="id278" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>GMV+21<span class="fn-bracket">]</span></span>
+<p>Timnit Gebru, Jamie Morgenstern, Briana Vecchione, Jennifer Wortman Vaughan, Hanna Wallach, Hal Daumé Iii, and Kate Crawford. Datasheets for datasets. <em>Communications of the ACM</em>, 64(12):86–92, 2021.</p>
+</div>
+<div class="citation" id="id268" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>GKBP15<span class="fn-bracket">]</span></span>
+<p>Alex Goldstein, Adam Kapelner, Justin Bleich, and Emil Pitkin. Peeking inside the black box: visualizing statistical learning with plots of individual conditional expectation. <em>journal of Computational and Graphical Statistics</em>, 24(1):44–65, 2015.</p>
+</div>
+<div class="citation" id="id272" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>GBL+25<span class="fn-bracket">]</span></span>
+<p>Hila Gonen, Terra Blevins, Alisa Liu, Luke Zettlemoyer, and Noah A Smith. Does liking yellow imply driving a school bus? semantic leakage in language models. In <em>Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers)</em>, 785–798. 2025.</p>
+</div>
+<div class="citation" id="id215" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>GC19<span class="fn-bracket">]</span></span>
+<p>Ben Green and Yiling Chen. Disparate interactions: an algorithm-in-the-loop analysis of fairness in risk assessments. In <em>Proceedings of the Conference on Fairness, Accountability, and Transparency</em>, 90–99. 2019.</p>
+</div>
+<div class="citation" id="id292" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>GM23<span class="fn-bracket">]</span></span>
+<p>Michael M Grynbaum and Ryan Mac. The times sues openai and microsoft over ai use of copyrighted work. <em>The New York Times</em>, 2023.</p>
+</div>
+<div class="citation" id="id274" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>GGB25<span class="fn-bracket">]</span></span>
+<p>Eileen Guo, G Gabriel, and Justin-Casimir Braun. Inside amsterdam's high-stakes experiment to create fair welfare ai. <em>MIT Technology Review</em>, 2025.</p>
+</div>
+<div class="citation" id="id257" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>HTFF09<span class="fn-bracket">]</span></span>
+<p>Trevor Hastie, Robert Tibshirani, Jerome H Friedman, and Jerome H Friedman. <em>The elements of statistical learning: data mining, inference, and prediction</em>. Volume 2. Springer, 2009.</p>
+</div>
+<div class="citation" id="id227" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>JW21<span class="fn-bracket">]</span></span>
+<p>Abigail Z Jacobs and Hanna Wallach. Measurement and fairness. In <em>Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency</em>, 375–385. 2021.</p>
+</div>
+<div class="citation" id="id289" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>JG20<span class="fn-bracket">]</span></span>
+<p>Alon Jacovi and Yoav Goldberg. Towards faithfully interpretable nlp systems: how should we define and evaluate faithfulness? <em>arXiv preprint arXiv:2004.03685</em>, 2020.</p>
+</div>
+<div class="citation" id="id136" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>JCW07<span class="fn-bracket">]</span></span>
+<p>Charles E Jordan, Stanley J Clark, and Marilyn A Waldron. Gender bias and compensation in the executive suite of the fortune 100. <em>Journal of Organizational Culture, Communications and Conflict</em>, 11(1):19–29, 2007.</p>
+</div>
+<div class="citation" id="id62" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KC09<span class="fn-bracket">]</span></span>
+<p>Faisal Kamiran and Toon Calders. Classifying without discriminating. In <em>2009 2nd International Conference on Computer, Control and Communication</em>, 1–6. IEEE, 2009.</p>
+</div>
+<div class="citation" id="id16" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KvZliobaiteC13<span class="fn-bracket">]</span></span>
+<p>Faisal Kamiran, Indrė Žliobaitė, and Toon Calders. Quantifying explainable discrimination and removing illegal discrimination in automated decision making. <em>Knowledge and information systems</em>, 35(3):613–644, 2013.</p>
+</div>
+<div class="citation" id="id53" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KAS11<span class="fn-bracket">]</span></span>
+<p>Toshihiro Kamishima, Shotaro Akaho, and Jun Sakuma. Fairness-aware learning through regularization approach. In <em>2011 IEEE 11th International Conference on Data Mining Workshops</em>, 643–650. IEEE, 2011.</p>
+</div>
+<div class="citation" id="id270" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KNJ+20<span class="fn-bracket">]</span></span>
+<p>Harmanpreet Kaur, Harsha Nori, Samuel Jenkins, Rich Caruana, Hanna Wallach, and Jennifer Wortman Vaughan. Interpreting interpretability: understanding data scientists' use of interpretability tools for machine learning. In <em>Proceedings of the 2020 CHI conference on human factors in computing systems</em>, 1–14. 2020.</p>
+</div>
+<div class="citation" id="id27" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Kir16<span class="fn-bracket">]</span></span>
+<p>Keith Kirkpatrick. Battling algorithmic bias: how do we ensure algorithms treat us fairly? 2016.</p>
+</div>
+<div class="citation" id="id103" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KM19<span class="fn-bracket">]</span></span>
+<p>Jon Kleinberg and Sendhil Mullainathan. Simplicity creates inequity: implications for fairness, stereotypes, and interpretability. In <em>Proceedings of the 2019 ACM Conference on Economics and Computation</em>, 807–808. 2019.</p>
+</div>
+<div class="citation" id="id30" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KMR16<span class="fn-bracket">]</span></span>
+<p>Jon Kleinberg, Sendhil Mullainathan, and Manish Raghavan. Inherent trade-offs in the fair determination of risk scores. <em>arXiv:1609.05807</em>, 2016.</p>
+</div>
+<div class="citation" id="id182" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KTHS18<span class="fn-bracket">]</span></span>
+<p>Junpei Komiyama, Akiko Takeda, Junya Honda, and Hajime Shimao. Nonconvex optimization for regression with fairness constraints. In <em>International conference on machine learning</em>, 2737–2746. 2018.</p>
+</div>
+<div class="citation" id="id283" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>LDS+23<span class="fn-bracket">]</span></span>
+<p>Yingji Li, Mengnan Du, Rui Song, Xin Wang, and Ying Wang. A survey on fairness in large language models. <em>arXiv preprint arXiv:2308.10149</em>, 2023.</p>
+</div>
+<div class="citation" id="id113" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>LMM19<span class="fn-bracket">]</span></span>
+<p>Jennifer M Logg, Julia A Minson, and Don A Moore. Algorithm appreciation: people prefer algorithmic to human judgment. <em>Organizational Behavior and Human Decision Processes</em>, 151:90–103, 2019.</p>
+</div>
+<div class="citation" id="id213" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>LL17<span class="fn-bracket">]</span></span>
+<p>Scott Lundberg and Su-In Lee. A unified approach to interpreting model predictions. <em>arXiv preprint arXiv:1705.07874</em>, 2017.</p>
+</div>
+<div class="citation" id="id263" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MW04<span class="fn-bracket">]</span></span>
+<p>Adam Meyerson and Ryan Williams. On the complexity of optimal k-anonymity. In <em>Proceedings of the twenty-third ACM SIGMOD-SIGACT-SIGART symposium on Principles of database systems</em>, 223–228. 2004.</p>
+</div>
+<div class="citation" id="id298" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MAS+24<span class="fn-bracket">]</span></span>
+<p>Iman Mirzadeh, Keivan Alizadeh, Hooman Shahrokhi, Oncel Tuzel, Samy Bengio, and Mehrdad Farajtabar. Gsm-symbolic: understanding the limitations of mathematical reasoning in large language models. <em>arXiv preprint arXiv:2410.05229</em>, 2024.</p>
+</div>
+<div class="citation" id="id269" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Mol25<span class="fn-bracket">]</span></span>
+<p><strong>missing publisher in molnar2025</strong></p>
+</div>
+<div class="citation" id="id293" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>NCH+23<span class="fn-bracket">]</span></span>
+<p>Milad Nasr, Nicholas Carlini, Jonathan Hayase, Matthew Jagielski, A Feder Cooper, Daphne Ippolito, Christopher A Choquette-Choo, Eric Wallace, Florian Tramèr, and Katherine Lee. Scalable extraction of training data from (production) language models. <em>arXiv preprint arXiv:2311.17035</em>, 2023.</p>
+</div>
+<div class="citation" id="id121" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>OPVM19<span class="fn-bracket">]</span></span>
+<p>Ziad Obermeyer, Brian Powers, Christine Vogeli, and Sendhil Mullainathan. Dissecting racial bias in an algorithm used to manage the health of populations. <em>Science</em>, 366(6464):447–453, 2019.</p>
+</div>
+<div class="citation" id="id299" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>OWJ+22<span class="fn-bracket">]</span></span>
+<p>Long Ouyang, Jeffrey Wu, Xu Jiang, Diogo Almeida, Carroll Wainwright, Pamela Mishkin, Chong Zhang, Sandhini Agarwal, Katarina Slama, Alex Ray, and others. Training language models to follow instructions with human feedback. <em>Advances in neural information processing systems</em>, 35:27730–27744, 2022.</p>
+</div>
+<div class="citation" id="id130" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Phe72<span class="fn-bracket">]</span></span>
+<p>Edmund S Phelps. The statistical theory of racism and sexism. <em>The american economic review</em>, 62(4):659–661, 1972.</p>
+</div>
+<div class="citation" id="id177" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>RCO+19<span class="fn-bracket">]</span></span>
+<p>Iyad Rahwan, Manuel Cebrian, Nick Obradovich, Josh Bongard, Jean-François Bonnefon, Cynthia Breazeal, Jacob W Crandall, Nicholas A Christakis, Iain D Couzin, Matthew O Jackson, and others. Machine behaviour. <em>Nature</em>, 568(7753):477–486, 2019.</p>
+</div>
+<div class="citation" id="id131" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>RSZ14<span class="fn-bracket">]</span></span>
+<p>Ernesto Reuben, Paola Sapienza, and Luigi Zingales. How stereotypes impair women’s careers in science. <em>Proceedings of the National Academy of Sciences</em>, 111(12):4403–4408, 2014.</p>
+</div>
+<div class="citation" id="id139" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>RSG16<span class="fn-bracket">]</span></span>
+<p>Marco Tulio Ribeiro, Sameer Singh, and Carlos Guestrin. &quot;why should i trust you?&quot; explaining the predictions of any classifier. In <em>Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining</em>, 1135–1144. 2016.</p>
+</div>
+<div class="citation" id="id127" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>RR14<span class="fn-bracket">]</span></span>
+<p>Andrea Romei and Salvatore Ruggieri. A multidisciplinary survey on discrimination analysis. <em>The Knowledge Engineering Review</em>, 29(5):582–638, 2014.</p>
+</div>
+<div class="citation" id="id277" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>RS18<span class="fn-bracket">]</span></span>
+<p>Casey Ross and Ike Swetlitz. Ibm’s watson supercomputer recommended ‘unsafe and incorrect’cancer treatments, internal documents show. <em>Stat</em>, 25:1–10, 2018.</p>
+</div>
+<div class="citation" id="id288" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SMK23<span class="fn-bracket">]</span></span>
+<p>Rylan Schaeffer, Brando Miranda, and Sanmi Koyejo. Are emergent abilities of large language models a mirage? <em>Advances in neural information processing systems</em>, 36:55565–55581, 2023.</p>
+</div>
+<div class="citation" id="id231" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SEG+20<span class="fn-bracket">]</span></span>
+<p>Mark Sendak, Madeleine Clare Elish, Michael Gao, Joseph Futoma, William Ratliff, Marshall Nichols, Armando Bedoya, Suresh Balu, and Cara O'Brien. &quot; the human body is a black box&quot; supporting clinical decision-making with deep learning. In <em>Proceedings of the 2020 conference on fairness, accountability, and transparency</em>, 99–109. 2020.</p>
+</div>
+<div class="citation" id="id276" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SSepulveda18<span class="fn-bracket">]</span></span>
+<p>Edward H Shortliffe and Martin J Sepúlveda. Clinical decision support in the era of artificial intelligence. <em>Jama</em>, 320(21):2199–2200, 2018.</p>
+</div>
+<div class="citation" id="id214" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SHJ+20<span class="fn-bracket">]</span></span>
+<p>Dylan Slack, Sophie Hilgard, Emily Jia, Sameer Singh, and Himabindu Lakkaraju. Fooling lime and shap: adversarial attacks on post hoc explanation methods. In <em>Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society</em>, 180–186. 2020.</p>
+</div>
+<div class="citation" id="id265" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Sol05<span class="fn-bracket">]</span></span>
+<p>Daniel J Solove. A taxonomy of privacy. <em>U. Pa. l. Rev.</em>, 154:477, 2005.</p>
+</div>
+<div class="citation" id="id275" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Str19<span class="fn-bracket">]</span></span>
+<p>Eliza Strickland. Ibm watson, heal thyself: how ibm overpromised and underdelivered on ai health care. <em>IEEE spectrum</em>, 56(4):24–31, 2019.</p>
+</div>
+<div class="citation" id="id259" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>STY17<span class="fn-bracket">]</span></span>
+<p>Mukund Sundararajan, Ankur Taly, and Qiqi Yan. Axiomatic attribution for deep networks. In <em>International conference on machine learning</em>, 3319–3328. PMLR, 2017.</p>
+</div>
+<div class="citation" id="id262" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Swe02<span class="fn-bracket">]</span></span>
+<p>Latanya Sweeney. K-anonymity: a model for protecting privacy. <em>International journal of uncertainty, fuzziness and knowledge-based systems</em>, 10(05):557–570, 2002.</p>
+</div>
+<div class="citation" id="id284" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>TBB+25<span class="fn-bracket">]</span></span>
+<p>Kimi Team, Yifan Bai, Yiping Bao, Guanduo Chen, Jiahao Chen, Ningxin Chen, Ruijue Chen, Yanru Chen, Yuankun Chen, Yutian Chen, and others. Kimi k2: open agentic intelligence. <em>arXiv preprint arXiv:2507.20534</em>, 2025.</p>
+</div>
+<div class="citation" id="id266" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>TDW+19<span class="fn-bracket">]</span></span>
+<p>Vahe Tshitoyan, John Dagdelen, Leigh Weston, Alexander Dunn, Ziqin Rong, Olga Kononova, Kristin A Persson, Gerbrand Ceder, and Anubhav Jain. Unsupervised word embeddings capture latent knowledge from materials science literature. <em>Nature</em>, 571(7763):95–98, 2019.</p>
+</div>
+<div class="citation" id="id290" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>TMPB23<span class="fn-bracket">]</span></span>
+<p>Miles Turpin, Julian Michael, Ethan Perez, and Samuel Bowman. Language models don't always say what they think: unfaithful explanations in chain-of-thought prompting. <em>Advances in Neural Information Processing Systems</em>, 36:74952–74965, 2023.</p>
+</div>
+<div class="citation" id="id287" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>WTB+22<span class="fn-bracket">]</span></span>
+<p>Jason Wei, Yi Tay, Rishi Bommasani, Colin Raffel, Barret Zoph, Sebastian Borgeaud, Dani Yogatama, Maarten Bosma, Denny Zhou, Donald Metzler, and others. Emergent abilities of large language models. <em>arXiv preprint arXiv:2206.07682</em>, 2022.</p>
+</div>
+<div class="citation" id="id286" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>WWS+22<span class="fn-bracket">]</span></span>
+<p>Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Fei Xia, Ed Chi, Quoc V Le, Denny Zhou, and others. Chain-of-thought prompting elicits reasoning in large language models. <em>Advances in neural information processing systems</em>, 35:24824–24837, 2022.</p>
+</div>
+<div class="citation" id="id255" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Wig98<span class="fn-bracket">]</span></span>
+<p>Linda F Wightman. Lsac national longitudinal bar passage study. <em>LSAC Research Report Series</em>, 1998.</p>
+</div>
+<div class="citation" id="id188" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ZVRG17<span class="fn-bracket">]</span></span>
+<p>Muhammad Bilal Zafar, Isabel Valera, Manuel Gomez Rogriguez, and Krishna P Gummadi. Fairness constraints: mechanisms for fair classification. In <em>Artificial Intelligence and Statistics</em>, 962–970. PMLR, 2017.</p>
+</div>
+<div class="citation" id="id281" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ZBZ+23<span class="fn-bracket">]</span></span>
+<p>Jizhi Zhang, Keqin Bao, Yang Zhang, Wenjie Wang, Fuli Feng, and Xiangnan He. Is chatgpt fair for recommendation? evaluating fairness in large language model recommendation. In <em>Proceedings of the 17th ACM Conference on Recommender Systems</em>, 993–999. 2023.</p>
+</div>
+<div class="citation" id="id15" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>vZliobaiteKC11<span class="fn-bracket">]</span></span>
+<p>Indre Žliobaite, Faisal Kamiran, and Toon Calders. Handling conditional discrimination. In <em>2011 IEEE 11th International Conference on Data Mining</em>, 992–1001. IEEE, 2011.</p>
+</div>
+<div class="citation" id="id21" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>vZliobaite17<span class="fn-bracket">]</span></span>
+<p>Indrė Žliobaitė. Measuring discrimination in algorithmic decision making. <em>Data Mining and Knowledge Discovery</em>, 31(4):1060–1089, 2017.</p>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="resources.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Resources</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Gediminas Adomavicius and Mochen Yang
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

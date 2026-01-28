@@ -1,0 +1,578 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to Algorithmic Bias and Fairness &#8212; Responsible AI for Data Scientists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/1-1-intro';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Measuring Fairness" href="1-2-measure.html" />
+    <link rel="prev" title="Fundementals of Machine Learning" href="0-4-prep.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="0-1-intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.webp" class="logo__image only-light" alt="Responsible AI for Data Scientists - Home"/>
+    <script>document.write(`<img src="../_static/logo.webp" class="logo__image only-dark" alt="Responsible AI for Data Scientists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="0-1-intro.html">
+                    Responsible AI for Data Scientists
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="0-2-framework.html">A Human-Centric Framework of Responsible AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-3-philosophy.html">Philosophical Foundations for Ethical Decision-Making</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-4-prep.html">Fundementals of Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fairness and Algorithmic Bias</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to Algorithmic Bias and Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-2-measure.html">Measuring Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-3-mitigation.html">Mitigating Algorithmic Bias</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Transparency and Interpretable Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2-1-intro.html">Introduction to Interpretable Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-2-global.html">Methods for Global Interpretations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-3-local.html">Methods for Local Interpretations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3-1-framework.html">Conceptual Framework of Privacy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3-2-mechanism.html">Privacy Mechanisms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Special Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4-1-GenAI.html">Responsible AI in the Age of Generative AI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="zbib.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/mochenyang/Responsible-AI" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/1-1-intro.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Algorithmic Bias and Fairness</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithmic-bias-as-a-socio-technical-system-s-problem">Algorithmic Bias as a Socio-Technical System’s Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-fairness-in-problem-formulation">Defining Fairness in Problem Formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-and-measurement">Data and Measurement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-design">Algorithm Design</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#human-involvement-in-decision-making">Human Involvement in Decision-Making</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-algorithmic-bias-and-fairness">
+<h1>Introduction to Algorithmic Bias and Fairness<a class="headerlink" href="#introduction-to-algorithmic-bias-and-fairness" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p><strong>Note</strong>: this chapter is adapted from the authors’ own academic publication <span id="id1">Adomavicius and Yang [<a class="reference internal" href="zbib.html#id267" title="Gediminas Adomavicius and Mochen Yang. Integrating behavioral, economic, and technical insights to understand and address algorithmic bias: a human-centric perspective. ACM Transactions on Management Information Systems (TMIS), 13(3):1–27, 2022.">AY22</a>]</span>.</p>
+</div></blockquote>
+<p>As the applications of algorithmic systems in real-world decision-making increase, so do the concerns of its potential biases (or lack of fairness). Some of the most high-profile failures of Responsible AI are related algorithmic bias in high-stake decision-making processes, including, for example:</p>
+<ul class="simple">
+<li><p>Racial bias in recidivism risk predictions <span id="id2">[<a class="reference internal" href="zbib.html#id117" title="Julia Angwin, Jeff Larson, Surya Mattu, and Lauren Kirchner. Machine bias. ProPublica, May, 23:2016, 2016.">ALMK16</a>]</span>: where a risk assessment tool widely used across courts in the U.S. is found to be systematically more inaccurate for black defendents than for white defendents (more specifically, the tool makes more false positive mistakes for black defendents than for white defendents);</p></li>
+<li><p>Gender bias in automated resume screening <span id="id3">[<a class="reference internal" href="zbib.html#id118" title="Jeffrey Dastin. Amazon scraps secret ai recruiting tool that showed bias against women. San Fransico, CA: Reuters. Retrieved on October, 9:2018, 2018.">Das18</a>]</span>: where a resume screening system developed by Amazon is shown to disadvantage female candidates;</p></li>
+<li><p>Racial bias in access to healthcare <span id="id4">[<a class="reference internal" href="zbib.html#id121" title="Ziad Obermeyer, Brian Powers, Christine Vogeli, and Sendhil Mullainathan. Dissecting racial bias in an algorithm used to manage the health of populations. Science, 366(6464):447–453, 2019.">OPVM19</a>]</span>: a widely used algorithm used to predict healthcare needs (and subsequently used for healthcare resource allocation) has been found to systematically under-predict the needs of black patients. Given the same predicted risk score, black patients are much sicker than white patients.</p></li>
+</ul>
+<p>Why do these algorithmic biases arise and what can be done about them? In this chapter, we apply the framework introduced in Chapter <a class="reference internal" href="0-2-framework.html"><span class="doc">A Human-Centric Framework of Responsible AI</span></a> to make sense of the multi-faceted nature of algorithmic bias. This will serve as the conceptual foundation for the next two chapters, which focus on measuring and mitigating algorithmic bias.</p>
+<section id="algorithmic-bias-as-a-socio-technical-system-s-problem">
+<h2>Algorithmic Bias as a Socio-Technical System’s Problem<a class="headerlink" href="#algorithmic-bias-as-a-socio-technical-system-s-problem" title="Link to this heading">#</a></h2>
+<p>A critical thing to realize first is that algorithmic bias is not simply a technical issue – reducing it to “errors / imperfections” in the development of algorithms is counterproductive and masks the real problem in most cases. Despite its name, algorithmic bias is a multi-faceted problem that can be attributed to limitations in problem formulation, data (used for training the algorithms), algorithm design, as well as human involvement <span id="id5">[<a class="reference internal" href="zbib.html#id119" title="Ahmed Abbasi, Jingjing Li, Gari Clifford, and Herman Taylor. Make “fairness by design&quot; part of machine learning. Harvard Business Review, 2018.">ALCT18</a>, <a class="reference internal" href="zbib.html#id120" title="Mehmet Eren Ahsen, Mehmet Ulvi Saygi Ayvaci, and Srinivasan Raghunathan. When algorithmic predictions use human-generated data: a bias-aware classification algorithm for breast cancer diagnosis. Information Systems Research, 30(1):97–116, 2019.">AAR19</a>, <a class="reference internal" href="zbib.html#id92" title="Bettina Berendt and Sören Preibusch. Toward accountable discrimination-aware data mining: the importance of keeping the human in the loop—and under the looking glass. Big data, 5(2):135–152, 2017.">BP17</a>, <a class="reference internal" href="zbib.html#id177" title="Iyad Rahwan, Manuel Cebrian, Nick Obradovich, Josh Bongard, Jean-François Bonnefon, Cynthia Breazeal, Jacob W Crandall, Nicholas A Christakis, Iain D Couzin, Matthew O Jackson, and others. Machine behaviour. Nature, 568(7753):477–486, 2019.">RCO+19</a>]</span>. Therefore, to obtain a comprehensive understanding of algorithmic bias, it is essentially to view it as a socio-technical problem. To this end, the Responsible AI framework introduced in Chapter <a class="reference internal" href="0-2-framework.html"><span class="doc">A Human-Centric Framework of Responsible AI</span></a>, and in particular the inner layer, is highly relevant here. Figure 1 in <span id="id6">Adomavicius and Yang [<a class="reference internal" href="zbib.html#id267" title="Gediminas Adomavicius and Mochen Yang. Integrating behavioral, economic, and technical insights to understand and address algorithmic bias: a human-centric perspective. ACM Transactions on Management Information Systems (TMIS), 13(3):1–27, 2022.">AY22</a>]</span> is an extension of that layer, and can serve as a more specific theoretical framework for algorithmic bias, which we reproduce below.</p>
+<p><img alt="A Sociotechnical System" src="../_images/Fairness_Framework.png" /></p>
+</section>
+<section id="defining-fairness-in-problem-formulation">
+<h2>Defining Fairness in Problem Formulation<a class="headerlink" href="#defining-fairness-in-problem-formulation" title="Link to this heading">#</a></h2>
+<p>If we want an algorithm to be “fair”, we must clearly specify what we mean by that as part of problem formulation. Defining fairness, as it turns out, is substantially more difficult than it might seem. As should be evident from our discussions in Chapter <a class="reference internal" href="0-3-philosophy.html"><span class="doc">Philosophical Foundations for Ethical Decision-Making</span></a>, history is filled with a variety of competing ideals of what it means to be “fair”. For instance:</p>
+<ul class="simple">
+<li><p>Equality vs. Equity: Equality literally means treating everyone the same (e.g., during an exam, every student gets the same test, same room, and same time limit). In comparison, Equity means adjusting treatment to different people so that everyone has a fair chance to succeed (e.g., giving some students more support—like providing extra exam time for students with disabilities—so the outcome better reflects effort rather than circumstances).</p></li>
+<li><p>Equal opportunity vs. Equal outcome: Equal Opportunity is about giving everyone a level playing field even if outcomes differ in the end, whereas Equal outcome is the goal that everyone ends up with the same results (often too much to ask but may make sense for fundamental rights or minimum standards, such as universal literacy education and eradication of infant mortality).</p></li>
+</ul>
+<p>Beside the above philosophical / ideological notions of fairness, there are a few common (and related) definitions of fairness that are often considered in practice.</p>
+<p>A common understanding of fairness distinguishes between <em>direct discrimination</em> and <em>indirect discrimination</em>. Direct discrimination occurs when an individual is deliberately treated less favorably than another in a comparable situation due to a protected characteristic <span id="id7">[<a class="reference internal" href="zbib.html#id127" title="Andrea Romei and Salvatore Ruggieri. A multidisciplinary survey on discrimination analysis. The Knowledge Engineering Review, 29(5):582–638, 2014.">RR14</a>, <a class="reference internal" href="zbib.html#id21" title="Indrė Žliobaitė. Measuring discrimination in algorithmic decision making. Data Mining and Knowledge Discovery, 31(4):1060–1089, 2017.">vZliobaite17</a>]</span>. Here, a comparable situation implies that the two individuals are similar in all relevant aspects except for the protected characteristic, such as gender or race. In contrast, indirect discrimination arises when an “apparently neutral practice puts persons of a protected group at a particular disadvantage compared with others” <span id="id8">[<a class="reference internal" href="zbib.html#id21" title="Indrė Žliobaitė. Measuring discrimination in algorithmic decision making. Data Mining and Knowledge Discovery, 31(4):1060–1089, 2017.">vZliobaite17</a>]</span>. In hiring, for instance, selecting a male candidate over a female candidate with equivalent credentials solely because of gender constitutes direct discrimination. On the other hand, favoring candidates from specific regions or neighborhoods (e.g., due to relocation constraints) may lead to race-based indirect discrimination, even if the employer is unaware of the candidates’ races. These two primary types of discrimination may be known by different terms in other fields. For example, in legal contexts, direct discrimination is often referred to as <em>disparate treatment</em>, whereas indirect discrimination is termed <em>disparate impact</em> <span id="id9">[<a class="reference internal" href="zbib.html#id128" title="Solon Barocas and Andrew D Selbst. Big data's disparate impact. Calif. L. Rev., 104:671, 2016.">BS16</a>]</span>.</p>
+<p>Another widely discussed fairness concept in economics distinguishes between <em>taste-based discrimination</em> <span id="id10">[<a class="reference internal" href="zbib.html#id129" title="Gary S Becker. The economics of discrimination. University of Chicago press, 2010.">Bec10</a>]</span> and <em>statistical discrimination</em> <span id="id11">[<a class="reference internal" href="zbib.html#id130" title="Edmund S Phelps. The statistical theory of racism and sexism. The american economic review, 62(4):659–661, 1972.">Phe72</a>]</span>. Taste-based discrimination occurs when an employer exhibits a preference for one group of candidates over another based on personal bias. Statistical discrimination, on the other hand, arises when an employer lacks complete information about candidates’ key attributes (e.g., productivity) and consequently relies on group membership as a proxy for these attributes. Importantly, taste-based and statistical discrimination are distinct from direct and indirect discrimination. For example, an employer who deliberately incorporates gender in hiring decisions, thus engaging in direct discrimination, may do so either due to taste-based motives (e.g., a personal preference for a certain gender) or statistical reasoning (e.g., using aggregated performance data across gender groups to inform hiring decisions for an individual).</p>
+<p>When building algorithmic systems for decision-making problems, it is not enough to talk about fairness in abstract, conceptual terms. Instead, quantifiable fairness metrics are needed (either as objectives of algorithm design or one of the constraints that an algorithm must satisfy). We elaborate on these metrics and demonstrate how to compute them from data in Chapter <a class="reference internal" href="1-2-measure.html"><span class="doc">Measuring Fairness</span></a>.</p>
+<p>Meanwhile, a fundamental challenge in defining fairness in algorithmic systems is that different fairness objectives can be incompatible with each other, meaning that satisfying one fairness objective would automatically violate another. We illustrate this in Chapter <a class="reference internal" href="1-2-measure.html"><span class="doc">Measuring Fairness</span></a> using the COMPASS risk assessment case, and refer the readers to another case study on <a class="reference external" href="https://www.technologyreview.com/2025/06/11/1118233/amsterdam-fair-welfare-ai-discriminatory-algorithms-failure/">The Limits of Ethical AI</a>.</p>
+</section>
+<section id="data-and-measurement">
+<h2>Data and Measurement<a class="headerlink" href="#data-and-measurement" title="Link to this heading">#</a></h2>
+<p>Data is the “fuel” of algorithms, and the quality of data used to develop models impacts not only their performance but also their fairness properties. When models learn from bias-infused training data, they can inadvertently replicate human biases <span id="id12">[<a class="reference internal" href="zbib.html#id27" title="Keith Kirkpatrick. Battling algorithmic bias: how do we ensure algorithms treat us fairly? 2016.">Kir16</a>]</span>. Moreover, many algorithmic bias issues stem from discrepancies between certain theoretical constructs (often the focus of fairness considerations) and their measurements <span id="id13">[<a class="reference internal" href="zbib.html#id227" title="Abigail Z Jacobs and Hanna Wallach. Measurement and fairness. In Proceedings of the 2021 ACM Conference on Fairness, Accountability, and Transparency, 375–385. 2021.">JW21</a>]</span>. We now explore these two closely related challenges: (1) biases in outcome labels and input features used in model development, and (2) biases that emerge due to the misalignment between theoretical constructs of interest and their operationalizations.</p>
+<p>Many algorithms used in decision-making are essentially supervised machine learning systems. To build these systems, we need to collect a labeled dataset where both the ground-truth labels and input features are observed. Biases can manifest in labels, features, or intermediate representations through different mechanisms.</p>
+<p>First, outcome labels can be biased simply due to an imperfect social reality. For example, it is well established that women are underrepresented in science and mathematics careers <span id="id14">[<a class="reference internal" href="zbib.html#id131" title="Ernesto Reuben, Paola Sapienza, and Luigi Zingales. How stereotypes impair women’s careers in science. Proceedings of the National Academy of Sciences, 111(12):4403–4408, 2014.">RSZ14</a>]</span> and in C-suite executive positions <span id="id15">[<a class="reference internal" href="zbib.html#id136" title="Charles E Jordan, Stanley J Clark, and Marilyn A Waldron. Gender bias and compensation in the executive suite of the fortune 100. Journal of Organizational Culture, Communications and Conflict, 11(1):19–29, 2007.">JCW07</a>]</span>. Consequently, directly using current employment data as training labels would reinforce existing gender bias. Second, biases can also be encoded in non-sensitive features due to correlations between these features and a protected characteristic (e.g., gender or race). A well-known example is the <em>redlining problem</em> <span id="id16">[<a class="reference internal" href="zbib.html#id127" title="Andrea Romei and Salvatore Ruggieri. A multidisciplinary survey on discrimination analysis. The Knowledge Engineering Review, 29(5):582–638, 2014.">RR14</a>]</span>. Geographic location is often considered by human employers in hiring decisions due to proximity preferences or relocation restrictions. Because racial distributions vary across neighborhoods, geographic features are likely correlated with race. Thus, even if race (the protected feature in this case) is excluded from the data, discriminatory information remains embedded in geographic features. Moreover, removing geographic features (or other correlated variables) may not fully resolve the issue, as racial information may still be encoded in non-sensitive features through complex (e.g., non-linear) relationships. Third, implicit human biases contribute to biases in (unsupervised) representation learning. <span id="id17">Caliskan <em>et al.</em> [<a class="reference internal" href="zbib.html#id82" title="Aylin Caliskan, Joanna J Bryson, and Arvind Narayanan. Semantics derived automatically from language corpora contain human-like biases. Science, 356(6334):183–186, 2017.">CBN17</a>]</span> detected various biases in word embeddings trained on large corpora of text documents. For instance, the word “female” was more strongly associated with “family,” while “male” was more associated with “career.” Using such biased word embeddings as inputs to machine learning models (e.g., recurrent neural networks) can propagate and amplify these biases, leading to problematic outcomes.</p>
+<p>In addition, for many real-world decision problems, the targets of fairness considerations are theoretical constructs that cannot be directly observed from data. In the context of hiring, the <em>productivity</em> of candidates is often the basis for making hiring decisions. However, productivity is typically unobservable and must be measured/inferred based on available data of the candidates, such as their academic achievements, past job performances, or responses to screening questions. Bias can arise when there is a mismatch between a theoretical construct and its operationalization. For instance, sizable racial gaps in academic achievements have been shown in prior research <span id="id18">[<a class="reference internal" href="zbib.html#id238" title="Charles T Clotfelter, Helen F Ladd, and Jacob L Vigdor. The academic achievement gap in grades 3 to 8. The Review of Economics and Statistics, 91(2):398–419, 2009.">CLV09</a>]</span>, and using academic achievements to proxy for productivity can therefore introduce racial biases into hiring decisions.</p>
+</section>
+<section id="algorithm-design">
+<h2>Algorithm Design<a class="headerlink" href="#algorithm-design" title="Link to this heading">#</a></h2>
+<p>An emerging body of research, most notably in the computer science discipline, has been devoted to designing AI/ML techniques that not only make accurate predictions but also achieve certain fairness objectives. Chapter <a class="reference internal" href="1-3-mitigation.html"><span class="doc">Mitigating Algorithmic Bias</span></a> will demonstrate a few of these approaches, but we provide a higher-level overview here.</p>
+<p>A seemingly obvious approach to building fairness-aware models is to simply <em>drop the protected feature</em>, so that the algorithms are blind to the sensitive information. However, this is typically not the best idea for several reasons. First, as mentioned before, other non-protected features in the data can be correlated with the protected feature (i.e., the redlining problem). As a result, dropping the protected feature may not be sufficient to remove the potentially discriminatory information. Second, the protected feature may carry important and legitimate (non-discriminatory) predictive information about the outcome, and dropping it may hurt predictive performance as well as further exacerbate biases. For example, using a college admission dataset, \cite{kleinberg2018algorithmic} show that a race-blind predictor can result in less diversity in admitted students than a race-aware predictor, because the former may produce misleading predictions for minority students.</p>
+<p>Despite varying technical details, we characterize fairness-aware modeling techniques according to a few broad types of strategies.</p>
+<ul class="simple">
+<li><p><strong>Pre-processing approaches</strong>: pre-process input data to reduce bias;</p></li>
+<li><p><strong>In-processing approaches</strong>: modify specific machine learning algorithms to reduce bias, e.g.,  by incorporating fairness in optimization procedure;</p></li>
+<li><p><strong>Post-processing approaches</strong>: change how predictions are made to reduce bias.</p></li>
+</ul>
+<p>Given this burgeoning field of designing fair algorithms, it might be tempting to think that algorithmic fairness is just a matter of applying the right techniques on the right datasets. However, building fair algorithms in practice faces several very tricky trade-offs.</p>
+<p>Perhaps not surprisingly, improved fairness often comes at the cost of predictive performance. Several studies have demonstrated the theoretical trade-offs between model accuracy and fairness. <span id="id19">Calders <em>et al.</em> [<a class="reference internal" href="zbib.html#id19" title="Toon Calders, Faisal Kamiran, and Mykola Pechenizkiy. Building classifiers with independency constraints. In 2009 IEEE International Conference on Data Mining Workshops, 13–18. IEEE, 2009.">CKP09</a>]</span> prove a trade-off between predictive accuracy and the level of dependency between predictions and the protected feature (a measure of bias). <span id="id20">Corbett-Davies <em>et al.</em> [<a class="reference internal" href="zbib.html#id20" title="Sam Corbett-Davies, Emma Pierson, Avi Feller, Sharad Goel, and Aziz Huq. Algorithmic decision making and the cost of fairness. In Proceedings of the 23rd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 797–806. 2017.">CDPF+17</a>]</span> show that maximizing predictive accuracy with a single threshold typically violates fairness constraints. Conversely, fairness-preserving models that implement group-specific thresholds often do so at the expense of overall accuracy. The fairness-performance trade-offs present complex incentive challenges for human decision-makers. Strict enforcement of fairness requirements may discourage users of models from investing in improving predictive accuracy. Additionally, these trade-offs pose challenges for policymakers in determining which fairness objectives to prioritize in regulations and how to effectively promote compliance.</p>
+<p>Besides performance, fairness may also be at odds with model explanability. Explainability can sometimes conceal bias. Recent work on post-hoc methods to explain the predictions of ML models, such as LIME <span id="id21">[<a class="reference internal" href="zbib.html#id139" title="Marco Tulio Ribeiro, Sameer Singh, and Carlos Guestrin. &quot;why should i trust you?&quot; explaining the predictions of any classifier. In Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining, 1135–1144. 2016.">RSG16</a>]</span> and SHAP <span id="id22">[<a class="reference internal" href="zbib.html#id213" title="Scott Lundberg and Su-In Lee. A unified approach to interpreting model predictions. arXiv preprint arXiv:1705.07874, 2017.">LL17</a>]</span>, has shown that these techniques can be manipulated to produce arbitrary explanations <span id="id23">[<a class="reference internal" href="zbib.html#id214" title="Dylan Slack, Sophie Hilgard, Emily Jia, Sameer Singh, and Himabindu Lakkaraju. Fooling lime and shap: adversarial attacks on post hoc explanation methods. In Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society, 180–186. 2020.">SHJ+20</a>]</span>. This vulnerability can be exploited to mask algorithmic bias under the guise of explainability. Furthermore, pursuing explainability by developing <em>simpler</em> models may also negatively impact fairness. Kleinberg et al. <span id="id24">[<a class="reference internal" href="zbib.html#id103" title="Jon Kleinberg and Sendhil Mullainathan. Simplicity creates inequity: implications for fairness, stereotypes, and interpretability. In Proceedings of the 2019 ACM Conference on Economics and Computation, 807–808. 2019.">KM19</a>]</span> theoretically demonstrate that inequality and stereotyping are inherent in simplistic models (e.g., Decision Trees). Thus, efforts to enhance explainability must carefully consider their implications for fairness and bias mitigation.</p>
+</section>
+<section id="human-involvement-in-decision-making">
+<h2>Human Involvement in Decision-Making<a class="headerlink" href="#human-involvement-in-decision-making" title="Link to this heading">#</a></h2>
+<p>Although modern AI/ML models can identify patterns from data and generate predictions, human decision-makers often play a crucial role in interpreting machine outputs and incorporating them into final decisions. In the hiring context, for instance, a predictive model may rank applicants and recommend a shortlist of top candidates for interviews. Human involvement in this “last mile” of decision-making can help mitigate algorithmic bias – such as by manually auditing the model or applying fair practices – but it also introduces several challenges. These challenges stem from cognitive limitations, lack of trust in algorithms, and difficulties in adopting new technology. As a result, decision bias and unfairness may still persist, even if fairness-aware AI/ML techniques successfully address biases before the decision-making stage.</p>
+<p>To make final decisions, human decision-makers often need to incorporate model outputs as <em>recommendations</em>. This process can be subject to two distinctive pitfalls. First, human decision-makers’ preferences can be unintentionally influenced by the model’s output. For example, a candidate performing well in an interview may be viewed less favorably simply because they were ranked lower by the algorithm, or vice versa. In other words, the algorithm’s recommendation can act as an <em>anchor</em> that sways subsequent decisions. As a result, if the algorithm produces biased outputs, such biases may be further magnified by the anchoring effect. These “side-effects” of model outputs on human judgment have been demonstrated in the MIS literature. For instance, in the context of recommender systems, system-generated recommendations affect consumers’ preferences <span id="id25">[<a class="reference internal" href="zbib.html#id89" title="Gediminas Adomavicius, Jesse C Bockstedt, Shawn P Curley, and Jingjing Zhang. Do recommender systems manipulate consumer preferences? a study of anchoring effects. Information Systems Research, 24(4):956–975, 2013.">ABCZ13</a>]</span> and willingness to pay for products <span id="id26">[<a class="reference internal" href="zbib.html#id149" title="Gediminas Adomavicius, Jesse C Bockstedt, Shawn P Curley, and Jingjing Zhang. Effects of online recommendations on consumers’ willingness to pay. Information Systems Research, 29(1):84–102, 2018.">ABCZ18</a>]</span>. Second, even if the model is capable of producing fair recommendations, human decision-makers may still reintroduce biases into the final decisions due to a limited understanding of the algorithm’s outputs, lack of trust, or implicit bias in their preferences. For example, <span id="id27">[<a class="reference internal" href="zbib.html#id215" title="Ben Green and Yiling Chen. Disparate interactions: an algorithm-in-the-loop analysis of fairness in risk assessments. In Proceedings of the Conference on Fairness, Accountability, and Transparency, 90–99. 2019.">GC19</a>]</span> shows that users of a criminal risk assessment tool fail to effectively incorporate the model’s predictions and deviate from the model in ways that are unfair to black defendants. In the extreme case, if a human decision-maker simply imposes gender- or race-based selection criteria within the shortlist of candidates generated by a fair hiring algorithm, the final hiring decision will still be biased. Therefore, having a fair model does not exempt decision-makers from following ethical standards.</p>
+<p>Human decision-makers’ trust (or lack thereof) towards the algorithms can also create problems. <em>Algorithm aversion</em> has been shown in several studies <span id="id28">[<a class="reference internal" href="zbib.html#id13" title="Berkeley Dietvorst and Soaham Bharti. People reject even the best possible algorithm in uncertain decision domains. Available at SSRN 3424158, 2019.">DB19</a>, <a class="reference internal" href="zbib.html#id94" title="Berkeley J Dietvorst, Joseph P Simmons, and Cade Massey. Algorithm aversion: people erroneously avoid algorithms after seeing them err. Journal of Experimental Psychology: General, 144(1):114, 2015.">DSM15</a>]</span>, where humans quickly lose trust in algorithms when they realize that the algorithms are imperfect (though still outperform human experts), and when they choose between relying on the algorithms and themselves <span id="id29">[<a class="reference internal" href="zbib.html#id113" title="Jennifer M Logg, Julia A Minson, and Don A Moore. Algorithm appreciation: people prefer algorithmic to human judgment. Organizational Behavior and Human Decision Processes, 151:90–103, 2019.">LMM19</a>]</span>. In clinical decision-making, physicians tend to rate advice from AI systems as having lower quality than advice from human experts <span id="id30">[<a class="reference internal" href="zbib.html#id230" title="Susanne Gaube, Harini Suresh, Martina Raue, Alexander Merritt, Seth J Berkowitz, Eva Lermer, Joseph F Coughlin, John V Guttag, Errol Colak, and Marzyeh Ghassemi. Do as ai say: susceptibility in deployment of clinical decision-aids. NPJ digital medicine, 4(1):1–8, 2021.">GSR+21</a>]</span>. This pattern is concerning because many applications naturally depend on productive collaborations between algorithms and human experts (hiring algorithms and HR managers; recidivism risk prediction algorithms and judges; diagnosis algorithms and physicians; etc.), where trust needs cultivating.</p>
+<p>Finally, as algorithms are increasingly being used to make high-stakes decisions, such as medical diagnoses and criminal justice, it is important to design and implement proper management/governance mechanisms to regulate the models’ usage; specifically to clarify accountability (e.g., who is responsible for accidents) and to investigate and overwrite problematic decisions from models if needed <span id="id31">[<a class="reference internal" href="zbib.html#id232" title="Madeleine Clare Elish. Moral crumple zones: cautionary tales in human-robot interaction (pre-print). Engaging Science, Technology, and Society (pre-print), 2019.">Eli19</a>, <a class="reference internal" href="zbib.html#id231" title="Mark Sendak, Madeleine Clare Elish, Michael Gao, Joseph Futoma, William Ratliff, Marshall Nichols, Armando Bedoya, Suresh Balu, and Cara O'Brien. &quot; the human body is a black box&quot; supporting clinical decision-making with deep learning. In Proceedings of the 2020 conference on fairness, accountability, and transparency, 99–109. 2020.">SEG+20</a>]</span>. Take the criminal justice system as an example, where many human decision-makers (lawmakers, judges, juries, attorneys, etc.) are collectively involved and take different roles in the system with respect to both the design and usage of algorithm-based risk assessment tools: lawmakers may be responsible for weighing different fairness objectives and setting the legal standards that the risk assessment tools must comply with; judges and juries need to implement due process, e.g., to audit the decisions from the risk assessment tools and offer adjudications to settle fairness-related disputes; and attorneys represent those directly affected by the models (e.g., criminal defendants) and must provide possible recourse or appeal in the decision-making process. All parties work together to take advantage of the models while also managing and governing the models’ decisions when needed.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="0-4-prep.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Fundementals of Machine Learning</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="1-2-measure.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Measuring Fairness</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithmic-bias-as-a-socio-technical-system-s-problem">Algorithmic Bias as a Socio-Technical System’s Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-fairness-in-problem-formulation">Defining Fairness in Problem Formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-and-measurement">Data and Measurement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-design">Algorithm Design</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#human-involvement-in-decision-making">Human Involvement in Decision-Making</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Gediminas Adomavicius and Mochen Yang
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

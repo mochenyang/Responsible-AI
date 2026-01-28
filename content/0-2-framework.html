@@ -1,0 +1,579 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>A Human-Centric Framework of Responsible AI &#8212; Responsible AI for Data Scientists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/0-2-framework';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Philosophical Foundations for Ethical Decision-Making" href="0-3-philosophy.html" />
+    <link rel="prev" title="Responsible AI for Data Scientists" href="0-1-intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="0-1-intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.webp" class="logo__image only-light" alt="Responsible AI for Data Scientists - Home"/>
+    <script>document.write(`<img src="../_static/logo.webp" class="logo__image only-dark" alt="Responsible AI for Data Scientists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="0-1-intro.html">
+                    Responsible AI for Data Scientists
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">A Human-Centric Framework of Responsible AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-3-philosophy.html">Philosophical Foundations for Ethical Decision-Making</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-4-prep.html">Fundementals of Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fairness and Algorithmic Bias</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1-1-intro.html">Introduction to Algorithmic Bias and Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-2-measure.html">Measuring Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-3-mitigation.html">Mitigating Algorithmic Bias</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Transparency and Interpretable Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2-1-intro.html">Introduction to Interpretable Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-2-global.html">Methods for Global Interpretations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-3-local.html">Methods for Local Interpretations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3-1-framework.html">Conceptual Framework of Privacy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3-2-mechanism.html">Privacy Mechanisms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Special Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4-1-GenAI.html">Responsible AI in the Age of Generative AI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="zbib.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/mochenyang/Responsible-AI" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/0-2-framework.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>A Human-Centric Framework of Responsible AI</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-socio-technical-system">The Socio-Technical System</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="a-human-centric-framework-of-responsible-ai">
+<h1>A Human-Centric Framework of Responsible AI<a class="headerlink" href="#a-human-centric-framework-of-responsible-ai" title="Link to this heading">#</a></h1>
+<section id="the-socio-technical-system">
+<h2>The Socio-Technical System<a class="headerlink" href="#the-socio-technical-system" title="Link to this heading">#</a></h2>
+<p>We present a sociotechnical system’s view of how an augmented decision-making system, powered by data and modern ML / AI tools, interact with the society and its various constituents.</p>
+<p><img alt="A Sociotechnical System" src="../_images/AI_Governance.png" /></p>
+<p>The above figure visualizes a three-layer structure of Responsible AI. At the lowest layer, an Augmented Decision Making Framework describes how ML / AI-driven systems can engage in decision making. At the middle layer, four distinct pillars of Responsible AI encompass common ethical considerations of these systems. At the highest layer, AI governance as a part of the larger sociotechnical systems includes imprtant issues such as alignment, oversight, and accountability.</p>
+<p>Let’s first consider the ML / AI-driven Augmented Decision-Making Framework, which encompasses a variety of tasks for which AI can be used. This framework can be described by four intuitive aspects: <strong>problem</strong>, <strong>data</strong>, <strong>model</strong>, and <strong>decision</strong>.</p>
+<ul class="simple">
+<li><p><strong>Problem</strong>: The first aspect involves clearly defining the problem that needs to be solved, such as identifying fraudulent transactions, forecasting demand, predicting customer churn, and many others.</p></li>
+<li><p><strong>Data</strong>: The next aspect involves gathering and preparing the data that will inform the AI model. As we all understand very well, quality data is foundational for effective decision-making.</p></li>
+<li><p><strong>Model</strong>: This aspect focuses on developing (training) the AI model that will analyze the data and generate predictions or insights.</p></li>
+<li><p><strong>Decision</strong>: The final aspect involves using the model’s output to make informed decisions. This step translates AI model outcomes into actions.</p></li>
+</ul>
+<p>There has been a lot of development on various AI approaches over the past several decades with some amazing progress. However, it is becoming apparent that the focus of traditional AI approaches on <em>performance</em> and <em>efficiency</em> can have critical limitations and challenges, especially on ethical, societal, and legal dimensions. The need for Responsible AI arises from these limitations and challenges.</p>
+<p>So, what exactly is Responsible AI? At a very high level, responsible AI encompasses the ethical use of AI technologies, and there have been quite a few frameworks proposed for how to think about it. These frameworks have been put forward by technology leaders, consulting companies, standards bodies, and government agencies. However, the most common capabilities of Responsible AI that almost everybody seems to agree upon include: <strong>safety</strong>, <strong>fairness</strong>, <strong>transparency</strong>, and <strong>privacy</strong>.</p>
+<p>Thus, broadly speaking, Responsible AI refers to the development and deployment of artificial intelligence systems in a manner that systematically supports the following capabilities (or pillars): safety, fairness, transparency, and privacy. These capabilities in and of themselves are not necessarily unique to AI systems, but they do represent some significant additional challenges that are highly AI-specific.</p>
+<ul class="simple">
+<li><p><strong>Safety</strong>: AI systems could be susceptible to errors, unexpected inputs, adversarial attacks, and other attempts to corrupt, compromise, or misuse the system. To name just a few examples, it is becoming quite apparent that AI can be weaponized for cyberattacks, for creating sophisticated phishing schemes, and for automating the spread of misinformation.</p></li>
+<li><p><strong>Fairness</strong>: AI systems can perpetuate or amplify existing biases in data, resulting in unfair treatment and discrimination in areas like hiring, law enforcement, lending, healthcare, and many other instances.</p></li>
+<li><p><strong>Transparency</strong>: The AI-based decisions are increasingly consequential. Thus, it is important to make sure that the decisions made by AI systems are understandable and explainable (especially if an AI system makes a decision that seems unfair or unusual). Many traditional AI models operate as “black boxes,” making it difficult to understand how decisions are made.</p></li>
+<li><p><strong>Privacy</strong>: Traditional AI may not adequately address data privacy concerns, especially when handling sensitive information. The vast amounts of data used to train AI models pose significant risks to individual privacy. For instance, such data can be targeted for theft/disclosure, leading to breaches of sensitive information. Also, AI technologies can enhance surveillance capabilities, leading to increased privacy concerns.</p></li>
+</ul>
+<p>These key Responsible AI capabilities can have distinct and nuanced impacts for each component of the underlying AI development framework. For example, let’s consider fairness considerations throughout this framework:</p>
+<ul class="simple">
+<li><p>From the perspective of <strong>Problem</strong> formulation, we may need to:</p>
+<ul>
+<li><p>Identify our fairness ideals by understanding social reality that we operate in (as we know, different cultures may have significant differences in what is considered fair);</p></li>
+<li><p>Define or choose quantifiable metrics that map to our fairness ideals;</p></li>
+<li><p>Understand tradeoffs between different fairness metrics. We know from academic research that certain fairness metrics are incompatible with one another.</p></li>
+</ul>
+</li>
+<li><p>From the perspective of <strong>Data</strong>, we will likely need to have:</p>
+<ul>
+<li><p>Methods for bias detection in data;</p></li>
+<li><p>Data preprocessing techniques for bias reduction;</p></li>
+<li><p>After seeing the extent of bias in our data, we may want to change processes for collecting less biased data to begin with.</p></li>
+</ul>
+</li>
+<li><p>From the perspective of <strong>Model</strong> building, we need to have</p>
+<ul>
+<li><p>Fairness-aware AI-based modeling techniques, which could be implemented via:</p>
+<ul>
+<li><p>Data pre-processing, by altering (debiasing) input data;</p></li>
+<li><p>Modifying the learning algorithm, to inject fairness-awareness directly into the learning process;</p></li>
+<li><p>Outcome post-processing, e.g., by changing how AI predictions are made for different user sub-populations.</p></li>
+</ul>
+</li>
+<li><p>And, there are additional complicating factors, such as known tradeoffs between some fairness metrics and predictive accuracy, as well as between fairness and explainability. Thus, these tradeoffs will need to be managed.</p></li>
+</ul>
+</li>
+<li><p>From the perspective of <strong>Decision</strong> making, an example of interesting challenge is whether we should use AI-based outputs in an automated OR in an advisory manner? For example, using human in the loop could (a) serve as an additional check to ensure fairness OR (b) could potentially re-introduce unfairness via human decision-making biases.</p></li>
+</ul>
+<p>And, similarly to Fairness, we could take other Responsible AI pillars and see the distinct impacts that they can have on the underlying AI development framework. By systematically addressing each aspect—problem, data, model, and decision—using Responsible AI capabilities, we can create a robust AI-based decision-making application that is both effective and responsible.</p>
+<p>Finally, it is crucial to understand that just having Responsible AI capabilities is not sufficient. An AI-based solution (such as a criminal risk prediction model or health insurance fraud prediction model) is typically a component in a larger sociotechnical system, and therefore it is important to have a clear legal/regulatory/policy/standard-based approach to governing AI and ensuring these capabilities. We refer to it as <strong>governance and oversight</strong>, which include formal frameworks, policies, and practices that regulate and guide the development, deployment, and management of Responsible AI systems.</p>
+<p>However, there two key notions that deserve a special consideration and have a direct impact on the strategic design of AI-based solutions: Alignment and Accountability.</p>
+<ul class="simple">
+<li><p><strong>Alignment</strong>: The process of ensuring that AI systems’ objectives, behaviors, and outcomes are in harmony with human values, ethical standards, and societal goals. For a given setting or an application domain, this could mean deciding what specific values / goals / objectives / standards / behaviors are formally mandated (and implemented via the underlying Responsible AI capabilities).</p></li>
+<li><p><strong>Accountability</strong>: AI systems/solutions should be accountable and answerable. We all understand very well that, in most real-world applications, no AI model can be expected to be perfectly accurate. How do we deal with situations where we suspect that the model made an erroneous prediction or exhibited systematic unfairness? Thus, it is important to establish explicit/formal accountability mechanisms for AI decision-making processes through the ability to do meaningful inspections/audits, to have clear traceability and attribution for various decisions made, and then – this being a true sociotechnical system – to have pathways for contesting the (potentially incorrect or unfair) outcomes and have corresponding remediation and recourse.</p></li>
+</ul>
+<p>Where does this governance come from? Governments and regulatory bodies are beginning to develop and implement regulations surrounding AI usage. Unfortunately, like with many other technologies, the legal frameworks are significantly behind with numerous AI advances. Thus, much of the AI governance priorities are currently being set inside individual companies, driven by Boards of Directors, senior management, data science teams, internal ethics/advisory boards, legal departments, HR departments, and some external stakeholders.</p>
+<p>Finally, we also need to recognize the sheer scope of Responsible AI spectrum:</p>
+<ul class="simple">
+<li><p>On one extreme – in our everyday business applications, our Responsible AI challenges could be simply to provide sufficient explainability or to ensure fairness of a simple prediction model (say, of a product recommendation system on an e-commerce platform).</p></li>
+<li><p>On the other extreme, nowadays, serious discussions are also happening on much more major issues, like: should we treat generative AI and foundation LLM models similarly to how we treat nuclear technologies, due to their potential for significant, widespread consequences? There have been increasing concerns regarding Generative AI potential capabilities of producing harmful misinformation, deepfakes, or automated weaponry that could lead to potential dramatic changes to economies and societal structures – and possibly all the way up to existential threats for humanity, according to some doomsday scenarios.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="0-1-intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Responsible AI for Data Scientists</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="0-3-philosophy.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Philosophical Foundations for Ethical Decision-Making</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-socio-technical-system">The Socio-Technical System</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Gediminas Adomavicius and Mochen Yang
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

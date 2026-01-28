@@ -1,0 +1,600 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to Interpretable Machine Learning &#8212; Responsible AI for Data Scientists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/2-1-intro';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Methods for Global Interpretations" href="2-2-global.html" />
+    <link rel="prev" title="Mitigating Algorithmic Bias" href="1-3-mitigation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="0-1-intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.webp" class="logo__image only-light" alt="Responsible AI for Data Scientists - Home"/>
+    <script>document.write(`<img src="../_static/logo.webp" class="logo__image only-dark" alt="Responsible AI for Data Scientists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="0-1-intro.html">
+                    Responsible AI for Data Scientists
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="0-2-framework.html">A Human-Centric Framework of Responsible AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-3-philosophy.html">Philosophical Foundations for Ethical Decision-Making</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-4-prep.html">Fundementals of Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fairness and Algorithmic Bias</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1-1-intro.html">Introduction to Algorithmic Bias and Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-2-measure.html">Measuring Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-3-mitigation.html">Mitigating Algorithmic Bias</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Transparency and Interpretable Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to Interpretable Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-2-global.html">Methods for Global Interpretations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-3-local.html">Methods for Local Interpretations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3-1-framework.html">Conceptual Framework of Privacy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3-2-mechanism.html">Privacy Mechanisms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Special Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4-1-GenAI.html">Responsible AI in the Age of Generative AI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="zbib.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/mochenyang/Responsible-AI" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/2-1-intro.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Interpretable Machine Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transparency-in-ai-augmented-decision-making">Transparency in AI / Augmented Decision Making</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-interpretation-mean">What Does “Interpretation” Mean?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-interpretation-to-decision">From Interpretation to Decision</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-interpretable-machine-learning">
+<h1>Introduction to Interpretable Machine Learning<a class="headerlink" href="#introduction-to-interpretable-machine-learning" title="Link to this heading">#</a></h1>
+<p>In 2015, IBM launched <em>Watson for Oncology</em> and promoted it as a breakthrough in clinical decision support: an AI system that could help oncologists identify personalized cancer treatments by synthesizing patient records, clinical guidelines, and the medical literature <span id="id1">[<a class="reference internal" href="zbib.html#id275" title="Eliza Strickland. Ibm watson, heal thyself: how ibm overpromised and underdelivered on ai health care. IEEE spectrum, 56(4):24–31, 2019.">Str19</a>]</span>. IBM invested billions of dollars in the development of this system, only to find that many clinicians and hospitals ultimately chose not to adopt the system. A recurring concern was not merely whether Watson’s recommendations were accurate, but whether they were understandable. Clinicians reported difficulty assessing why particular treatments were suggested, how recommendations aligned with clinical evidence, and when the system might be unreliable <span id="id2">[<a class="reference internal" href="zbib.html#id277" title="Casey Ross and Ike Swetlitz. Ibm’s watson supercomputer recommended ‘unsafe and incorrect’cancer treatments, internal documents show. Stat, 25:1–10, 2018.">RS18</a>]</span>. In a domain where decisions carry life‑and‑death consequences and professional accountability rests with human experts, the absence of transparency proved to be a critical barrier to trust and adoption.</p>
+<blockquote>
+<div><p>Black boxes are unacceptable: A CDSS (clinical decision support system) requires transparency so that users can understand the basis for any advice or recommendations that are offered. – <span id="id3">[<a class="reference internal" href="zbib.html#id276" title="Edward H Shortliffe and Martin J Sepúlveda. Clinical decision support in the era of artificial intelligence. Jama, 320(21):2199–2200, 2018.">SSepulveda18</a>]</span></p>
+</div></blockquote>
+<section id="transparency-in-ai-augmented-decision-making">
+<h2>Transparency in AI / Augmented Decision Making<a class="headerlink" href="#transparency-in-ai-augmented-decision-making" title="Link to this heading">#</a></h2>
+<p>As discussed in Chapter <a class="reference internal" href="0-2-framework.html"><span class="doc">A Human-Centric Framework of Responsible AI</span></a>, AI / augmented decision making systems do not act alone; they are inherently embedded as part of the larger socio-technical systems, where human judgment and algorithmic recommendations are intertwined. This gives rise to <strong>transparency</strong> as an important responsible AI consideration: how can stakeholders understand, scrutinize, and ultimately trust decisions shaped by complex ML / AI models?</p>
+<p>Like algorithmic fairness, the issue of transparency in AI / augmented decision making can also manifest in Problem, Data, Model, and Decision components. Specifically,</p>
+<ul class="simple">
+<li><p><strong>Problem</strong> transparency: clarity about what decision problem the ML / AI system is designed to support and how it is framed. This includes explicit disclosure of the target outcome, optimization objective, constraints, assumptions, and key stakeholders in the problem formulation.</p></li>
+<li><p><strong>Data</strong> transparency: visibility into where data come from, how they were collected, processed, and labeled, and what populations they represent. Common mechanisms include data provenance <span id="id4">[<a class="reference internal" href="zbib.html#id279" title="Peter Buneman, Sanjeev Khanna, and Tan Wang-Chiew. Why and where: a characterization of data provenance. In International conference on database theory, 316–330. Springer, 2001.">BKWC01</a>]</span>, data documentation, and datasheets <span id="id5">[<a class="reference internal" href="zbib.html#id278" title="Timnit Gebru, Jamie Morgenstern, Briana Vecchione, Jennifer Wortman Vaughan, Hanna Wallach, Hal Daumé Iii, and Kate Crawford. Datasheets for datasets. Communications of the ACM, 64(12):86–92, 2021.">GMV+21</a>]</span>. Data transparency enables stakeholders to assess data quality, relevance, bias, and limitations, and to reason about when a model’s predictions may or may not generalize.</p></li>
+<li><p><strong>Model</strong> transparency: this primarily deals with interpretable machine learning (more on this later).</p></li>
+<li><p><strong>Decision</strong> transparency: clarity about how model outputs are communicated, contextualized, and used in downstream decision processes. This includes interaction transparency (e.g., explanations shown to users, uncertainty communication, confidence indicators), disclosure that AI assistance is being used (e.g., watermarking or labeling), and governance mechanisms that specify when human judgment can override or contest algorithmic recommendations.</p></li>
+</ul>
+<p>From a technical point of view, the following two chapters focus on interpretable machine learning. Many machine learning models are inherently very complex, and it is often unclear why a model makes certain predictions. The goal of Interpretable Machine Learning is to provide interpretations for a ML model’s predictions. It is also referred to as Explainable Machine Learning or Explainable AI (XAI).</p>
+</section>
+<section id="what-does-interpretation-mean">
+<h2>What Does “Interpretation” Mean?<a class="headerlink" href="#what-does-interpretation-mean" title="Link to this heading">#</a></h2>
+<p>When people talk about making machine learning models interpretable / explainable, they don’t always mean the same thing <span id="id6">[<a class="reference internal" href="zbib.html#id270" title="Harmanpreet Kaur, Harsha Nori, Samuel Jenkins, Rich Caruana, Hanna Wallach, and Jennifer Wortman Vaughan. Interpreting interpretability: understanding data scientists' use of interpretability tools for machine learning. In Proceedings of the 2020 CHI conference on human factors in computing systems, 1–14. 2020.">KNJ+20</a>]</span>. Therefore, before we dive into the <em>how</em> of interpretable machine learning, we need to first discuss the <em>what</em> question.</p>
+<p>At a high level, there are at least three different ways to interpret “interpretability” (pun intended):</p>
+<ol class="arabic simple">
+<li><p><strong>Feature Importance</strong>: which features are most responsible / impactful for the model’s predictions? This is perhaps the most common way people talk about interpretable machine learning.</p></li>
+<li><p><strong>Model Complexity</strong>: whether a model is simple enough to be understood by humans. This is often an intrinsic characteristic of the model’s underlying learning technique. For example, a decision tree or a linear regression model is intrinsically not very complex (and is therefore more interpretable), where as a deep learning neural network is intrinsically more complex (and less interpretable). This is related to feature importance – in general, it is easier to characterize feature importance for intrinsically less complex models.</p></li>
+<li><p><strong>Model Transparency</strong>: whether the process of building a machine learning model as well as its inner workings are properly disclosed. For example, what kinds of tranining data are used, what is the learning technique and training strategy, how is the model evaluated, etc. This is closely related to the idea of “open-source” in software development.</p></li>
+</ol>
+<p>For our subsequent discussions, we will focus on the first way to understand interpretable machine learning, and cover different techniques to quantify feature importance.</p>
+<p>Within this scope, there are different types of intepretation methods that have been developed:</p>
+<ul class="simple">
+<li><p><strong>Global interpretation</strong>: derive overall interpretation of a model, usually the relative importance of different input features.</p></li>
+<li><p><strong>Local interpretation</strong>: derive specific interpretation for a given prediction.</p></li>
+<li><p><strong>Model-specific interpretation</strong>: methods that only work for certain (class of) machine learning techniques.</p></li>
+<li><p><strong>Model-agnostic interpretation</strong>: methods that are applicable regardless of the machine learning techniques being used.</p></li>
+</ul>
+<p>The following table summarizes the interpretation methods that will be discussed in the next two chapters. All of them are model-agnostic (note that Chapter <a class="reference internal" href="2-2-global.html"><span class="doc">Methods for Global Interpretations</span></a> will also cover a few model-specific techniques for completeness).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Global Interpretation</p></th>
+<th class="head"><p>Local Interpretation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PDP</p></td>
+<td><p>✓</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>M-Plot</p></td>
+<td><p>✓</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>ICE</p></td>
+<td><p></p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>ALE</p></td>
+<td><p>✓</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>SHAP</p></td>
+<td><p>✓</p></td>
+<td><p>✓</p></td>
+</tr>
+<tr class="row-odd"><td><p>LIME</p></td>
+<td><p></p></td>
+<td><p>✓</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>It is worth noting that interpretable machine learning is a fast-evloving field, and new interpretation methods are constantly being proposed (e.g., the “Integrated Gradients” approach <span id="id7">[<a class="reference internal" href="zbib.html#id260" title="Joseph Enguehard. Sequential integrated gradients: a simple but effective method for explaining language models. arXiv preprint arXiv:2305.15853, 2023.">Eng23</a>, <a class="reference internal" href="zbib.html#id259" title="Mukund Sundararajan, Ankur Taly, and Qiqi Yan. Axiomatic attribution for deep networks. In International conference on machine learning, 3319–3328. PMLR, 2017.">STY17</a>]</span>). For a more comprehensive coverage of this topic, we recommend <span id="id8">Molnar [<a class="reference internal" href="zbib.html#id269">Mol25</a>]</span> (also available as an <a class="reference external" href="https://christophm.github.io/interpretable-ml-book/">online book</a>).</p>
+</section>
+<section id="from-interpretation-to-decision">
+<h2>From Interpretation to Decision<a class="headerlink" href="#from-interpretation-to-decision" title="Link to this heading">#</a></h2>
+<p>Consider the following two (fictitous) scenarios:</p>
+<ol class="arabic simple">
+<li><p>Scenario 1: a cancer detection algorithm predicts potential skin cancer using images of skin surfaces. User X received a positive diagnosis along with an explanation that “there is a large dark spot”. X went on to cover the dark spot with makeup. With a new skin image, X received a negative diagnosis.</p></li>
+<li><p>Scenario 2: a bank relies on a predictive model to approve / reject loans. The model predicts default risk based on an applicant’s credit score and financial standing. Suppose applicant A received a rejection decision with an explanation “credit score lower than 600” (implying that A’s application would have been approved if credit score was higher than 600). The bank next recommended A to prioritize paying off credit card debts and refrain from opening new lines of credit.</p></li>
+</ol>
+<p>Even without deep knowledge of interpretable machine learning techniques, most people would intuitive think that user X’s decision in scenario 1 is ineffective (and comical), whereas the bank’s recommendation in scenario 2 is reasonable. In the first scenario, the action of covering up the dark spot follows from the interpretation, and this action, technically speaking, does change the model’s prediction from positive to negative. However, this action would not do anything to cure the underlying skin condition (if there is one), because it does not causally affect the underlying ground truth (the actual skin condition). It simply “tricks” the model to give a different prediction. In the second scenario, the action taken based on the interpretation has a decent chance of not only change the model’s prediction but also meaningfully change the ground truth default risk of the individual.</p>
+<p>Comparing these two scenarios, we can draw some takeaway lessons about making decisions based on interpretations of machine learning predictions. In both scenarios, the action is taken based on the interpretation, and the action can in fact change the model’s prediction. This is not surprising, because interpretation methods are often mechanically designed to measure how much a feature can change a model’s prediction. So if we change the value of features, we can “causally” change the predictions. However, changing model’s predictions may not be what we truly care about in most cases. Instead, we care about taking actions to change the ground truth, such as curing the actual skin condition or to reduce the actual default risk. Here, interpretation typically is not the same as causality, meaning that decisions based on interpretation may not effectively change the ground truth (such as what we saw in scenario 1). The key missing element to go from interpretation to effective decisions here is the causal understanding of “how things work”. In both of the scenarios discussed before, our common sense tells us that merely covering up a dark spot is not going to cure skin conditions, but paying off one’s debt can reduce default risk. In more complex decision environments where common sense is insufficient, we need to rely on causal inference methods, such as running experiments. to deal with this issue.</p>
+<p>Please keep in mind that: making effective decisions often requires causal understanding, and causality is hard to claim. It needs domain knowledge and expertise. Do not treat data-driven interpretations as causal evidence and directly start making prescriptive decisions. Instead, treat them as possible hypotheses, questions to ask, factors to test, and an intermediate step to take before making the final decisions.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1-3-mitigation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Mitigating Algorithmic Bias</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="2-2-global.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Methods for Global Interpretations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transparency-in-ai-augmented-decision-making">Transparency in AI / Augmented Decision Making</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-interpretation-mean">What Does “Interpretation” Mean?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-interpretation-to-decision">From Interpretation to Decision</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Gediminas Adomavicius and Mochen Yang
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1367 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Measuring Fairness &#8212; Responsible AI for Data Scientists</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/1-2-measure';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Mitigating Algorithmic Bias" href="1-3-mitigation.html" />
+    <link rel="prev" title="Introduction to Algorithmic Bias and Fairness" href="1-1-intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="0-1-intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.webp" class="logo__image only-light" alt="Responsible AI for Data Scientists - Home"/>
+    <script>document.write(`<img src="../_static/logo.webp" class="logo__image only-dark" alt="Responsible AI for Data Scientists - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="0-1-intro.html">
+                    Responsible AI for Data Scientists
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="0-2-framework.html">A Human-Centric Framework of Responsible AI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-3-philosophy.html">Philosophical Foundations for Ethical Decision-Making</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0-4-prep.html">Fundementals of Machine Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fairness and Algorithmic Bias</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1-1-intro.html">Introduction to Algorithmic Bias and Fairness</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Measuring Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1-3-mitigation.html">Mitigating Algorithmic Bias</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Transparency and Interpretable Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2-1-intro.html">Introduction to Interpretable Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-2-global.html">Methods for Global Interpretations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-3-local.html">Methods for Local Interpretations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Privacy</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3-1-framework.html">Conceptual Framework of Privacy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3-2-mechanism.html">Privacy Mechanisms</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Special Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4-1-GenAI.html">Responsible AI in the Age of Generative AI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="zbib.html">Bibliography</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/mochenyang/Responsible-AI" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/1-2-measure.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Measuring Fairness</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background-of-compas-data">Background of COMPAS Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fairness-measures-for-binary-classifier">Fairness Measures for Binary Classifier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demographic-parity">Demographic Parity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-demographic-parity">Conditional Demographic Parity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-balance-equalized-odds">Error Balance / Equalized Odds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictive-parity">Predictive Parity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-impossibility-of-achieving-both-error-balance-and-predictive-parity">The Impossibility of Achieving both Error Balance and Predictive Parity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-within-groups">Calibration within Groups</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fairness-measure-for-numeric-prediction-regression">Fairness Measure for Numeric Prediction / Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">(Conditional) Demographic Parity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-balance">Residual Balance</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="measuring-fairness">
+<h1>Measuring Fairness<a class="headerlink" href="#measuring-fairness" title="Link to this heading">#</a></h1>
+<p>The first step to addressing algorithmic bias is to be able to measure the degree of fairness (or lack thereof) given a model’s predictions on a certain dataset. This chapter covers a number of commonly used fairness measures. For concreteness, we will demonstrate these fairness measures by calculating them on the <a class="reference external" href="https://www.propublica.org/datastore/dataset/compas-recidivism-risk-score-data-and-analysis">Compas Recidivism Dataset</a>.</p>
+<section id="background-of-compas-data">
+<h2>Background of COMPAS Data<a class="headerlink" href="#background-of-compas-data" title="Link to this heading">#</a></h2>
+<p>Recidivism prediction refers to the task of estimating the likelihood that a convicted criminal will reoffend after being released. This type of prediction plays a critical role in the criminal justice system, influencing decisions about bail, parole, sentencing, and rehabilitation programs. In recent years, machine learning (ML) models have been increasingly deployed to assist with these predictions, promising greater objectivity and efficiency. One prominent example is the Correctional Offender Management Profiling for Alternative Sanctions (COMPAS) tool, developed by Northpointe Inc. COMPAS uses a range of input features, including criminal history, age, and responses to interview questions, to generate risk scores intended to inform judicial decisions.</p>
+<p>However, the deployment of COMPAS and similar tools has sparked considerable controversy. In 2016, ProPublica published an investigative article titled “<a class="reference external" href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">Machine Bias</a>,” which analyzed COMPAS scores and concluded that the tool was racially biased. According to their analysis, Black defendants were disproportionately labeled as high risk compared to white defendants, even when they did not reoffend. Conversely, white defendants were more often mislabeled as low risk. ProPublica argued that this disparity indicated systemic racial bias embedded in the algorithm (or more technically, that the algorithm violates a specific notion of fairness known as <strong>error balance</strong>).</p>
+<p>Northpointe Inc. responded to these claims by challenging ProPublica’s methodology and interpretation. They argued that COMPAS was calibrated to achieve equal predictive accuracy across racial groups and emphasized that fairness should be understood in terms of <strong>predictive parity</strong>—meaning that individuals with the same score should have the same likelihood of reoffending, regardless of race. This rebuttal highlighted the complex and often conflicting definitions of fairness in algorithmic decision-making.</p>
+<p>Error balance and predictive parity (along with demographic parity) are among the most commonly used fairness metrics. Next, we will demonstrate these different fairness metrics on (a subset of) the COMPAS data.</p>
+<div class="note admonition">
+<p class="admonition-title">Data: Compas Recidivism Dataset</p>
+<ul class="simple">
+<li><p>Location: “data/compas-scores-two-years.csv”</p></li>
+<li><p>Shape: (7214, 53)</p></li>
+<li><p>Note: data taken from ProPublica’s analyses of COMPAS</p></li>
+</ul>
+</div>
+<p>The following script imports the dataset and prints the first few rows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import compas two-year dataset</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">compas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/compas-scores-two-years.csv&#39;</span><span class="p">)</span>
+<span class="n">compas</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>first</th>
+      <th>last</th>
+      <th>compas_screening_date</th>
+      <th>sex</th>
+      <th>dob</th>
+      <th>age</th>
+      <th>age_cat</th>
+      <th>race</th>
+      <th>...</th>
+      <th>v_decile_score</th>
+      <th>v_score_text</th>
+      <th>v_screening_date</th>
+      <th>in_custody</th>
+      <th>out_custody</th>
+      <th>priors_count.1</th>
+      <th>start</th>
+      <th>end</th>
+      <th>event</th>
+      <th>two_year_recid</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>miguel hernandez</td>
+      <td>miguel</td>
+      <td>hernandez</td>
+      <td>2013-08-14</td>
+      <td>Male</td>
+      <td>1947-04-18</td>
+      <td>69</td>
+      <td>Greater than 45</td>
+      <td>Other</td>
+      <td>...</td>
+      <td>1</td>
+      <td>Low</td>
+      <td>2013-08-14</td>
+      <td>2014-07-07</td>
+      <td>2014-07-14</td>
+      <td>0</td>
+      <td>0</td>
+      <td>327</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>kevon dixon</td>
+      <td>kevon</td>
+      <td>dixon</td>
+      <td>2013-01-27</td>
+      <td>Male</td>
+      <td>1982-01-22</td>
+      <td>34</td>
+      <td>25 - 45</td>
+      <td>African-American</td>
+      <td>...</td>
+      <td>1</td>
+      <td>Low</td>
+      <td>2013-01-27</td>
+      <td>2013-01-26</td>
+      <td>2013-02-05</td>
+      <td>0</td>
+      <td>9</td>
+      <td>159</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4</td>
+      <td>ed philo</td>
+      <td>ed</td>
+      <td>philo</td>
+      <td>2013-04-14</td>
+      <td>Male</td>
+      <td>1991-05-14</td>
+      <td>24</td>
+      <td>Less than 25</td>
+      <td>African-American</td>
+      <td>...</td>
+      <td>3</td>
+      <td>Low</td>
+      <td>2013-04-14</td>
+      <td>2013-06-16</td>
+      <td>2013-06-16</td>
+      <td>4</td>
+      <td>0</td>
+      <td>63</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5</td>
+      <td>marcu brown</td>
+      <td>marcu</td>
+      <td>brown</td>
+      <td>2013-01-13</td>
+      <td>Male</td>
+      <td>1993-01-21</td>
+      <td>23</td>
+      <td>Less than 25</td>
+      <td>African-American</td>
+      <td>...</td>
+      <td>6</td>
+      <td>Medium</td>
+      <td>2013-01-13</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1174</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6</td>
+      <td>bouthy pierrelouis</td>
+      <td>bouthy</td>
+      <td>pierrelouis</td>
+      <td>2013-03-26</td>
+      <td>Male</td>
+      <td>1973-01-22</td>
+      <td>43</td>
+      <td>25 - 45</td>
+      <td>Other</td>
+      <td>...</td>
+      <td>1</td>
+      <td>Low</td>
+      <td>2013-03-26</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1102</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 53 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># following the ProPublica analysis, we remove several rows with missing data</span>
+<span class="c1"># see https://github.com/propublica/compas-analysis/blob/master/Compas%20Analysis.ipynb for more details</span>
+<span class="n">compas</span> <span class="o">=</span> <span class="n">compas</span><span class="p">[[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;c_charge_degree&#39;</span><span class="p">,</span> <span class="s1">&#39;race&#39;</span><span class="p">,</span> <span class="s1">&#39;age_cat&#39;</span><span class="p">,</span> <span class="s1">&#39;score_text&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="s1">&#39;priors_count&#39;</span><span class="p">,</span> <span class="s1">&#39;days_b_screening_arrest&#39;</span><span class="p">,</span> <span class="s1">&#39;decile_score&#39;</span><span class="p">,</span> <span class="s1">&#39;is_recid&#39;</span><span class="p">,</span> <span class="s1">&#39;two_year_recid&#39;</span><span class="p">,</span> <span class="s1">&#39;c_jail_in&#39;</span><span class="p">,</span> <span class="s1">&#39;c_jail_out&#39;</span><span class="p">]]</span>
+<span class="n">compas</span> <span class="o">=</span> <span class="n">compas</span><span class="p">[(</span><span class="n">compas</span><span class="p">[</span><span class="s1">&#39;days_b_screening_arrest&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">30</span><span class="p">)</span> <span class="o">&amp;</span> 
+                <span class="p">(</span><span class="n">compas</span><span class="p">[</span><span class="s1">&#39;days_b_screening_arrest&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">30</span><span class="p">)</span> <span class="o">&amp;</span>  
+                <span class="p">(</span><span class="n">compas</span><span class="p">[</span><span class="s1">&#39;is_recid&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span>
+                <span class="p">(</span><span class="n">compas</span><span class="p">[</span><span class="s1">&#39;c_charge_degree&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;O&#39;</span><span class="p">)</span> <span class="o">&amp;</span> 
+                <span class="p">(</span><span class="n">compas</span><span class="p">[</span><span class="s1">&#39;score_text&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;N/A&#39;</span><span class="p">)]</span>
+<span class="n">compas</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(6172, 13)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># finally, we focus on &quot;race&quot; as the protected attribute and African American vs. Caucasian as the two groups</span>
+<span class="n">compas</span> <span class="o">=</span> <span class="n">compas</span><span class="p">[</span><span class="n">compas</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;African-American&#39;</span><span class="p">,</span> <span class="s1">&#39;Caucasian&#39;</span><span class="p">])]</span>
+<span class="n">compas</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5278, 13)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="fairness-measures-for-binary-classifier">
+<h2>Fairness Measures for Binary Classifier<a class="headerlink" href="#fairness-measures-for-binary-classifier" title="Link to this heading">#</a></h2>
+<p>To begin with, we consider measuring fairness of a classification model. In the <code class="docutils literal notranslate"><span class="pre">Compas</span></code> dataset, the <code class="docutils literal notranslate"><span class="pre">score_text</span></code> columns contains model-predicted risk level (low, medium, high) and the <code class="docutils literal notranslate"><span class="pre">two_year_recid</span></code> column contains the actual two-year recidivism label (1, 0). Because the ground-truth outcome label is binary, we focus on the “low” and “high” predicted classes here.<a class="footnote-reference brackets" href="#footnote1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compas_binary</span> <span class="o">=</span> <span class="n">compas</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="c1"># remove &quot;medium&quot; in score_text</span>
+<span class="n">compas_binary</span> <span class="o">=</span> <span class="n">compas_binary</span><span class="p">[</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;score_text&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;Medium&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Throughout this chapter, we adopt the following notations in formal definitions of different fairness measures:</p>
+<div class="tip admonition">
+<p class="admonition-title">Notations</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Y\)</span>: actual outcome (0/1, recidivism within two years or not);</p></li>
+<li><p><span class="math notranslate nohighlight">\(\widehat{Y}\)</span>: predicted risk score (“High” or “Low”);</p></li>
+<li><p><span class="math notranslate nohighlight">\(p\)</span>: predicted probability of being “High” risk;</p></li>
+<li><p><span class="math notranslate nohighlight">\(R\)</span>: race, protected attribute of interested in this example. <span class="math notranslate nohighlight">\(R \in \{AA, W\}\)</span> represents African American and Caucasian respectively;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{X}\)</span>: other observable characteristics (e.g., gender, age, prior offenses).</p></li>
+</ul>
+</div>
+<section id="demographic-parity">
+<h3>Demographic Parity<a class="headerlink" href="#demographic-parity" title="Link to this heading">#</a></h3>
+<p><strong>Demographic parity</strong> (sometimes also referred to as <strong>Statistical Parity</strong>) is one of the most straightforward fairness metrics. It simply asserts that one group should not receive systematically more favorable predicted outcomes than the other group. Despite its simplicity, it has been extensively used / discussed in the prior literature, such as <span id="id2">Calders <em>et al.</em> [<a class="reference internal" href="zbib.html#id19" title="Toon Calders, Faisal Kamiran, and Mykola Pechenizkiy. Building classifiers with independency constraints. In 2009 IEEE International Conference on Data Mining Workshops, 13–18. IEEE, 2009.">CKP09</a>], Calders and Verwer [<a class="reference internal" href="zbib.html#id23" title="Toon Calders and Sicco Verwer. Three naive bayes approaches for discrimination-free classification. Data Mining and Knowledge Discovery, 21(2):277–292, 2010.">CV10</a>], Kamiran and Calders [<a class="reference internal" href="zbib.html#id62" title="Faisal Kamiran and Toon Calders. Classifying without discriminating. In 2009 2nd International Conference on Computer, Control and Communication, 1–6. IEEE, 2009.">KC09</a>], Kamishima <em>et al.</em> [<a class="reference internal" href="zbib.html#id53" title="Toshihiro Kamishima, Shotaro Akaho, and Jun Sakuma. Fairness-aware learning through regularization approach. In 2011 IEEE 11th International Conference on Data Mining Workshops, 643–650. IEEE, 2011.">KAS11</a>]</span>, among many others.</p>
+<p>In the context of recidivism prediction, with the protected attribute being race and the two groups to be compared being African American vs. White, demographic parity can be defined as:</p>
+<div class="tip admonition">
+<p class="admonition-title">Definition: Demographic Parity for Binary Classifier</p>
+<div class="math notranslate nohighlight">
+\[
+\Pr(\widehat{Y} = High | R = AA) = \Pr(\widehat{Y} = High | R = W)
+\]</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># evaluate demographic parity</span>
+<span class="c1"># percentage of &quot;high&quot; scores among African Americans</span>
+<span class="n">AA_pct</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;score_text&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;High&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;African-American&#39;</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;African-American&#39;</span><span class="p">])</span>
+<span class="c1"># percentage of &quot;high&quot; scores among Whites</span>
+<span class="n">W_pct</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;score_text&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;High&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Caucasian&#39;</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Caucasian&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Percentage of &#39;high&#39; predicted scores among African Americans: &quot;</span><span class="p">,</span> <span class="n">AA_pct</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Percentage of &#39;high&#39; predicted scores among Whites: &quot;</span><span class="p">,</span> <span class="n">W_pct</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Percentage of &#39;high&#39; predicted scores among African Americans:  0.38566864445458693
+Percentage of &#39;high&#39; predicted scores among Whites:  0.13680981595092023
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we can see, around 38.6% of African American defendents received high-risk predictions whereas only 13.7% of White defendents received high-risk predictions. This is a violation of demographic parity.</p>
+</section>
+<section id="conditional-demographic-parity">
+<h3>Conditional Demographic Parity<a class="headerlink" href="#conditional-demographic-parity" title="Link to this heading">#</a></h3>
+<p>Demographic parity is a rather crude measure and, specifically, does not take into account any systematic differences across the two groups that may legitimately explain some of the disparity in predicted outcomes. <strong>Conditional Demographic Parity</strong> seeks to amend this issue by conditioning on other observable characteristics. It has also been discussed in prior literature, including for example, <span id="id3">Kamiran <em>et al.</em> [<a class="reference internal" href="zbib.html#id16" title="Faisal Kamiran, Indrė Žliobaitė, and Toon Calders. Quantifying explainable discrimination and removing illegal discrimination in automated decision making. Knowledge and information systems, 35(3):613–644, 2013.">KvZliobaiteC13</a>], Žliobaite <em>et al.</em> [<a class="reference internal" href="zbib.html#id15" title="Indre Žliobaite, Faisal Kamiran, and Toon Calders. Handling conditional discrimination. In 2011 IEEE 11th International Conference on Data Mining, 992–1001. IEEE, 2011.">vZliobaiteKC11</a>]</span>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Definition: Conditional Demographic Parity for Binary Classifier</p>
+<div class="math notranslate nohighlight">
+\[
+\Pr(\widehat{Y} = High | R = AA, \boldsymbol{X}) = \Pr(\widehat{Y} = High | R = W, \boldsymbol{X})
+\]</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># evaluate conditional demographic parity</span>
+<span class="c1"># following ProPublica&#39;s analysis, X may contain: age, gender, number of prior offenses, and severity of charge</span>
+<span class="c1"># they can be used as control variables in a logistic regression of predicted risk score on race</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.formula.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">smf</span>
+<span class="c1"># convert score_text to 1 and 0</span>
+<span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;score_text&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;High&#39;</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">logit</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;Y ~ race + age + sex + priors_count + c_charge_degree&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">compas_binary</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">disp</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">stargazer.stargazer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Stargazer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="n">sg</span> <span class="o">=</span> <span class="n">Stargazer</span><span class="p">([</span><span class="n">model</span><span class="p">])</span>
+<span class="n">sg</span><span class="o">.</span><span class="n">dependent_variable_name</span><span class="p">(</span><span class="s1">&#39;Predicted High Risk&#39;</span><span class="p">)</span>
+<span class="n">sg</span><span class="o">.</span><span class="n">rename_covariates</span><span class="p">({</span>
+    <span class="s2">&quot;c_charge_degree[T.M]&quot;</span><span class="p">:</span> <span class="s2">&quot;Charge Degree Misdemeanor&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;race[T.Caucasian]&quot;</span><span class="p">:</span> <span class="s2">&quot;race Caucasian&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sex[T.Male]&quot;</span><span class="p">:</span> <span class="s2">&quot;sex Male&quot;</span>
+<span class="p">})</span>
+<span class="n">sg</span><span class="o">.</span><span class="n">show_model_numbers</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">sg</span><span class="o">.</span><span class="n">render_html</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html"><table style="text-align:center"><tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align:left"></td><td colspan="1"><em>Dependent variable: Predicted High Risk</em></td></tr><tr><td style="text-align:left"></td>
+<tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr>
+
+<tr><td style="text-align:left">Intercept</td><td>2.582<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.224)</td></tr>
+<tr><td style="text-align:left">age</td><td>-0.140<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.007)</td></tr>
+<tr><td style="text-align:left">Charge Degree Misdemeanor</td><td>-0.495<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.106)</td></tr>
+<tr><td style="text-align:left">priors_count</td><td>0.378<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.016)</td></tr>
+<tr><td style="text-align:left">race Caucasian</td><td>-0.653<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.105)</td></tr>
+<tr><td style="text-align:left">sex Male</td><td>-0.037<sup></sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.128)</td></tr>
+
+<td colspan="2" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align: left">Observations</td><td>3821</td></tr><tr><td style="text-align: left">Pseudo R<sup>2</sup></td><td>0.392</td></tr>
+<tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align: left">Note:</td><td colspan="1" style="text-align: right"><sup>*</sup>p&lt;0.1; <sup>**</sup>p&lt;0.05; <sup>***</sup>p&lt;0.01</td></tr></table></div></div>
+</div>
+<p>We can see that even after controlling for age, gender, prior offenses and the severity of charge, being African American still significantly increased the odds of receiving high-risk predictions. This is a violation of conditional demographic parity.</p>
+<p>Demographic parity (with or without conditioning on covariates) concerns only with a model’s predictions but not the ground truths. Error balance and predictive parity are two representative fairness metrics that account for both, which are at the center of the debate between ProPublica and Northpointe. We discuss them next.</p>
+</section>
+<section id="error-balance-equalized-odds">
+<h3>Error Balance / Equalized Odds<a class="headerlink" href="#error-balance-equalized-odds" title="Link to this heading">#</a></h3>
+<p>Demographic parity (with or without conditioning on other observable characteristics) aims to balance the predicted outcomes of two groups. Fairness measures like these reflect the <em>Equal Outcome</em> ideal. In contrast, many other fairness measures are designed to reflect the <em>Equal Opportunity</em> ideal (that individuals from different groups who are equally “eligible” are treated equally). <strong>Error Balance</strong> or <strong>Equalized Odds</strong> is one of such measures.</p>
+<p>Error balance requires that the false positive rate and false negative rate are equalized for the two groups. Because false positive / negative rates are equivalent to the complements of recall rates for positive / negative classes, the error balance metric is the same as <strong>equalizing recall rates</strong> for positive and negative classes across the two groups. More formally,</p>
+<div class="tip admonition">
+<p class="admonition-title">Definition: Error Balance / Equalized Odds</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Pr(\widehat{Y} = High | R = AA, Y = 0) &amp; = \Pr(\widehat{Y} = High | R = W, Y = 0) \\
+\Pr(\widehat{Y} = Low | R = AA, Y = 1) &amp; = \Pr(\widehat{Y} = Low | R = W, Y = 1)
+\end{align*}\]</div>
+<p>or equivalently</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\text{Recall(High | R = AA)} &amp; = \text{Recall(High | R = W)} \\
+\text{Recall(Low | R = AA)} &amp; = \text{Recall(Low | R = W)}
+\end{align*}\]</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># evaluate FPR and FNR for both groups</span>
+<span class="n">FPR_AA</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;score_text&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;High&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;African-American&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;African-American&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)])</span>
+<span class="n">FNR_AA</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;score_text&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Low&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;African-American&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;African-American&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)])</span>
+<span class="n">FPR_W</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;score_text&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;High&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Caucasian&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Caucasian&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)])</span>
+<span class="n">FNR_W</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;score_text&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Low&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Caucasian&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Caucasian&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)])</span>
+<span class="c1"># print results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;False Positive Rate for African Americans: &quot;</span><span class="p">,</span> <span class="n">FPR_AA</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;False Positive Rate for Whites: &quot;</span><span class="p">,</span> <span class="n">FPR_W</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;False Negative Rate for African Americans: &quot;</span><span class="p">,</span> <span class="n">FNR_AA</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;False Negative Rate for Whites: &quot;</span><span class="p">,</span> <span class="n">FNR_W</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False Positive Rate for African Americans:  0.19464944649446494
+False Positive Rate for Whites:  0.057547169811320756
+False Negative Rate for African Americans:  0.42728093947606144
+False Negative Rate for Whites:  0.7157894736842105
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, we see that the false positive / negative rate is clearly higher / lower for African Americans. Specifically, the model makes more false positive mistakes (i.e., misclassify a low-risk defendent as high-risk) for African Americans but makes more false negative mistakes (i.e., misclassify a high-risk defendent as low-risk) for Whites. In fact, this is one of ProPublica’s main arguments to show the unfairness of COMPAS <span id="id4">[<a class="reference internal" href="zbib.html#id117" title="Julia Angwin, Jeff Larson, Surya Mattu, and Lauren Kirchner. Machine bias. ProPublica, May, 23:2016, 2016.">ALMK16</a>]</span>.</p>
+<p>Just like in the case of demographic parity, you can further condition on other observables to construct a <strong>conditional</strong> version of error balance / equalized odds. One way to test whether error balance is violated is to create subsets of data where the ground truth recidivism label is 0 or 1. Within each subsample, run logistic regressions of the model’s predictions on race and other observed characteristics, then check the coefficient estimate on the group identifier.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create two subsamples, respectively for two-year recidivism label 0 and 1</span>
+<span class="n">compas_recid_0</span> <span class="o">=</span> <span class="n">compas_binary</span><span class="p">[</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">compas_recid_1</span> <span class="o">=</span> <span class="n">compas_binary</span><span class="p">[</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># regressions on recall of class 0</span>
+<span class="n">model_recid_0</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">logit</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;Y ~ race + age + sex + priors_count + c_charge_degree&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">compas_recid_0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">disp</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># regressions on recall of class 1</span>
+<span class="n">model_recid_1</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">logit</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;Y ~ race + age + sex + priors_count + c_charge_degree&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">compas_recid_1</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">disp</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">stargazer.stargazer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Stargazer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="n">sg</span> <span class="o">=</span> <span class="n">Stargazer</span><span class="p">([</span><span class="n">model_recid_0</span><span class="p">,</span> <span class="n">model_recid_1</span><span class="p">])</span>
+<span class="n">sg</span><span class="o">.</span><span class="n">dependent_variable_name</span><span class="p">(</span><span class="s1">&#39;Predicted High Risk&#39;</span><span class="p">)</span>
+<span class="n">sg</span><span class="o">.</span><span class="n">rename_covariates</span><span class="p">({</span>
+    <span class="s2">&quot;c_charge_degree[T.M]&quot;</span><span class="p">:</span> <span class="s2">&quot;Charge Degree Misdemeanor&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;race[T.Caucasian]&quot;</span><span class="p">:</span> <span class="s2">&quot;race Caucasian&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sex[T.Male]&quot;</span><span class="p">:</span> <span class="s2">&quot;sex Male&quot;</span>
+<span class="p">})</span>
+<span class="n">sg</span><span class="o">.</span><span class="n">show_model_numbers</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">sg</span><span class="o">.</span><span class="n">custom_columns</span><span class="p">([</span><span class="s1">&#39;Recidivism = 0&#39;</span><span class="p">,</span> <span class="s1">&#39;Recidivism = 1&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">sg</span><span class="o">.</span><span class="n">render_html</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table style="text-align:center"><tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align:left"></td><td colspan="2"><em>Dependent variable: Predicted High Risk</em></td></tr><tr><td style="text-align:left"></td><tr><td></td><td colspan="1">Recidivism = 0</td><td colspan="1">Recidivism = 1</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr>
+
+<tr><td style="text-align:left">Intercept</td><td>1.737<sup>***</sup></td><td>2.948<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.350)</td><td>(0.300)</td></tr>
+<tr><td style="text-align:left">age</td><td>-0.127<sup>***</sup></td><td>-0.129<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.011)</td><td>(0.009)</td></tr>
+<tr><td style="text-align:left">Charge Degree Misdemeanor</td><td>-0.209<sup></sup></td><td>-0.681<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.166)</td><td>(0.140)</td></tr>
+<tr><td style="text-align:left">priors_count</td><td>0.373<sup>***</sup></td><td>0.328<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.028)</td><td>(0.020)</td></tr>
+<tr><td style="text-align:left">race Caucasian</td><td>-0.819<sup>***</sup></td><td>-0.526<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.172)</td><td>(0.139)</td></tr>
+<tr><td style="text-align:left">sex Male</td><td>-0.101<sup></sup></td><td>-0.134<sup></sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.190)</td><td>(0.184)</td></tr>
+
+<td colspan="3" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align: left">Observations</td><td>2144</td><td>1677</td></tr><tr><td style="text-align: left">Pseudo R<sup>2</sup></td><td>0.301</td><td>0.345</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align: left">Note:</td><td colspan="2" style="text-align: right"><sup>*</sup>p&lt;0.1; <sup>**</sup>p&lt;0.05; <sup>***</sup>p&lt;0.01</td></tr></table></div></div>
+</div>
+<p>In the regression on the <code class="docutils literal notranslate"><span class="pre">compas_recid_0</span></code> sample, we see a significant and negative coefficient on the race variable, indicating that white defendants who did not reoffend have a lower probability of experiencing false positive predictions (i.e., recall rate of class 0 is higher for white defendants). Similarly, in the regression on the <code class="docutils literal notranslate"><span class="pre">compas_recid_1</span></code> sample, we also see a significant and negative coefficient on the race variable, indicating that white defendants who did reoffend have a higher probability of experiencing false negative predictions (i.e., recall rate of class 1 is lower for white defendants).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Importantly, error balance is sometimes informally described as requiring a classifier to not be systematically <strong>more inaccurate</strong> for one group vs. the other group. This can be misleading. Error balance focus on equalizing a specific type of performance metric, namely the recall rates. As will be seen in the subsequent discussion on predictive parity, even when error balance is satisfied, the model can still have differential accuracy for different groups, e.g., by achieving different precision rates.</p>
+</div>
+<p>Another way to define error balance makes use of <strong>predicted probabilities</strong> rather than class predictions. It seeks to equalize the expected predicted probabilities of different groups conditioning on true labels (see, for example, <span id="id5">Kleinberg <em>et al.</em> [<a class="reference internal" href="zbib.html#id30" title="Jon Kleinberg, Sendhil Mullainathan, and Manish Raghavan. Inherent trade-offs in the fair determination of risk scores. arXiv:1609.05807, 2016.">KMR16</a>]</span>). More formally,</p>
+<div class="tip admonition">
+<p class="admonition-title">Definition: Error Balance / Equalized Odds (with predicted probabilities)</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbb{E}(p | R = AA, Y = 0) &amp; = \mathbb{E}(p | R = W, Y = 0) \\
+\mathbb{E}(p | R = AA, Y = 1) &amp; = \mathbb{E}(p | R = W, Y = 1)
+\end{align*}\]</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># evaluate error balance with predicted probabilities</span>
+<span class="c1"># we will use &quot;decile_score&quot; to approximate the predicted probability of recidivism</span>
+<span class="c1"># COMPAS predicts &quot;High&quot; risk when decile score is greater than 7 and &quot;Low&quot; if the decile score is lower than 5</span>
+<span class="c1"># print average decile_score for African Americans and Whites</span>
+<span class="n">AA_0_avg</span> <span class="o">=</span> <span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;African-American&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)][</span><span class="s1">&#39;decile_score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">AA_1_avg</span> <span class="o">=</span> <span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;African-American&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)][</span><span class="s1">&#39;decile_score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">W_0_avg</span> <span class="o">=</span> <span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Caucasian&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)][</span><span class="s1">&#39;decile_score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">W_1_avg</span> <span class="o">=</span> <span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Caucasian&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)][</span><span class="s1">&#39;decile_score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="c1"># print results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average decile score for African Americans who did not recidivate: &quot;</span><span class="p">,</span> <span class="n">AA_0_avg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average decile score for African Americans who recidivated: &quot;</span><span class="p">,</span> <span class="n">AA_1_avg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average decile score for Whites who did not recidivate: &quot;</span><span class="p">,</span> <span class="n">W_0_avg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average decile score for Whites who recidivated: &quot;</span><span class="p">,</span> <span class="n">W_1_avg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average decile score for African Americans who did not recidivate:  3.5488929889298895
+Average decile score for African Americans who recidivated:  6.308039747064138
+Average decile score for Whites who did not recidivate:  2.3650943396226416
+Average decile score for Whites who recidivated:  4.187719298245614
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, we see that the model systematically assigned higher decile scores to African Americans who did not recidivate, but lower scores to Whites who did recidivate.</p>
+</section>
+<section id="predictive-parity">
+<h3>Predictive Parity<a class="headerlink" href="#predictive-parity" title="Link to this heading">#</a></h3>
+<p>In response to ProPublica’s allegation that COMPAS violated error balance, <span id="id6">Dieterich <em>et al.</em> [<a class="reference internal" href="zbib.html#id253" title="William Dieterich, Christina Mendoza, and Tim Brennan. Compas risk scales: demonstrating accuracy equity and predictive parity. Northpointe Inc, 7(4):1–36, 2016.">DMB16</a>]</span> argued that a more “appropriate” fairness metric would be <strong>Predictive Parity</strong>, which requires that individuals who received a given type of predictions (high risk or low risk) should have equal probability of actually reoffending or not, regardless of race. In machine learning language, predictive parity requires equalizing the <strong>precision rates</strong> of both classes across groups. Formally, it can be defined as</p>
+<div class="tip admonition">
+<p class="admonition-title">Definition: Predictive Parity (Equalized False Discovery / Omission Rates)</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\Pr(Y = 1 | R = AA, \widehat{Y} = Low) &amp; = \Pr(Y = High | R = W, \widehat{Y} = Low) \\
+\Pr(Y = 0 | R = AA, \widehat{Y} = High) &amp; = \Pr(Y = Low | R = W, \widehat{Y} = High)
+\end{align*}\]</div>
+<p>or equivalently</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\text{Precision(High | R = AA)} &amp; = \text{Precision(High | R = W)} \\
+\text{Precision(Low | R = AA)} &amp; = \text{Precision(Low | R = W)}
+\end{align*}\]</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># evaluate predictive parity for both groups</span>
+<span class="n">FOR_AA</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;African-American&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;score_text&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Low&#39;</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;African-American&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;score_text&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Low&#39;</span><span class="p">)])</span>
+<span class="n">FDR_AA</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;African-American&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;score_text&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;High&#39;</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;African-American&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;score_text&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;High&#39;</span><span class="p">)])</span>
+<span class="n">FOR_W</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Caucasian&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;score_text&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Low&#39;</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Caucasian&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;score_text&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Low&#39;</span><span class="p">)])</span>
+<span class="n">FDR_W</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Caucasian&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;score_text&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;High&#39;</span><span class="p">)])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">compas_binary</span><span class="p">[(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Caucasian&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;score_text&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;High&#39;</span><span class="p">)])</span>
+<span class="c1"># print results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;False Omission Rate for African Americans: &quot;</span><span class="p">,</span> <span class="n">FOR_AA</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;False Omission Rate for Whites: &quot;</span><span class="p">,</span> <span class="n">FOR_W</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;False Discovery Rate for African Americans: &quot;</span><span class="p">,</span> <span class="n">FDR_AA</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;False Discovery Rate for Whites: &quot;</span><span class="p">,</span> <span class="n">FDR_W</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False Omission Rate for African Americans:  0.3514115898959881
+False Omission Rate for Whites:  0.2899786780383795
+False Discovery Rate for African Americans:  0.24970414201183433
+False Discovery Rate for Whites:  0.273542600896861
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, we find that the false omission rate (i.e., labeled as low-risk, but did recidivate) is somewhat higher for African American than for White, and the false discovery rate is fairly similar. To account for other observed characteristics, we can create subsets of data where the predicted label is 0 or 1. Within each subsample, run logistic regressions of the actual recidivism outcome on race and other observed characteristics, then check the coefficient estimate on the group identifier.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create two subsamples, respectively for predicted label 0 and 1</span>
+<span class="n">compas_pred_0</span> <span class="o">=</span> <span class="n">compas_binary</span><span class="p">[</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;score_text&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Low&#39;</span><span class="p">]</span>
+<span class="n">compas_pred_1</span> <span class="o">=</span> <span class="n">compas_binary</span><span class="p">[</span><span class="n">compas_binary</span><span class="p">[</span><span class="s1">&#39;score_text&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;High&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># regressions on precision of class 0</span>
+<span class="n">model_pred_0</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">logit</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;two_year_recid ~ race + age + sex + priors_count + c_charge_degree&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">compas_pred_0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">disp</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># regressions on precision of class 1</span>
+<span class="n">model_pred_1</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">logit</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;two_year_recid ~ race + age + sex + priors_count + c_charge_degree&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">compas_pred_1</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">disp</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">stargazer.stargazer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Stargazer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="n">sg</span> <span class="o">=</span> <span class="n">Stargazer</span><span class="p">([</span><span class="n">model_pred_0</span><span class="p">,</span> <span class="n">model_pred_1</span><span class="p">])</span>
+<span class="n">sg</span><span class="o">.</span><span class="n">dependent_variable_name</span><span class="p">(</span><span class="s1">&#39;Recidivism&#39;</span><span class="p">)</span>
+<span class="n">sg</span><span class="o">.</span><span class="n">rename_covariates</span><span class="p">({</span>
+    <span class="s2">&quot;c_charge_degree[T.M]&quot;</span><span class="p">:</span> <span class="s2">&quot;Charge Degree Misdemeanor&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;race[T.Caucasian]&quot;</span><span class="p">:</span> <span class="s2">&quot;race Caucasian&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sex[T.Male]&quot;</span><span class="p">:</span> <span class="s2">&quot;sex Male&quot;</span>
+<span class="p">})</span>
+<span class="n">sg</span><span class="o">.</span><span class="n">show_model_numbers</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">sg</span><span class="o">.</span><span class="n">custom_columns</span><span class="p">([</span><span class="s1">&#39;Predicted Low Risk&#39;</span><span class="p">,</span> <span class="s1">&#39;Predicted High Risk&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">sg</span><span class="o">.</span><span class="n">render_html</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table style="text-align:center"><tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align:left"></td><td colspan="2"><em>Dependent variable: Recidivism</em></td></tr><tr><td style="text-align:left"></td><tr><td></td><td colspan="1">Predicted Low Risk</td><td colspan="1">Predicted High Risk</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr>
+
+<tr><td style="text-align:left">Intercept</td><td>-0.145<sup></sup></td><td>1.464<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.169)</td><td>(0.314)</td></tr>
+<tr><td style="text-align:left">age</td><td>-0.033<sup>***</sup></td><td>-0.047<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.004)</td><td>(0.009)</td></tr>
+<tr><td style="text-align:left">Charge Degree Misdemeanor</td><td>0.056<sup></sup></td><td>-0.373<sup>**</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.088)</td><td>(0.167)</td></tr>
+<tr><td style="text-align:left">priors_count</td><td>0.186<sup>***</sup></td><td>0.108<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.018)</td><td>(0.015)</td></tr>
+<tr><td style="text-align:left">race Caucasian</td><td>-0.045<sup></sup></td><td>0.133<sup></sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.087)</td><td>(0.180)</td></tr>
+<tr><td style="text-align:left">sex Male</td><td>0.353<sup>***</sup></td><td>0.452<sup>**</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.111)</td><td>(0.197)</td></tr>
+
+<td colspan="3" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align: left">Observations</td><td>2753</td><td>1068</td></tr><tr><td style="text-align: left">Pseudo R<sup>2</sup></td><td>0.059</td><td>0.065</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align: left">Note:</td><td colspan="2" style="text-align: right"><sup>*</sup>p&lt;0.1; <sup>**</sup>p&lt;0.05; <sup>***</sup>p&lt;0.01</td></tr></table></div></div>
+</div>
+<p>We can see that, in both regressions, the coefficient estimate on race is non-siginificant, supporting Northpointe’s argument that COMPAS achieved predictive parity.</p>
+</section>
+<section id="the-impossibility-of-achieving-both-error-balance-and-predictive-parity">
+<h3>The Impossibility of Achieving both Error Balance and Predictive Parity<a class="headerlink" href="#the-impossibility-of-achieving-both-error-balance-and-predictive-parity" title="Link to this heading">#</a></h3>
+<p>The COMPAS case is particularly complicated because, as it turns out, one cannot simultaneously achieve error balance and predictive parity (unless there is no disparity in recidivism across race to begin with). This impossibility result, discussed in <span id="id7">Kleinberg <em>et al.</em> [<a class="reference internal" href="zbib.html#id30" title="Jon Kleinberg, Sendhil Mullainathan, and Manish Raghavan. Inherent trade-offs in the fair determination of risk scores. arXiv:1609.05807, 2016.">KMR16</a>]</span> and <span id="id8">Chouldechova [<a class="reference internal" href="zbib.html#id75" title="Alexandra Chouldechova. Fair prediction with disparate impact: a study of bias in recidivism prediction instruments. Big data, 5(2):153–163, 2017.">Cho17</a>]</span>, can be derived fairly straightforwardly using the <a class="reference external" href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Bayes rule</a>.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Proof of the incompatibility between error balance and predictive parity (optional, toggle to show)</p>
+<p>Consider a binary classification task with features <span class="math notranslate nohighlight">\(X\)</span>, sensitive attribute (using gender here as an example) <span class="math notranslate nohighlight">\(V \in \{F, M \}\)</span>, ground truth <span class="math notranslate nohighlight">\(Y \in \{0,1\}\)</span>, and classifier prediction <span class="math notranslate nohighlight">\(\widehat{Y} \in \{0,1\}\)</span>.</p>
+<p>The proof will make use of the <a class="reference external" href="https://en.wikipedia.org/wiki/Bayes%27_theorem">Bayes Theorem</a>, which states that for two events <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\Pr(A|B) = \frac{\Pr(B|A)\Pr(A)}{\Pr(B)}
+\]</div>
+<p>In addition, we need a “conditioned” version of the Bayes theorem, where each of the above probability is further conditioned on an event <span class="math notranslate nohighlight">\(C\)</span>, i.e.,</p>
+<div class="math notranslate nohighlight">
+\[
+\Pr(A|B, C) = \frac{\Pr(B|A, C)\Pr(A|C)}{\Pr(B|C)}
+\]</div>
+<p>Now, set event <span class="math notranslate nohighlight">\(A\)</span> as <span class="math notranslate nohighlight">\(Y=1\)</span>, event <span class="math notranslate nohighlight">\(B\)</span> as <span class="math notranslate nohighlight">\(\widehat{Y}=1\)</span>, and event <span class="math notranslate nohighlight">\(C\)</span> as <span class="math notranslate nohighlight">\(V=F\)</span>. By applying the conditional Bayes theorem, we get</p>
+<div class="math notranslate nohighlight">
+\[
+\Pr(Y=1|\widehat{Y}=1, V=F) = \frac{\Pr(\widehat{Y}=1|Y=1, V=F)\Pr(Y=1|V=F)}{\Pr(\widehat{Y}=1|V=F)} ~~~~~ Eq(1)
+\]</div>
+<p>Similarly, by setting event <span class="math notranslate nohighlight">\(C\)</span> as <span class="math notranslate nohighlight">\(V=M\)</span>, we can obtain another equality</p>
+<div class="math notranslate nohighlight">
+\[
+\Pr(Y=1|\widehat{Y}=1, V=M) = \frac{\Pr(\widehat{Y}=1|Y=1, V=M)\Pr(Y=1|V=M)}{\Pr(\widehat{Y}=1|V=M)}~~~~~ Eq(2)
+\]</div>
+<p>Notice that:</p>
+<ul class="simple">
+<li><p>Error balance on class 1 dictates that <span class="math notranslate nohighlight">\(\Pr(\widehat{Y}=1|Y=1, V=F) = \Pr(\widehat{Y}=1|Y=1, V=M)\)</span>;</p></li>
+<li><p>Predictive parity on class 0 dictates that <span class="math notranslate nohighlight">\(\Pr(Y=1|\widehat{Y}=1, V=F) = \Pr(Y=1|\widehat{Y}=1, V=M)\)</span>.</p></li>
+</ul>
+<p>Comparing the left-hand-side and right-hand-side of the Eq(1) and Eq(2), we can see that: having error balance and predictive parity at the same time would imply</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\Pr(Y=1|V=F)}{\Pr(\widehat{Y}=1|V=F)} = \frac{\Pr(Y=1|V=M)}{\Pr(\widehat{Y}=1|V=M)}
+\]</div>
+<p>Now, pay attention to the denominators, for each value of <span class="math notranslate nohighlight">\(V\in\{F,M\}\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+\Pr(\widehat{Y}=1|V) = \Pr(\widehat{Y}=1|Y=1,V) \Pr(Y=1|V) + \Pr(\widehat{Y}=1|Y=0,V) \Pr(Y=0|V)
+\]</div>
+<p>Among these terms</p>
+<ul class="simple">
+<li><p>Error balance on class 1 dictates that <span class="math notranslate nohighlight">\(\Pr(\widehat{Y}=1|Y=1, V=F) = \Pr(\widehat{Y}=1|Y=1, V=M)\)</span>;</p></li>
+<li><p>Error balance on class 0 dictates that <span class="math notranslate nohighlight">\(\Pr(\widehat{Y}=1|Y=0, V=F) = \Pr(\widehat{Y}=1|Y=0, V=M)\)</span></p></li>
+</ul>
+<p>So, putting everything together, the only way that we can having error balance and predictive parity at the same time is</p>
+<div class="math notranslate nohighlight">
+\[
+\Pr(Y=1|V=F) = \Pr(Y=1|V=M)
+\]</div>
+<p>which implies there is no inequality in outcomes across gender to begin with. Contradiction.</p>
+</div>
+<p>Impossibility results like this one is not an exception but rather the norm in algorithmic fairness <span id="id9">[<a class="reference internal" href="zbib.html#id273" title="Sina Fazelpour and Zachary C Lipton. Algorithmic fairness from a non-ideal perspective. In Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society, 57–63. 2020.">FL20</a>]</span>, leading some to question “Can this kind of algorithm ever be done right?” <span id="id10">[<a class="reference internal" href="zbib.html#id274" title="Eileen Guo, G Gabriel, and Justin-Casimir Braun. Inside amsterdam's high-stakes experiment to create fair welfare ai. MIT Technology Review, 2025.">GGB25</a>]</span>. This is still an open problem at the forefront of algorithmic decision-making research and practice.</p>
+</section>
+<section id="calibration-within-groups">
+<h3>Calibration within Groups<a class="headerlink" href="#calibration-within-groups" title="Link to this heading">#</a></h3>
+<p>As an extension of predictive parity, calibration within groups represents another fairness metric that relies on predicted probabilities. It refers to a property of classification models, known as <strong>calibration</strong>, which requires the predicted probabilities to be “accurate” in the sense that they reflect the actual event rate. For example, suppose a well-calibrated model assigns a predicted probability of 70% (of being in positive class) to 10 data points, then you would expect 7 out of those data points to actually belong to the positive class. Calibration is a desierable property because it allows users to intuitively interpret the predicted probabilities as actual event rates. Conversely, predicted probabilities from a poorly calibrated model may systematically overestimate or underestimate the actual event rates. Calibration within groups is a strictly stronger notion of fairness than predictive parity. Calibration within groups implies predictive parity but not vice versa.</p>
+<p>Adapting the notion of calibration for fairness measurement, we say that a classifier achieves calibration within groups if predictions from the two groups are both well-calibrated. More formally,</p>
+<div class="tip admonition">
+<p class="admonition-title">Definition: Equal Calibration</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(Y | p, R = AA) = \mathbb{E}(Y | p, R = W) = p
+\]</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># evaluate calibration</span>
+<span class="c1"># we will again use decile_score as the predicted probability of recidivism</span>
+<span class="c1"># we will visualize the percentage of recidivism for each decile score and racial group</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="c1"># group by decile score and race, then calculate the average value of two_year_recid</span>
+<span class="n">calibration</span> <span class="o">=</span> <span class="n">compas</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;decile_score&#39;</span><span class="p">,</span> <span class="s1">&#39;race&#39;</span><span class="p">])[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">calibration</span><span class="p">[</span><span class="s1">&#39;decile_score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">Y_AA</span> <span class="o">=</span> <span class="n">calibration</span><span class="p">[</span><span class="n">calibration</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;African-American&quot;</span><span class="p">][</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span>
+<span class="n">Y_W</span> <span class="o">=</span> <span class="n">calibration</span><span class="p">[</span><span class="n">calibration</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Caucasian&quot;</span><span class="p">][</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span>
+<span class="c1"># plot average recidivism rate for each decile score and the two groups</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mf">0.4</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y_AA</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;African-American&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">X</span> <span class="o">+</span> <span class="n">width</span><span class="p">,</span> <span class="n">Y_W</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Caucasian&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Decile Score&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Recidivism Rate&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">X</span> <span class="o">+</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/50dad0f212836e82761f887917e08896b2527a789cdd71edd59a65ca5d7f9c15.png" src="../_images/50dad0f212836e82761f887917e08896b2527a789cdd71edd59a65ca5d7f9c15.png" />
+</div>
+</div>
+<p>Interestingly, we see that the average recidivism rates across different deciles are somewhat similar between the two groups. Among low-risk deciles, the model seems to underestimate the actual recidivism risks for both groups. Among high-risk deciles, it seems to overestimate the risks. Overall, we do not see a very clear pattern and this is aligned with Northpointe’s counter-arguments to ProPublica, i.e., their risk tool is similarly calibrated for both racial groups <span id="id11">[<a class="reference internal" href="zbib.html#id253" title="William Dieterich, Christina Mendoza, and Tim Brennan. Compas risk scales: demonstrating accuracy equity and predictive parity. Northpointe Inc, 7(4):1–36, 2016.">DMB16</a>]</span>.</p>
+</section>
+</section>
+<section id="fairness-measure-for-numeric-prediction-regression">
+<h2>Fairness Measure for Numeric Prediction / Regression<a class="headerlink" href="#fairness-measure-for-numeric-prediction-regression" title="Link to this heading">#</a></h2>
+<p>Besides fairness measures for binary classification, we also need to consider fairness measures for numeric prediction / regression tasks, where the target variables take continuous values. A few fairness measures designed for binary classification can be generalized to the case of numeric prediction / regression. For demonstration, we will treat the <code class="docutils literal notranslate"><span class="pre">decile_score</span></code> as the numerical prediction values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compas_regression</span> <span class="o">=</span> <span class="n">compas</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="c1"># treating decile_score as the numerical prediction values, no need to remove any rows</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id12">
+<h3>(Conditional) Demographic Parity<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<p>The same notions of demographic parity and conditional demographic parity can be defined by comparing the expected values of the predicted outcome between two groups.</p>
+<div class="tip admonition">
+<p class="admonition-title">Definition: Demographic Parity for Regression</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(\widehat{Y} | R = AA) = \mathbb{E}(\widehat{Y} | R = W)
+\]</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Definition: Conditional Demographic Parity for Regression</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(\widehat{Y} | R = AA, \boldsymbol{X}) = \mathbb{E}(\widehat{Y} | R = W, \boldsymbol{X})
+\]</div>
+</div>
+<p>Detecting demographic parity can be done by essentially running a regression of <span class="math notranslate nohighlight">\(\widehat{Y}\)</span> on <span class="math notranslate nohighlight">\(R\)</span> (and potentially controlling for other observables to evaluate the conditional demographic parity). If <span class="math notranslate nohighlight">\(R\)</span> is statistically significantly associated with <span class="math notranslate nohighlight">\(\widehat{Y}\)</span>, then there will be a significant difference in the expected <span class="math notranslate nohighlight">\(\widehat{Y}\)</span> between the two groups.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># evaluate conditional demographic parity</span>
+<span class="c1"># running a linear regression of decile_score on race, controlling for age, gender, number of prior offenses, and severity of charge</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.formula.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">smf</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;decile_score ~ race + age + sex + priors_count + c_charge_degree&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">compas_regression</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">stargazer.stargazer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Stargazer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="n">sg</span> <span class="o">=</span> <span class="n">Stargazer</span><span class="p">([</span><span class="n">model</span><span class="p">])</span>
+<span class="n">sg</span><span class="o">.</span><span class="n">dependent_variable_name</span><span class="p">(</span><span class="s1">&#39;Predicted Decile Score&#39;</span><span class="p">)</span>
+<span class="n">sg</span><span class="o">.</span><span class="n">rename_covariates</span><span class="p">({</span>
+    <span class="s2">&quot;c_charge_degree[T.M]&quot;</span><span class="p">:</span> <span class="s2">&quot;Charge Degree Misdemeanor&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;race[T.Caucasian]&quot;</span><span class="p">:</span> <span class="s2">&quot;race Caucasian&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sex[T.Male]&quot;</span><span class="p">:</span> <span class="s2">&quot;sex Male&quot;</span>
+<span class="p">})</span>
+<span class="n">sg</span><span class="o">.</span><span class="n">show_model_numbers</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">sg</span><span class="o">.</span><span class="n">render_html</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table style="text-align:center"><tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align:left"></td><td colspan="1"><em>Dependent variable: Predicted Decile Score</em></td></tr><tr><td style="text-align:left"></td>
+<tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr>
+
+<tr><td style="text-align:left">Intercept</td><td>7.728<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.113)</td></tr>
+<tr><td style="text-align:left">age</td><td>-0.105<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.003)</td></tr>
+<tr><td style="text-align:left">Charge Degree Misdemeanor</td><td>-0.456<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.064)</td></tr>
+<tr><td style="text-align:left">priors_count</td><td>0.274<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.006)</td></tr>
+<tr><td style="text-align:left">race Caucasian</td><td>-0.534<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.064)</td></tr>
+<tr><td style="text-align:left">sex Male</td><td>-0.073<sup></sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.076)</td></tr>
+
+<td colspan="2" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align: left">Observations</td><td>5278</td></tr><tr><td style="text-align: left">R<sup>2</sup></td><td>0.421</td></tr><tr><td style="text-align: left">Adjusted R<sup>2</sup></td><td>0.420</td></tr><tr><td style="text-align: left">Residual Std. Error</td><td>2.163 (df=5272)</td></tr><tr><td style="text-align: left">F Statistic</td><td>766.453<sup>***</sup> (df=5; 5272)</td></tr>
+<tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align: left">Note:</td><td colspan="1" style="text-align: right"><sup>*</sup>p&lt;0.1; <sup>**</sup>p&lt;0.05; <sup>***</sup>p&lt;0.01</td></tr></table></div></div>
+</div>
+<p>We can see that, even after controlling for several observables, being the Caucasian is still negatively and significantly associated with risk decile.</p>
+</section>
+<section id="residual-balance">
+<h3>Residual Balance<a class="headerlink" href="#residual-balance" title="Link to this heading">#</a></h3>
+<p>Residual balance is analogous to the Error Balance measure in binary classification, where fairness is measured by the degree to which the model’s prediction errors (which is residual in the case of regression) are balanced across the two groups. Note that we do not have the ground truth value for <code class="docutils literal notranslate"><span class="pre">decile_score</span></code> in the dataset. For illustration purpose only, we will use the binary label <code class="docutils literal notranslate"><span class="pre">is_redic</span></code> as the ground truth, and use <code class="docutils literal notranslate"><span class="pre">decile_score</span></code> / 10 as the predicted value.</p>
+<div class="tip admonition">
+<p class="admonition-title">Definition: Residual Balance for Regression<a class="footnote-reference brackets" href="#footnote2" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}( (\widehat{Y} - Y)^2 | R = AA) = \mathbb{E}( (\widehat{Y} - Y)^2 | R = W)
+\]</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the residuals of the regression and store as a new column</span>
+<span class="n">compas_regression</span><span class="p">[</span><span class="s1">&#39;residuals&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">compas_regression</span><span class="p">[</span><span class="s1">&#39;decile_score&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">10</span> <span class="o">-</span> <span class="n">compas_regression</span><span class="p">[</span><span class="s1">&#39;two_year_recid&#39;</span><span class="p">]</span>
+<span class="c1"># evaluate sqaured residuals for African Americans and Caucasians</span>
+<span class="n">AA_residuals</span> <span class="o">=</span> <span class="n">compas_regression</span><span class="p">[</span><span class="n">compas_regression</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;African-American&#39;</span><span class="p">][</span><span class="s1">&#39;residuals&#39;</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">W_residuals</span> <span class="o">=</span> <span class="n">compas_regression</span><span class="p">[</span><span class="n">compas_regression</span><span class="p">[</span><span class="s1">&#39;race&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Caucasian&#39;</span><span class="p">][</span><span class="s1">&#39;residuals&#39;</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="c1"># print results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average squared residuals for African Americans: &quot;</span><span class="p">,</span> <span class="n">AA_residuals</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average squared residuals for Whites: &quot;</span><span class="p">,</span> <span class="n">W_residuals</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average squared residuals for African Americans:  0.22908346456692916
+Average squared residuals for Whites:  0.2200523062291964
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that African American defendents had slighter greater residuals (indicating less accurate predictions) than White defendents.</p>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="footnote1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Please note that this is different from ProPublica’s processing of the data; they pooled “Medium” and “High” together as “High” category.</p>
+</aside>
+<aside class="footnote brackets" id="footnote2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id13">2</a><span class="fn-bracket">]</span></span>
+<p>Note that one can use other aggregation functions than <span class="math notranslate nohighlight">\(L_2\)</span> here, such as absolute difference (i.e., <span class="math notranslate nohighlight">\(L_1\)</span>).</p>
+</aside>
+</aside>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1-1-intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Algorithmic Bias and Fairness</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="1-3-mitigation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Mitigating Algorithmic Bias</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background-of-compas-data">Background of COMPAS Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fairness-measures-for-binary-classifier">Fairness Measures for Binary Classifier</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demographic-parity">Demographic Parity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-demographic-parity">Conditional Demographic Parity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-balance-equalized-odds">Error Balance / Equalized Odds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictive-parity">Predictive Parity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-impossibility-of-achieving-both-error-balance-and-predictive-parity">The Impossibility of Achieving both Error Balance and Predictive Parity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calibration-within-groups">Calibration within Groups</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fairness-measure-for-numeric-prediction-regression">Fairness Measure for Numeric Prediction / Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">(Conditional) Demographic Parity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-balance">Residual Balance</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Gediminas Adomavicius and Mochen Yang
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
